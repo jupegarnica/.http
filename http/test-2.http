@@ -1,0 +1,12 @@
+{{
+globalThis.hello = 'world';
+console.log('header');
+ }}
+###
+POST {{= env.HOST}}/?body=hello&status=202
+Content-Type: application/json
+
+{"status":202,"body":"hello"}
+
+{{~ globalThis.hello }}
+{{console.log('footer')}}

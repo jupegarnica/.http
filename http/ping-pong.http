@@ -1,0 +1,5 @@
+POST https://mock-api.deno.dev?body=Pong
+Accept: text/plain
+Content-Type: text/plain
+
+Ping
