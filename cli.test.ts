@@ -1,5 +1,4 @@
-
-import { sh, assertEquals } from "./dev.deps.ts";
+import { assertEquals, sh } from "./dev.deps.ts";
 // import './cli.ts'; // react in watch mode
 
 Deno.test({
@@ -7,40 +6,40 @@ Deno.test({
   ignore: true,
   only: false,
   fn: async () => {
-
-    const { stdout, code } = await sh`NO_COLOR=1 deno run --allow-read=./ ./cli.ts http/ping-pong.http`;
+    const { stdout, code } = await sh
+      `NO_COLOR=1 deno run --allow-read=./ ./cli.ts http/ping-pong.http`;
     assertEquals(code, 0);
-    assertEquals(stdout,
+    assertEquals(
+      stdout,
       `POST https://mock-api.deno.dev?body=Pong
 Accept: text/plain
 Content-Type: text/plain
 
 Ping
-`);
+`,
+    );
   },
 });
-
-
 
 Deno.test({
   name: "read file from absolute path",
   ignore: true,
   only: false,
   fn: async () => {
-
-    const { stdout, code } = await sh`NO_COLOR=1 deno run --allow-read=./ ./cli.ts ${Deno.cwd()}/http/ping-pong.http`;
+    const { stdout, code } = await sh
+      `NO_COLOR=1 deno run --allow-read=./ ./cli.ts ${Deno.cwd()}/http/ping-pong.http`;
     assertEquals(code, 0);
-    assertEquals(stdout,
+    assertEquals(
+      stdout,
       `POST https://mock-api.deno.dev?body=Pong
 Accept: text/plain
 Content-Type: text/plain
 
 Ping
-`);
+`,
+    );
   },
 });
-
-
 
 Deno.test({
   name: "read files",
@@ -51,17 +50,17 @@ Deno.test({
 Accept: text/plain
 Content-Type: text/plain
 
-Ping`
-    const { stdout, code } = await sh`NO_COLOR=1 deno run --allow-read=./ ./cli.ts http/ping-pong.http http/ping-pong.http`;
+Ping`;
+    const { stdout, code } = await sh
+      `NO_COLOR=1 deno run --allow-read=./ ./cli.ts http/ping-pong.http http/ping-pong.http`;
     assertEquals(code, 0);
-    assertEquals(stdout,
-`${content}${content}
-`);
+    assertEquals(
+      stdout,
+      `${content}${content}
+`,
+    );
   },
 });
-
-
-
 
 Deno.test({
   name: "read files from glob",
@@ -72,11 +71,14 @@ Deno.test({
 Accept: text/plain
 Content-Type: text/plain
 
-Ping`
-    const { stdout, code } = await sh`NO_COLOR=1 deno run --allow-read=./ ./cli.ts http/ping-pong.http http/ping-pong.http`;
+Ping`;
+    const { stdout, code } = await sh
+      `NO_COLOR=1 deno run --allow-read=./ ./cli.ts http/ping-pong.http http/ping-pong.http`;
     assertEquals(code, 0);
-    assertEquals(stdout,
-`${content}${content}
-`);
+    assertEquals(
+      stdout,
+      `${content}${content}
+`,
+    );
   },
 });
