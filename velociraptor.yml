@@ -61,13 +61,12 @@ scripts:
 
 
 
-  test:
+  test-watch:
     desc: Runs and watch the tests
     cmd: deno test -A --watch --unstable
     # env:
     #   NO_COLOR: '1'
-    gitHook: pre-push
-  test-ci:
+  test:
     desc: Runs the tests once
     cmd: deno test -A
     gitHook: pre-push
