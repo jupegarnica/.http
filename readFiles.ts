@@ -1,8 +1,8 @@
 import { isAbsolute, join } from "https://deno.land/std@0.126.0/path/mod.ts";
 import { expandGlob } from "https://deno.land/std@0.126.0/fs/mod.ts";
 
-export async function* readContentFromFiles(
-  filePaths: string[],
+export async function* readFiles(
+  ...filePaths: string[]
 ): AsyncIterableIterator<string> {
   const basePath = Deno.cwd();
   for (const path of filePaths) {
