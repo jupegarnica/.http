@@ -1,4 +1,4 @@
-import {_ as _map} from "../../common/_map-855e0a50.js";
+import { _ as _map } from "../../common/_map-855e0a50.js";
 import identity2 from "./identity.js";
 import pickAll2 from "./pickAll.js";
 import useWith2 from "./useWith.js";

@@ -1,4 +1,4 @@
-import {_ as _curry3} from "../../common/_curry3-716aebc1.js";
+import { _ as _curry3 } from "../../common/_curry3-716aebc1.js";
 import always2 from "./always.js";
 import over2 from "./over.js";
 import "../../common/_curry1-a6784b40.js";

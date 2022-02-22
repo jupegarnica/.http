@@ -1,4 +1,4 @@
-import {_ as _curry1} from "../../common/_curry1-a6784b40.js";
+import { _ as _curry1 } from "../../common/_curry1-a6784b40.js";
 import curryN2 from "./curryN.js";
 import "../../common/_isPlaceholder-69544913.js";
 import "../../common/_arity-fefc01f2.js";

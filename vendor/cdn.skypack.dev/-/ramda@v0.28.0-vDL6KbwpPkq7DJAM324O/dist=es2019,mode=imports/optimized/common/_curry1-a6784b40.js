@@ -1,4 +1,4 @@
-import {_ as _isPlaceholder} from "./_isPlaceholder-69544913.js";
+import { _ as _isPlaceholder } from "./_isPlaceholder-69544913.js";
 function _curry1(fn) {
   return function f1(a) {
     if (arguments.length === 0 || _isPlaceholder(a)) {
@@ -8,5 +8,5 @@ function _curry1(fn) {
     }
   };
 }
-export {_curry1 as _};
+export { _curry1 as _ };
 export default null;

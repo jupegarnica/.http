@@ -6,5 +6,5 @@ function _objectIs(a, b) {
   }
 }
 var _objectIs$1 = typeof Object.is === "function" ? Object.is : _objectIs;
-export {_objectIs$1 as _};
+export { _objectIs$1 as _ };
 export default null;

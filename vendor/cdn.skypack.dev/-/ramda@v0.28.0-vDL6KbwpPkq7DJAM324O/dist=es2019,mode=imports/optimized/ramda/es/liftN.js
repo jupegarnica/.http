@@ -1,5 +1,5 @@
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
-import {_ as _reduce} from "../../common/_reduce-6079ab80.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
+import { _ as _reduce } from "../../common/_reduce-6079ab80.js";
 import ap2 from "./ap.js";
 import curryN2 from "./curryN.js";
 import map2 from "./map.js";
@@ -20,8 +20,12 @@ import "../../common/_has-ef506577.js";
 import "../../common/_isArguments-6faa657b.js";
 var liftN = /* @__PURE__ */ _curry2(function liftN2(arity, fn) {
   var lifted = curryN2(arity, fn);
-  return curryN2(arity, function() {
-    return _reduce(ap2, map2(lifted, arguments[0]), Array.prototype.slice.call(arguments, 1));
+  return curryN2(arity, function () {
+    return _reduce(
+      ap2,
+      map2(lifted, arguments[0]),
+      Array.prototype.slice.call(arguments, 1),
+    );
   });
 });
 export default liftN;

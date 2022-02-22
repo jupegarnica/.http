@@ -1,4 +1,4 @@
-import {_ as _curry3} from "../../common/_curry3-716aebc1.js";
+import { _ as _curry3 } from "../../common/_curry3-716aebc1.js";
 import prop2 from "./prop.js";
 import equals2 from "./equals.js";
 import "../../common/_curry1-a6784b40.js";

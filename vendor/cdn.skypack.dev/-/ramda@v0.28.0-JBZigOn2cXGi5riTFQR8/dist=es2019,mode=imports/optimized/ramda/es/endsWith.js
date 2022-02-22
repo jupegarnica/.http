@@ -1,4 +1,4 @@
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
 import equals2 from "./equals.js";
 import takeLast2 from "./takeLast.js";
 import "../../common/_curry1-a6784b40.js";
@@ -16,7 +16,7 @@ import "../../common/_isTransformer-816ffbd7.js";
 import "./slice.js";
 import "../../common/_checkForMethod-9f9acae8.js";
 import "../../common/_curry3-716aebc1.js";
-var endsWith = /* @__PURE__ */ _curry2(function(suffix, list) {
+var endsWith = /* @__PURE__ */ _curry2(function (suffix, list) {
   return equals2(takeLast2(suffix.length, list), suffix);
 });
 export default endsWith;

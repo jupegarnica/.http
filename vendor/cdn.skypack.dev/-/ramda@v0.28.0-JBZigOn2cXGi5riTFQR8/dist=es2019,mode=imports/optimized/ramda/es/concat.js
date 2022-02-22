@@ -1,7 +1,7 @@
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
-import {_ as _isArray} from "../../common/_isArray-3f7112bf.js";
-import {_ as _isFunction} from "../../common/_isFunction-f2ef089d.js";
-import {_ as _isString} from "../../common/_isString-bd8a5e0f.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
+import { _ as _isArray } from "../../common/_isArray-3f7112bf.js";
+import { _ as _isFunction } from "../../common/_isFunction-f2ef089d.js";
+import { _ as _isString } from "../../common/_isString-bd8a5e0f.js";
 import toString2 from "./toString.js";
 import "../../common/_curry1-a6784b40.js";
 import "../../common/_isPlaceholder-69544913.js";
@@ -46,6 +46,9 @@ var concat = /* @__PURE__ */ _curry2(function concat2(a, b) {
   if (a != null && _isFunction(a.concat)) {
     return a.concat(b);
   }
-  throw new TypeError(toString2(a) + ' does not have a method named "concat" or "fantasy-land/concat"');
+  throw new TypeError(
+    toString2(a) +
+      ' does not have a method named "concat" or "fantasy-land/concat"',
+  );
 });
 export default concat;

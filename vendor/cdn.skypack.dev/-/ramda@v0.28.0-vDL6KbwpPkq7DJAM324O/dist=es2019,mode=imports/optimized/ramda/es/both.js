@@ -1,5 +1,5 @@
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
-import {_ as _isFunction} from "../../common/_isFunction-f2ef089d.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
+import { _ as _isFunction } from "../../common/_isFunction-f2ef089d.js";
 import and2 from "./and.js";
 import lift2 from "./lift.js";
 import "../../common/_curry1-a6784b40.js";
@@ -23,8 +23,10 @@ import "./keys.js";
 import "../../common/_has-ef506577.js";
 import "../../common/_isArguments-6faa657b.js";
 var both = /* @__PURE__ */ _curry2(function both2(f, g) {
-  return _isFunction(f) ? function _both() {
-    return f.apply(this, arguments) && g.apply(this, arguments);
-  } : lift2(and2)(f, g);
+  return _isFunction(f)
+    ? function _both() {
+      return f.apply(this, arguments) && g.apply(this, arguments);
+    }
+    : lift2(and2)(f, g);
 });
 export default both;

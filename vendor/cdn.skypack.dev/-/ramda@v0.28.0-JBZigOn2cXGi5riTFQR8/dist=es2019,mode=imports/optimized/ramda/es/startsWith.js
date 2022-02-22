@@ -1,4 +1,4 @@
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
 import equals2 from "./equals.js";
 import take2 from "./take.js";
 import "../../common/_curry1-a6784b40.js";
@@ -16,7 +16,7 @@ import "../../common/_reduced-43259614.js";
 import "./slice.js";
 import "../../common/_checkForMethod-9f9acae8.js";
 import "../../common/_curry3-716aebc1.js";
-var startsWith = /* @__PURE__ */ _curry2(function(prefix, list) {
+var startsWith = /* @__PURE__ */ _curry2(function (prefix, list) {
   return equals2(take2(prefix.length, list), prefix);
 });
 export default startsWith;

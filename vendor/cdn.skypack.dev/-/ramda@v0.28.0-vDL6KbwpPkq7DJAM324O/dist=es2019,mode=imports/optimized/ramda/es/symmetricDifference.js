@@ -1,4 +1,4 @@
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
 import concat2 from "./concat.js";
 import difference2 from "./difference.js";
 import "../../common/_curry1-a6784b40.js";
@@ -30,7 +30,9 @@ import "../../common/_isArrayLike-9455bd24.js";
 import "./bind.js";
 import "../../common/_arity-fefc01f2.js";
 import "../../common/_Set-d915dfa1.js";
-var symmetricDifference = /* @__PURE__ */ _curry2(function symmetricDifference2(list1, list2) {
-  return concat2(difference2(list1, list2), difference2(list2, list1));
-});
+var symmetricDifference = /* @__PURE__ */ _curry2(
+  function symmetricDifference2(list1, list2) {
+    return concat2(difference2(list1, list2), difference2(list2, list1));
+  },
+);
 export default symmetricDifference;

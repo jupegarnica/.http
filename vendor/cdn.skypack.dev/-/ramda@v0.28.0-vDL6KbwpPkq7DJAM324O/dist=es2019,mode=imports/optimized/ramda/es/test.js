@@ -1,5 +1,5 @@
-import {_ as _cloneRegExp} from "../../common/_cloneRegExp-a38a2fe4.js";
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
+import { _ as _cloneRegExp } from "../../common/_cloneRegExp-a38a2fe4.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
 import toString2 from "./toString.js";
 import "../../common/_curry1-a6784b40.js";
 import "../../common/_isPlaceholder-69544913.js";
@@ -32,7 +32,10 @@ function _isRegExp(x) {
 }
 var test = /* @__PURE__ */ _curry2(function test2(pattern, str) {
   if (!_isRegExp(pattern)) {
-    throw new TypeError("\u2018test\u2019 requires a value of type RegExp as its first argument; received " + toString2(pattern));
+    throw new TypeError(
+      "\u2018test\u2019 requires a value of type RegExp as its first argument; received " +
+        toString2(pattern),
+    );
   }
   return _cloneRegExp(pattern).test(str);
 });

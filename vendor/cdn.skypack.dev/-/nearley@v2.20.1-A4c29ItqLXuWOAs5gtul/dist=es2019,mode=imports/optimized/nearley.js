@@ -1,24 +1,39 @@
-var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
+var commonjsGlobal = typeof globalThis !== "undefined"
+  ? globalThis
+  : typeof window !== "undefined"
+  ? window
+  : typeof global !== "undefined"
+  ? global
+  : typeof self !== "undefined"
+  ? self
+  : {};
 function createCommonjsModule(fn, basedir, module) {
   return module = {
     path: basedir,
     exports: {},
-    require: function(path, base) {
-      return commonjsRequire(path, base === void 0 || base === null ? module.path : base);
-    }
-  }, fn(module, module.exports), module.exports;
+    require: function (path, base) {
+      return commonjsRequire(
+        path,
+        base === void 0 || base === null ? module.path : base,
+      );
+    },
+  },
+    fn(module, module.exports),
+    module.exports;
 }
 function commonjsRequire() {
-  throw new Error("Dynamic requires are not currently supported by @rollup/plugin-commonjs");
+  throw new Error(
+    "Dynamic requires are not currently supported by @rollup/plugin-commonjs",
+  );
 }
-var nearley = createCommonjsModule(function(module) {
-  (function(root, factory) {
+var nearley = createCommonjsModule(function (module) {
+  (function (root, factory) {
     if (module.exports) {
       module.exports = factory();
     } else {
       root.nearley = factory();
     }
-  })(commonjsGlobal, function() {
+  })(commonjsGlobal, function () {
     function Rule2(name, symbols, postprocess) {
       this.id = ++Rule2.highestId;
       this.name = name;
@@ -27,8 +42,13 @@ var nearley = createCommonjsModule(function(module) {
       return this;
     }
     Rule2.highestId = 0;
-    Rule2.prototype.toString = function(withCursorAt) {
-      var symbolSequence = typeof withCursorAt === "undefined" ? this.symbols.map(getSymbolShortDisplay).join(" ") : this.symbols.slice(0, withCursorAt).map(getSymbolShortDisplay).join(" ") + " \u25CF " + this.symbols.slice(withCursorAt).map(getSymbolShortDisplay).join(" ");
+    Rule2.prototype.toString = function (withCursorAt) {
+      var symbolSequence = typeof withCursorAt === "undefined"
+        ? this.symbols.map(getSymbolShortDisplay).join(" ")
+        : this.symbols.slice(0, withCursorAt).map(getSymbolShortDisplay).join(
+          " ",
+        ) + " \u25CF " +
+          this.symbols.slice(withCursorAt).map(getSymbolShortDisplay).join(" ");
       return this.name + " \u2192 " + symbolSequence;
     };
     function State(rule, dot, reference, wantedBy) {
@@ -39,11 +59,17 @@ var nearley = createCommonjsModule(function(module) {
       this.wantedBy = wantedBy;
       this.isComplete = this.dot === rule.symbols.length;
     }
-    State.prototype.toString = function() {
-      return "{" + this.rule.toString(this.dot) + "}, from: " + (this.reference || 0);
+    State.prototype.toString = function () {
+      return "{" + this.rule.toString(this.dot) + "}, from: " +
+        (this.reference || 0);
     };
-    State.prototype.nextState = function(child) {
-      var state = new State(this.rule, this.dot + 1, this.reference, this.wantedBy);
+    State.prototype.nextState = function (child) {
+      var state = new State(
+        this.rule,
+        this.dot + 1,
+        this.reference,
+        this.wantedBy,
+      );
       state.left = this;
       state.right = child;
       if (state.isComplete) {
@@ -52,7 +78,7 @@ var nearley = createCommonjsModule(function(module) {
       }
       return state;
     };
-    State.prototype.build = function() {
+    State.prototype.build = function () {
       var children = [];
       var node = this;
       do {
@@ -62,9 +88,13 @@ var nearley = createCommonjsModule(function(module) {
       children.reverse();
       return children;
     };
-    State.prototype.finish = function() {
+    State.prototype.finish = function () {
       if (this.rule.postprocess) {
-        this.data = this.rule.postprocess(this.data, this.reference, Parser2.fail);
+        this.data = this.rule.postprocess(
+          this.data,
+          this.reference,
+          Parser2.fail,
+        );
       }
     };
     function Column(grammar, index) {
@@ -75,7 +105,7 @@ var nearley = createCommonjsModule(function(module) {
       this.scannable = [];
       this.completed = {};
     }
-    Column.prototype.process = function(nextColumn) {
+    Column.prototype.process = function (nextColumn) {
       var states = this.states;
       var wants = this.wants;
       var completed = this.completed;
@@ -85,7 +115,7 @@ var nearley = createCommonjsModule(function(module) {
           state.finish();
           if (state.data !== Parser2.fail) {
             var wantedBy = state.wantedBy;
-            for (var i = wantedBy.length; i--; ) {
+            for (var i = wantedBy.length; i--;) {
               var left = wantedBy[i];
               this.complete(left, state);
             }
@@ -116,7 +146,7 @@ var nearley = createCommonjsModule(function(module) {
         }
       }
     };
-    Column.prototype.predict = function(exp) {
+    Column.prototype.predict = function (exp) {
       var rules = this.grammar.byName[exp] || [];
       for (var i = 0; i < rules.length; i++) {
         var r = rules[i];
@@ -125,7 +155,7 @@ var nearley = createCommonjsModule(function(module) {
         this.states.push(s);
       }
     };
-    Column.prototype.complete = function(left, right) {
+    Column.prototype.complete = function (left, right) {
       var copy = left.nextState(right);
       this.states.push(copy);
     };
@@ -133,20 +163,20 @@ var nearley = createCommonjsModule(function(module) {
       this.rules = rules;
       this.start = start || this.rules[0].name;
       var byName = this.byName = {};
-      this.rules.forEach(function(rule) {
+      this.rules.forEach(function (rule) {
         if (!byName.hasOwnProperty(rule.name)) {
           byName[rule.name] = [];
         }
         byName[rule.name].push(rule);
       });
     }
-    Grammar2.fromCompiled = function(rules, start) {
+    Grammar2.fromCompiled = function (rules, start) {
       var lexer = rules.Lexer;
       if (rules.ParserStart) {
         start = rules.ParserStart;
         rules = rules.ParserRules;
       }
-      var rules = rules.map(function(r) {
+      var rules = rules.map(function (r) {
         return new Rule2(r.name, r.symbols, r.postprocess);
       });
       var g = new Grammar2(rules, start);
@@ -156,40 +186,45 @@ var nearley = createCommonjsModule(function(module) {
     function StreamLexer() {
       this.reset("");
     }
-    StreamLexer.prototype.reset = function(data, state) {
+    StreamLexer.prototype.reset = function (data, state) {
       this.buffer = data;
       this.index = 0;
       this.line = state ? state.line : 1;
       this.lastLineBreak = state ? -state.col : 0;
     };
-    StreamLexer.prototype.next = function() {
+    StreamLexer.prototype.next = function () {
       if (this.index < this.buffer.length) {
         var ch = this.buffer[this.index++];
         if (ch === "\n") {
           this.line += 1;
           this.lastLineBreak = this.index;
         }
-        return {value: ch};
+        return { value: ch };
       }
     };
-    StreamLexer.prototype.save = function() {
+    StreamLexer.prototype.save = function () {
       return {
         line: this.line,
-        col: this.index - this.lastLineBreak
+        col: this.index - this.lastLineBreak,
       };
     };
-    StreamLexer.prototype.formatError = function(token, message) {
+    StreamLexer.prototype.formatError = function (token, message) {
       var buffer = this.buffer;
       if (typeof buffer === "string") {
-        var lines = buffer.split("\n").slice(Math.max(0, this.line - 5), this.line);
+        var lines = buffer.split("\n").slice(
+          Math.max(0, this.line - 5),
+          this.line,
+        );
         var nextLineBreak = buffer.indexOf("\n", this.index);
-        if (nextLineBreak === -1)
+        if (nextLineBreak === -1) {
           nextLineBreak = buffer.length;
+        }
         var col = this.index - this.lastLineBreak;
         var lastLineDigits = String(this.line).length;
         message += " at line " + this.line + " col " + col + ":\n\n";
-        message += lines.map(function(line, i) {
-          return pad(this.line - lines.length + i + 1, lastLineDigits) + " " + line;
+        message += lines.map(function (line, i) {
+          return pad(this.line - lines.length + i + 1, lastLineDigits) + " " +
+            line;
         }, this).join("\n");
         message += "\n" + pad("", lastLineDigits + col) + "^\n";
         return message;
@@ -211,7 +246,7 @@ var nearley = createCommonjsModule(function(module) {
       this.grammar = grammar;
       this.options = {
         keepHistory: false,
-        lexer: grammar.lexer || new StreamLexer()
+        lexer: grammar.lexer || new StreamLexer(),
       };
       for (var key in options || {}) {
         this.options[key] = options[key];
@@ -226,7 +261,7 @@ var nearley = createCommonjsModule(function(module) {
       this.current = 0;
     }
     Parser2.fail = {};
-    Parser2.prototype.feed = function(chunk) {
+    Parser2.prototype.feed = function (chunk) {
       var lexer = this.lexer;
       lexer.reset(chunk, this.lexerState);
       var token;
@@ -254,11 +289,20 @@ var nearley = createCommonjsModule(function(module) {
         var literal = token.text !== void 0 ? token.text : token.value;
         var value = lexer.constructor === StreamLexer ? token.value : token;
         var scannable = column.scannable;
-        for (var w = scannable.length; w--; ) {
+        for (var w = scannable.length; w--;) {
           var state = scannable[w];
           var expect = state.rule.symbols[state.dot];
-          if (expect.test ? expect.test(value) : expect.type ? expect.type === token.type : expect.literal === literal) {
-            var next = state.nextState({data: value, token, isToken: true, reference: n - 1});
+          if (
+            expect.test ? expect.test(value) : expect.type
+              ? expect.type === token.type
+              : expect.literal === literal
+          ) {
+            var next = state.nextState({
+              data: value,
+              token,
+              isToken: true,
+              reference: n - 1,
+            });
             nextColumn.states.push(next);
           }
         }
@@ -280,11 +324,12 @@ var nearley = createCommonjsModule(function(module) {
       this.results = this.finish();
       return this;
     };
-    Parser2.prototype.reportLexerError = function(lexerError) {
+    Parser2.prototype.reportLexerError = function (lexerError) {
       var tokenDisplay, lexerMessage;
       var token = lexerError.token;
       if (token) {
-        tokenDisplay = "input " + JSON.stringify(token.text[0]) + " (lexer error)";
+        tokenDisplay = "input " + JSON.stringify(token.text[0]) +
+          " (lexer error)";
         lexerMessage = this.lexer.formatError(token, "Syntax error");
       } else {
         tokenDisplay = "input (lexer error)";
@@ -292,29 +337,39 @@ var nearley = createCommonjsModule(function(module) {
       }
       return this.reportErrorCommon(lexerMessage, tokenDisplay);
     };
-    Parser2.prototype.reportError = function(token) {
-      var tokenDisplay = (token.type ? token.type + " token: " : "") + JSON.stringify(token.value !== void 0 ? token.value : token);
+    Parser2.prototype.reportError = function (token) {
+      var tokenDisplay = (token.type ? token.type + " token: " : "") +
+        JSON.stringify(token.value !== void 0 ? token.value : token);
       var lexerMessage = this.lexer.formatError(token, "Syntax error");
       return this.reportErrorCommon(lexerMessage, tokenDisplay);
     };
-    Parser2.prototype.reportErrorCommon = function(lexerMessage, tokenDisplay) {
+    Parser2.prototype.reportErrorCommon = function (
+      lexerMessage,
+      tokenDisplay,
+    ) {
       var lines = [];
       lines.push(lexerMessage);
       var lastColumnIndex = this.table.length - 2;
       var lastColumn = this.table[lastColumnIndex];
-      var expectantStates = lastColumn.states.filter(function(state) {
+      var expectantStates = lastColumn.states.filter(function (state) {
         var nextSymbol = state.rule.symbols[state.dot];
         return nextSymbol && typeof nextSymbol !== "string";
       });
       if (expectantStates.length === 0) {
-        lines.push("Unexpected " + tokenDisplay + ". I did not expect any more input. Here is the state of my parse table:\n");
+        lines.push(
+          "Unexpected " + tokenDisplay +
+            ". I did not expect any more input. Here is the state of my parse table:\n",
+        );
         this.displayStateStack(lastColumn.states, lines);
       } else {
-        lines.push("Unexpected " + tokenDisplay + ". Instead, I was expecting to see one of the following:\n");
-        var stateStacks = expectantStates.map(function(state) {
+        lines.push(
+          "Unexpected " + tokenDisplay +
+            ". Instead, I was expecting to see one of the following:\n",
+        );
+        var stateStacks = expectantStates.map(function (state) {
           return this.buildFirstStateStack(state, []) || [state];
         }, this);
-        stateStacks.forEach(function(stateStack) {
+        stateStacks.forEach(function (stateStack) {
           var state = stateStack[0];
           var nextSymbol = state.rule.symbols[state.dot];
           var symbolDisplay = this.getSymbolDisplay(nextSymbol);
@@ -325,7 +380,7 @@ var nearley = createCommonjsModule(function(module) {
       lines.push("");
       return lines.join("\n");
     };
-    Parser2.prototype.displayStateStack = function(stateStack, lines) {
+    Parser2.prototype.displayStateStack = function (stateStack, lines) {
       var lastDisplay;
       var sameDisplayCount = 0;
       for (var j = 0; j < stateStack.length; j++) {
@@ -335,7 +390,9 @@ var nearley = createCommonjsModule(function(module) {
           sameDisplayCount++;
         } else {
           if (sameDisplayCount > 0) {
-            lines.push("    ^ " + sameDisplayCount + " more lines identical to this");
+            lines.push(
+              "    ^ " + sameDisplayCount + " more lines identical to this",
+            );
           }
           sameDisplayCount = 0;
           lines.push("    " + display);
@@ -343,10 +400,10 @@ var nearley = createCommonjsModule(function(module) {
         lastDisplay = display;
       }
     };
-    Parser2.prototype.getSymbolDisplay = function(symbol) {
+    Parser2.prototype.getSymbolDisplay = function (symbol) {
       return getSymbolLongDisplay(symbol);
     };
-    Parser2.prototype.buildFirstStateStack = function(state, visited) {
+    Parser2.prototype.buildFirstStateStack = function (state, visited) {
       if (visited.indexOf(state) !== -1) {
         return null;
       }
@@ -361,12 +418,12 @@ var nearley = createCommonjsModule(function(module) {
       }
       return [state].concat(childResult);
     };
-    Parser2.prototype.save = function() {
+    Parser2.prototype.save = function () {
       var column = this.table[this.current];
       column.lexerState = this.lexerState;
       return column;
     };
-    Parser2.prototype.restore = function(column) {
+    Parser2.prototype.restore = function (column) {
       var index = column.index;
       this.current = index;
       this.table[index] = column;
@@ -374,22 +431,25 @@ var nearley = createCommonjsModule(function(module) {
       this.lexerState = column.lexerState;
       this.results = this.finish();
     };
-    Parser2.prototype.rewind = function(index) {
+    Parser2.prototype.rewind = function (index) {
       if (!this.options.keepHistory) {
         throw new Error("set option `keepHistory` to enable rewinding");
       }
       this.restore(this.table[index]);
     };
-    Parser2.prototype.finish = function() {
+    Parser2.prototype.finish = function () {
       var considerations = [];
       var start = this.grammar.start;
       var column = this.table[this.table.length - 1];
-      column.states.forEach(function(t) {
-        if (t.rule.name === start && t.dot === t.rule.symbols.length && t.reference === 0 && t.data !== Parser2.fail) {
+      column.states.forEach(function (t) {
+        if (
+          t.rule.name === start && t.dot === t.rule.symbols.length &&
+          t.reference === 0 && t.data !== Parser2.fail
+        ) {
           considerations.push(t);
         }
       });
-      return considerations.map(function(c) {
+      return considerations.map(function (c) {
         return c.data;
       });
     };
@@ -432,7 +492,7 @@ var nearley = createCommonjsModule(function(module) {
     return {
       Parser: Parser2,
       Grammar: Grammar2,
-      Rule: Rule2
+      Rule: Rule2,
     };
   });
 });
@@ -440,4 +500,4 @@ var Grammar = nearley.Grammar;
 var Parser = nearley.Parser;
 var Rule = nearley.Rule;
 export default nearley;
-export {Grammar, Parser, Rule, nearley as __moduleExports};
+export { Grammar, nearley as __moduleExports, Parser, Rule };

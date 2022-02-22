@@ -1,4 +1,4 @@
-import {_ as _curry1} from "../../common/_curry1-a6784b40.js";
+import { _ as _curry1 } from "../../common/_curry1-a6784b40.js";
 import curryN2 from "./curryN.js";
 import max2 from "./max.js";
 import pluck2 from "./pluck.js";
@@ -24,7 +24,7 @@ import "../../common/_isInteger-6ed45b32.js";
 import "./nth.js";
 import "../../common/_curry3-716aebc1.js";
 var anyPass = /* @__PURE__ */ _curry1(function anyPass2(preds) {
-  return curryN2(reduce2(max2, 0, pluck2("length", preds)), function() {
+  return curryN2(reduce2(max2, 0, pluck2("length", preds)), function () {
     var idx = 0;
     var len = preds.length;
     while (idx < len) {

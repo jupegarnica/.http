@@ -1,4 +1,4 @@
-import {_ as _curry1} from "../../common/_curry1-a6784b40.js";
+import { _ as _curry1 } from "../../common/_curry1-a6784b40.js";
 import assocPath2 from "./assocPath.js";
 import lens2 from "./lens.js";
 import path2 from "./path.js";

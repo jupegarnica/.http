@@ -1,6 +1,9 @@
-import {_ as _curry1} from "../../common/_curry1-a6784b40.js";
-import {a as _dispatchable} from "../../common/_xfBase-47118e3a.js";
-import {d as dropRepeatsWith, _ as _xdropRepeatsWith} from "../../common/dropRepeatsWith-841a3509.js";
+import { _ as _curry1 } from "../../common/_curry1-a6784b40.js";
+import { a as _dispatchable } from "../../common/_xfBase-47118e3a.js";
+import {
+  _ as _xdropRepeatsWith,
+  d as dropRepeatsWith,
+} from "../../common/dropRepeatsWith-841a3509.js";
 import equals2 from "./equals.js";
 import "../../common/_isPlaceholder-69544913.js";
 import "../../common/_isArray-3f7112bf.js";
@@ -15,5 +18,11 @@ import "../../common/_objectIs-99c5251f.js";
 import "./keys.js";
 import "../../common/_isArguments-6faa657b.js";
 import "./type.js";
-var dropRepeats = /* @__PURE__ */ _curry1(/* @__PURE__ */ _dispatchable([], /* @__PURE__ */ _xdropRepeatsWith(equals2), /* @__PURE__ */ dropRepeatsWith(equals2)));
+var dropRepeats = /* @__PURE__ */ _curry1(
+  /* @__PURE__ */ _dispatchable(
+    [],
+    /* @__PURE__ */ _xdropRepeatsWith(equals2),
+    /* @__PURE__ */ dropRepeatsWith(equals2),
+  ),
+);
 export default dropRepeats;

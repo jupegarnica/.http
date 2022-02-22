@@ -1,4 +1,4 @@
-import {_ as _isArrayLike} from "./_isArrayLike-9455bd24.js";
+import { _ as _isArrayLike } from "./_isArrayLike-9455bd24.js";
 function _makeFlat(recursive) {
   return function flatt(list) {
     var value, jlen, j;
@@ -22,5 +22,5 @@ function _makeFlat(recursive) {
     return result;
   };
 }
-export {_makeFlat as _};
+export { _makeFlat as _ };
 export default null;

@@ -1,14 +1,15 @@
-var F = function() {
+var F = function () {
   return false;
 };
-var T = function() {
+var T = function () {
   return true;
 };
 var __ = {
-  "@@functional/placeholder": true
+  "@@functional/placeholder": true,
 };
 function _isPlaceholder(a) {
-  return a != null && typeof a === "object" && a["@@functional/placeholder"] === true;
+  return a != null && typeof a === "object" &&
+    a["@@functional/placeholder"] === true;
 }
 function _curry1(fn) {
   return function f1(a) {
@@ -25,15 +26,21 @@ function _curry2(fn) {
       case 0:
         return f2;
       case 1:
-        return _isPlaceholder(a) ? f2 : _curry1(function(_b) {
+        return _isPlaceholder(a) ? f2 : _curry1(function (_b) {
           return fn(a, _b);
         });
       default:
-        return _isPlaceholder(a) && _isPlaceholder(b) ? f2 : _isPlaceholder(a) ? _curry1(function(_a) {
-          return fn(_a, b);
-        }) : _isPlaceholder(b) ? _curry1(function(_b) {
-          return fn(a, _b);
-        }) : fn(a, b);
+        return _isPlaceholder(a) && _isPlaceholder(b)
+          ? f2
+          : _isPlaceholder(a)
+          ? _curry1(function (_a) {
+            return fn(_a, b);
+          })
+          : _isPlaceholder(b)
+          ? _curry1(function (_b) {
+            return fn(a, _b);
+          })
+          : fn(a, b);
     }
   };
 }
@@ -62,62 +69,67 @@ function _concat(set1, set22) {
 function _arity(n, fn) {
   switch (n) {
     case 0:
-      return function() {
+      return function () {
         return fn.apply(this, arguments);
       };
     case 1:
-      return function(a0) {
+      return function (a0) {
         return fn.apply(this, arguments);
       };
     case 2:
-      return function(a0, a1) {
+      return function (a0, a1) {
         return fn.apply(this, arguments);
       };
     case 3:
-      return function(a0, a1, a2) {
+      return function (a0, a1, a2) {
         return fn.apply(this, arguments);
       };
     case 4:
-      return function(a0, a1, a2, a3) {
+      return function (a0, a1, a2, a3) {
         return fn.apply(this, arguments);
       };
     case 5:
-      return function(a0, a1, a2, a3, a4) {
+      return function (a0, a1, a2, a3, a4) {
         return fn.apply(this, arguments);
       };
     case 6:
-      return function(a0, a1, a2, a3, a4, a5) {
+      return function (a0, a1, a2, a3, a4, a5) {
         return fn.apply(this, arguments);
       };
     case 7:
-      return function(a0, a1, a2, a3, a4, a5, a6) {
+      return function (a0, a1, a2, a3, a4, a5, a6) {
         return fn.apply(this, arguments);
       };
     case 8:
-      return function(a0, a1, a2, a3, a4, a5, a6, a7) {
+      return function (a0, a1, a2, a3, a4, a5, a6, a7) {
         return fn.apply(this, arguments);
       };
     case 9:
-      return function(a0, a1, a2, a3, a4, a5, a6, a7, a8) {
+      return function (a0, a1, a2, a3, a4, a5, a6, a7, a8) {
         return fn.apply(this, arguments);
       };
     case 10:
-      return function(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {
+      return function (a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {
         return fn.apply(this, arguments);
       };
     default:
-      throw new Error("First argument to _arity must be a non-negative integer no greater than ten");
+      throw new Error(
+        "First argument to _arity must be a non-negative integer no greater than ten",
+      );
   }
 }
 function _curryN(length3, received, fn) {
-  return function() {
+  return function () {
     var combined = [];
     var argsIdx = 0;
     var left = length3;
     var combinedIdx = 0;
     while (combinedIdx < received.length || argsIdx < arguments.length) {
       var result;
-      if (combinedIdx < received.length && (!_isPlaceholder(received[combinedIdx]) || argsIdx >= arguments.length)) {
+      if (
+        combinedIdx < received.length &&
+        (!_isPlaceholder(received[combinedIdx]) || argsIdx >= arguments.length)
+      ) {
         result = received[combinedIdx];
       } else {
         result = arguments[argsIdx];
@@ -129,7 +141,9 @@ function _curryN(length3, received, fn) {
       }
       combinedIdx += 1;
     }
-    return left <= 0 ? fn.apply(this, combined) : _arity(left, _curryN(length3, combined, fn));
+    return left <= 0
+      ? fn.apply(this, combined)
+      : _arity(left, _curryN(length3, combined, fn));
   };
 }
 var curryN = /* @__PURE__ */ _curry2(function curryN2(length3, fn) {
@@ -139,12 +153,12 @@ var curryN = /* @__PURE__ */ _curry2(function curryN2(length3, fn) {
   return _arity(length3, _curryN(length3, [], fn));
 });
 var addIndex = /* @__PURE__ */ _curry1(function addIndex2(fn) {
-  return curryN(fn.length, function() {
+  return curryN(fn.length, function () {
     var idx = 0;
     var origFn = arguments[0];
     var list = arguments[arguments.length - 1];
     var args = Array.prototype.slice.call(arguments, 0);
-    args[0] = function() {
+    args[0] = function () {
       var result = origFn.apply(this, _concat(arguments, [idx, list]));
       idx += 1;
       return result;
@@ -158,31 +172,51 @@ function _curry3(fn) {
       case 0:
         return f3;
       case 1:
-        return _isPlaceholder(a) ? f3 : _curry2(function(_b, _c) {
+        return _isPlaceholder(a) ? f3 : _curry2(function (_b, _c) {
           return fn(a, _b, _c);
         });
       case 2:
-        return _isPlaceholder(a) && _isPlaceholder(b) ? f3 : _isPlaceholder(a) ? _curry2(function(_a, _c) {
-          return fn(_a, b, _c);
-        }) : _isPlaceholder(b) ? _curry2(function(_b, _c) {
-          return fn(a, _b, _c);
-        }) : _curry1(function(_c) {
-          return fn(a, b, _c);
-        });
+        return _isPlaceholder(a) && _isPlaceholder(b)
+          ? f3
+          : _isPlaceholder(a)
+          ? _curry2(function (_a, _c) {
+            return fn(_a, b, _c);
+          })
+          : _isPlaceholder(b)
+          ? _curry2(function (_b, _c) {
+            return fn(a, _b, _c);
+          })
+          : _curry1(function (_c) {
+            return fn(a, b, _c);
+          });
       default:
-        return _isPlaceholder(a) && _isPlaceholder(b) && _isPlaceholder(c) ? f3 : _isPlaceholder(a) && _isPlaceholder(b) ? _curry2(function(_a, _b) {
-          return fn(_a, _b, c);
-        }) : _isPlaceholder(a) && _isPlaceholder(c) ? _curry2(function(_a, _c) {
-          return fn(_a, b, _c);
-        }) : _isPlaceholder(b) && _isPlaceholder(c) ? _curry2(function(_b, _c) {
-          return fn(a, _b, _c);
-        }) : _isPlaceholder(a) ? _curry1(function(_a) {
-          return fn(_a, b, c);
-        }) : _isPlaceholder(b) ? _curry1(function(_b) {
-          return fn(a, _b, c);
-        }) : _isPlaceholder(c) ? _curry1(function(_c) {
-          return fn(a, b, _c);
-        }) : fn(a, b, c);
+        return _isPlaceholder(a) && _isPlaceholder(b) && _isPlaceholder(c)
+          ? f3
+          : _isPlaceholder(a) && _isPlaceholder(b)
+          ? _curry2(function (_a, _b) {
+            return fn(_a, _b, c);
+          })
+          : _isPlaceholder(a) && _isPlaceholder(c)
+          ? _curry2(function (_a, _c) {
+            return fn(_a, b, _c);
+          })
+          : _isPlaceholder(b) && _isPlaceholder(c)
+          ? _curry2(function (_b, _c) {
+            return fn(a, _b, _c);
+          })
+          : _isPlaceholder(a)
+          ? _curry1(function (_a) {
+            return fn(_a, b, c);
+          })
+          : _isPlaceholder(b)
+          ? _curry1(function (_b) {
+            return fn(a, _b, c);
+          })
+          : _isPlaceholder(c)
+          ? _curry1(function (_c) {
+            return fn(a, b, _c);
+          })
+          : fn(a, b, c);
     }
   };
 }
@@ -197,13 +231,14 @@ var adjust = /* @__PURE__ */ _curry3(function adjust2(idx, fn, list) {
   return _list;
 });
 var _isArray = Array.isArray || function _isArray2(val) {
-  return val != null && val.length >= 0 && Object.prototype.toString.call(val) === "[object Array]";
+  return val != null && val.length >= 0 &&
+    Object.prototype.toString.call(val) === "[object Array]";
 };
 function _isTransformer(obj) {
   return obj != null && typeof obj["@@transducer/step"] === "function";
 }
 function _dispatchable(methodNames, xf, fn) {
-  return function() {
+  return function () {
     if (arguments.length === 0) {
       return fn();
     }
@@ -228,31 +263,31 @@ function _dispatchable(methodNames, xf, fn) {
 function _reduced(x) {
   return x && x["@@transducer/reduced"] ? x : {
     "@@transducer/value": x,
-    "@@transducer/reduced": true
+    "@@transducer/reduced": true,
   };
 }
 var _xfBase = {
-  init: function() {
+  init: function () {
     return this.xf["@@transducer/init"]();
   },
-  result: function(result) {
+  result: function (result) {
     return this.xf["@@transducer/result"](result);
-  }
+  },
 };
-var XAll = /* @__PURE__ */ function() {
+var XAll = /* @__PURE__ */ function () {
   function XAll2(f, xf) {
     this.xf = xf;
     this.f = f;
     this.all = true;
   }
   XAll2.prototype["@@transducer/init"] = _xfBase.init;
-  XAll2.prototype["@@transducer/result"] = function(result) {
+  XAll2.prototype["@@transducer/result"] = function (result) {
     if (this.all) {
       result = this.xf["@@transducer/step"](result, true);
     }
     return this.xf["@@transducer/result"](result);
   };
-  XAll2.prototype["@@transducer/step"] = function(result, input) {
+  XAll2.prototype["@@transducer/step"] = function (result, input) {
     if (!this.f(input)) {
       this.all = false;
       result = _reduced(this.xf["@@transducer/step"](result, false));
@@ -264,16 +299,18 @@ var XAll = /* @__PURE__ */ function() {
 var _xall = /* @__PURE__ */ _curry2(function _xall2(f, xf) {
   return new XAll(f, xf);
 });
-var all = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["all"], _xall, function all2(fn, list) {
-  var idx = 0;
-  while (idx < list.length) {
-    if (!fn(list[idx])) {
-      return false;
+var all = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _dispatchable(["all"], _xall, function all2(fn, list) {
+    var idx = 0;
+    while (idx < list.length) {
+      if (!fn(list[idx])) {
+        return false;
+      }
+      idx += 1;
     }
-    idx += 1;
-  }
-  return true;
-}));
+    return true;
+  }),
+);
 var max = /* @__PURE__ */ _curry2(function max2(a, b) {
   return b > a ? b : a;
 });
@@ -314,17 +351,17 @@ var _isArrayLike = /* @__PURE__ */ _curry1(function isArrayLike(x) {
   }
   return false;
 });
-var XWrap = /* @__PURE__ */ function() {
+var XWrap = /* @__PURE__ */ function () {
   function XWrap2(fn) {
     this.f = fn;
   }
-  XWrap2.prototype["@@transducer/init"] = function() {
+  XWrap2.prototype["@@transducer/init"] = function () {
     throw new Error("init not implemented on XWrap");
   };
-  XWrap2.prototype["@@transducer/result"] = function(acc) {
+  XWrap2.prototype["@@transducer/result"] = function (acc) {
     return acc;
   };
-  XWrap2.prototype["@@transducer/step"] = function(acc, x) {
+  XWrap2.prototype["@@transducer/step"] = function (acc, x) {
     return this.f(acc, x);
   };
   return XWrap2;
@@ -333,7 +370,7 @@ function _xwrap(fn) {
   return new XWrap(fn);
 }
 var bind = /* @__PURE__ */ _curry2(function bind2(fn, thisObj) {
-  return _arity(fn.length, function() {
+  return _arity(fn.length, function () {
     return fn.apply(thisObj, arguments);
   });
 });
@@ -363,9 +400,13 @@ function _iterableReduce(xf, acc, iter) {
   return xf["@@transducer/result"](acc);
 }
 function _methodReduce(xf, acc, obj, methodName) {
-  return xf["@@transducer/result"](obj[methodName](bind(xf["@@transducer/step"], xf), acc));
+  return xf["@@transducer/result"](
+    obj[methodName](bind(xf["@@transducer/step"], xf), acc),
+  );
 }
-var symIterator = typeof Symbol !== "undefined" ? Symbol.iterator : "@@iterator";
+var symIterator = typeof Symbol !== "undefined"
+  ? Symbol.iterator
+  : "@@iterator";
 function _reduce(fn, acc, list) {
   if (typeof fn === "function") {
     fn = _xwrap(fn);
@@ -387,14 +428,14 @@ function _reduce(fn, acc, list) {
   }
   throw new TypeError("reduce: list must be array or iterable");
 }
-var XMap = /* @__PURE__ */ function() {
+var XMap = /* @__PURE__ */ function () {
   function XMap2(f, xf) {
     this.xf = xf;
     this.f = f;
   }
   XMap2.prototype["@@transducer/init"] = _xfBase.init;
   XMap2.prototype["@@transducer/result"] = _xfBase.result;
-  XMap2.prototype["@@transducer/step"] = function(result, input) {
+  XMap2.prototype["@@transducer/step"] = function (result, input) {
     return this.xf["@@transducer/step"](result, this.f(input));
   };
   return XMap2;
@@ -406,18 +447,28 @@ function _has(prop3, obj) {
   return Object.prototype.hasOwnProperty.call(obj, prop3);
 }
 var toString = Object.prototype.toString;
-var _isArguments = /* @__PURE__ */ function() {
-  return toString.call(arguments) === "[object Arguments]" ? function _isArguments2(x) {
-    return toString.call(x) === "[object Arguments]";
-  } : function _isArguments2(x) {
-    return _has("callee", x);
-  };
+var _isArguments = /* @__PURE__ */ function () {
+  return toString.call(arguments) === "[object Arguments]"
+    ? function _isArguments2(x) {
+      return toString.call(x) === "[object Arguments]";
+    }
+    : function _isArguments2(x) {
+      return _has("callee", x);
+    };
 }();
 var hasEnumBug = !/* @__PURE__ */ {
-  toString: null
+  toString: null,
 }.propertyIsEnumerable("toString");
-var nonEnumerableProps = ["constructor", "valueOf", "isPrototypeOf", "toString", "propertyIsEnumerable", "hasOwnProperty", "toLocaleString"];
-var hasArgsEnumBug = /* @__PURE__ */ function() {
+var nonEnumerableProps = [
+  "constructor",
+  "valueOf",
+  "isPrototypeOf",
+  "toString",
+  "propertyIsEnumerable",
+  "hasOwnProperty",
+  "toLocaleString",
+];
+var hasArgsEnumBug = /* @__PURE__ */ function () {
   return arguments.propertyIsEnumerable("length");
 }();
 var contains = function contains2(list, item) {
@@ -430,47 +481,59 @@ var contains = function contains2(list, item) {
   }
   return false;
 };
-var keys = typeof Object.keys === "function" && !hasArgsEnumBug ? /* @__PURE__ */ _curry1(function keys2(obj) {
-  return Object(obj) !== obj ? [] : Object.keys(obj);
-}) : /* @__PURE__ */ _curry1(function keys3(obj) {
-  if (Object(obj) !== obj) {
-    return [];
-  }
-  var prop3, nIdx;
-  var ks = [];
-  var checkArgsLength = hasArgsEnumBug && _isArguments(obj);
-  for (prop3 in obj) {
-    if (_has(prop3, obj) && (!checkArgsLength || prop3 !== "length")) {
-      ks[ks.length] = prop3;
+var keys = typeof Object.keys === "function" && !hasArgsEnumBug
+  ? /* @__PURE__ */ _curry1(function keys2(obj) {
+    return Object(obj) !== obj ? [] : Object.keys(obj);
+  })
+  : /* @__PURE__ */ _curry1(function keys3(obj) {
+    if (Object(obj) !== obj) {
+      return [];
     }
-  }
-  if (hasEnumBug) {
-    nIdx = nonEnumerableProps.length - 1;
-    while (nIdx >= 0) {
-      prop3 = nonEnumerableProps[nIdx];
-      if (_has(prop3, obj) && !contains(ks, prop3)) {
+    var prop3, nIdx;
+    var ks = [];
+    var checkArgsLength = hasArgsEnumBug && _isArguments(obj);
+    for (prop3 in obj) {
+      if (_has(prop3, obj) && (!checkArgsLength || prop3 !== "length")) {
         ks[ks.length] = prop3;
       }
-      nIdx -= 1;
     }
-  }
-  return ks;
-});
-var map = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["fantasy-land/map", "map"], _xmap, function map2(fn, functor) {
-  switch (Object.prototype.toString.call(functor)) {
-    case "[object Function]":
-      return curryN(functor.length, function() {
-        return fn.call(this, functor.apply(this, arguments));
-      });
-    case "[object Object]":
-      return _reduce(function(acc, key) {
-        acc[key] = fn(functor[key]);
-        return acc;
-      }, {}, keys(functor));
-    default:
-      return _map(fn, functor);
-  }
-}));
+    if (hasEnumBug) {
+      nIdx = nonEnumerableProps.length - 1;
+      while (nIdx >= 0) {
+        prop3 = nonEnumerableProps[nIdx];
+        if (_has(prop3, obj) && !contains(ks, prop3)) {
+          ks[ks.length] = prop3;
+        }
+        nIdx -= 1;
+      }
+    }
+    return ks;
+  });
+var map = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _dispatchable(
+    ["fantasy-land/map", "map"],
+    _xmap,
+    function map2(fn, functor) {
+      switch (Object.prototype.toString.call(functor)) {
+        case "[object Function]":
+          return curryN(functor.length, function () {
+            return fn.call(this, functor.apply(this, arguments));
+          });
+        case "[object Object]":
+          return _reduce(
+            function (acc, key) {
+              acc[key] = fn(functor[key]);
+              return acc;
+            },
+            {},
+            keys(functor),
+          );
+        default:
+          return _map(fn, functor);
+      }
+    },
+  ),
+);
 var _isInteger = Number.isInteger || function _isInteger2(n) {
   return n << 0 === n;
 };
@@ -479,7 +542,7 @@ var nth = /* @__PURE__ */ _curry2(function nth2(offset, list) {
   return _isString(list) ? list.charAt(idx) : list[idx];
 });
 var paths = /* @__PURE__ */ _curry2(function paths2(pathsArray, obj) {
-  return pathsArray.map(function(paths3) {
+  return pathsArray.map(function (paths3) {
     var val = obj;
     var idx = 0;
     var p;
@@ -505,7 +568,7 @@ var pluck = /* @__PURE__ */ _curry2(function pluck2(p, list) {
 });
 var reduce = /* @__PURE__ */ _curry3(_reduce);
 var allPass = /* @__PURE__ */ _curry1(function allPass2(preds) {
-  return curryN(reduce(max, 0, pluck("length", preds)), function() {
+  return curryN(reduce(max, 0, pluck("length", preds)), function () {
     var idx = 0;
     var len = preds.length;
     while (idx < len) {
@@ -518,27 +581,27 @@ var allPass = /* @__PURE__ */ _curry1(function allPass2(preds) {
   });
 });
 var always = /* @__PURE__ */ _curry1(function always2(val) {
-  return function() {
+  return function () {
     return val;
   };
 });
 var and = /* @__PURE__ */ _curry2(function and2(a, b) {
   return a && b;
 });
-var XAny = /* @__PURE__ */ function() {
+var XAny = /* @__PURE__ */ function () {
   function XAny2(f, xf) {
     this.xf = xf;
     this.f = f;
     this.any = false;
   }
   XAny2.prototype["@@transducer/init"] = _xfBase.init;
-  XAny2.prototype["@@transducer/result"] = function(result) {
+  XAny2.prototype["@@transducer/result"] = function (result) {
     if (!this.any) {
       result = this.xf["@@transducer/step"](result, false);
     }
     return this.xf["@@transducer/result"](result);
   };
-  XAny2.prototype["@@transducer/step"] = function(result, input) {
+  XAny2.prototype["@@transducer/step"] = function (result, input) {
     if (this.f(input)) {
       this.any = true;
       result = _reduced(this.xf["@@transducer/step"](result, true));
@@ -550,18 +613,20 @@ var XAny = /* @__PURE__ */ function() {
 var _xany = /* @__PURE__ */ _curry2(function _xany2(f, xf) {
   return new XAny(f, xf);
 });
-var any = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["any"], _xany, function any2(fn, list) {
-  var idx = 0;
-  while (idx < list.length) {
-    if (fn(list[idx])) {
-      return true;
+var any = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _dispatchable(["any"], _xany, function any2(fn, list) {
+    var idx = 0;
+    while (idx < list.length) {
+      if (fn(list[idx])) {
+        return true;
+      }
+      idx += 1;
     }
-    idx += 1;
-  }
-  return false;
-}));
+    return false;
+  }),
+);
 var anyPass = /* @__PURE__ */ _curry1(function anyPass2(preds) {
-  return curryN(reduce(max, 0, pluck("length", preds)), function() {
+  return curryN(reduce(max, 0, pluck("length", preds)), function () {
     var idx = 0;
     var len = preds.length;
     while (idx < len) {
@@ -574,11 +639,21 @@ var anyPass = /* @__PURE__ */ _curry1(function anyPass2(preds) {
   });
 });
 var ap = /* @__PURE__ */ _curry2(function ap2(applyF, applyX) {
-  return typeof applyX["fantasy-land/ap"] === "function" ? applyX["fantasy-land/ap"](applyF) : typeof applyF.ap === "function" ? applyF.ap(applyX) : typeof applyF === "function" ? function(x) {
-    return applyF(x)(applyX(x));
-  } : _reduce(function(acc, f) {
-    return _concat(acc, map(f, applyX));
-  }, [], applyF);
+  return typeof applyX["fantasy-land/ap"] === "function"
+    ? applyX["fantasy-land/ap"](applyF)
+    : typeof applyF.ap === "function"
+    ? applyF.ap(applyX)
+    : typeof applyF === "function"
+    ? function (x) {
+      return applyF(x)(applyX(x));
+    }
+    : _reduce(
+      function (acc, f) {
+        return _concat(acc, map(f, applyX));
+      },
+      [],
+      applyF,
+    );
 });
 function _aperture(n, list) {
   var idx = 0;
@@ -590,7 +665,7 @@ function _aperture(n, list) {
   }
   return acc;
 }
-var XAperture = /* @__PURE__ */ function() {
+var XAperture = /* @__PURE__ */ function () {
   function XAperture2(n, xf) {
     this.xf = xf;
     this.pos = 0;
@@ -598,15 +673,17 @@ var XAperture = /* @__PURE__ */ function() {
     this.acc = new Array(n);
   }
   XAperture2.prototype["@@transducer/init"] = _xfBase.init;
-  XAperture2.prototype["@@transducer/result"] = function(result) {
+  XAperture2.prototype["@@transducer/result"] = function (result) {
     this.acc = null;
     return this.xf["@@transducer/result"](result);
   };
-  XAperture2.prototype["@@transducer/step"] = function(result, input) {
+  XAperture2.prototype["@@transducer/step"] = function (result, input) {
     this.store(input);
-    return this.full ? this.xf["@@transducer/step"](result, this.getCopy()) : result;
+    return this.full
+      ? this.xf["@@transducer/step"](result, this.getCopy())
+      : result;
   };
-  XAperture2.prototype.store = function(input) {
+  XAperture2.prototype.store = function (input) {
     this.acc[this.pos] = input;
     this.pos += 1;
     if (this.pos === this.acc.length) {
@@ -614,15 +691,20 @@ var XAperture = /* @__PURE__ */ function() {
       this.full = true;
     }
   };
-  XAperture2.prototype.getCopy = function() {
-    return _concat(Array.prototype.slice.call(this.acc, this.pos), Array.prototype.slice.call(this.acc, 0, this.pos));
+  XAperture2.prototype.getCopy = function () {
+    return _concat(
+      Array.prototype.slice.call(this.acc, this.pos),
+      Array.prototype.slice.call(this.acc, 0, this.pos),
+    );
   };
   return XAperture2;
 }();
 var _xaperture = /* @__PURE__ */ _curry2(function _xaperture2(n, xf) {
   return new XAperture(n, xf);
 });
-var aperture = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable([], _xaperture, _aperture));
+var aperture = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _dispatchable([], _xaperture, _aperture),
+);
 var append = /* @__PURE__ */ _curry2(function append2(el, list) {
   return _concat(list, [el]);
 });
@@ -641,18 +723,18 @@ var values = /* @__PURE__ */ _curry1(function values2(obj) {
   return vals;
 });
 function mapValues(fn, obj) {
-  return keys(obj).reduce(function(acc, key) {
+  return keys(obj).reduce(function (acc, key) {
     acc[key] = fn(obj[key]);
     return acc;
   }, {});
 }
 var applySpec = /* @__PURE__ */ _curry1(function applySpec2(spec) {
-  spec = mapValues(function(v) {
+  spec = mapValues(function (v) {
     return typeof v == "function" ? v : applySpec2(v);
   }, spec);
-  return curryN(reduce(max, 0, pluck("length", values(spec))), function() {
+  return curryN(reduce(max, 0, pluck("length", values(spec))), function () {
     var args = arguments;
-    return mapValues(function(f) {
+    return mapValues(function (f) {
       return apply(f, args);
     }, spec);
   });
@@ -682,7 +764,11 @@ var assocPath = /* @__PURE__ */ _curry3(function assocPath2(path3, val, obj) {
   }
   var idx = path3[0];
   if (path3.length > 1) {
-    var nextObj = !isNil(obj) && _has(idx, obj) ? obj[idx] : _isInteger(path3[1]) ? [] : {};
+    var nextObj = !isNil(obj) && _has(idx, obj)
+      ? obj[idx]
+      : _isInteger(path3[1])
+      ? []
+      : {};
     val = assocPath2(Array.prototype.slice.call(path3, 1), val, nextObj);
   }
   if (_isInteger(idx) && _isArray(obj)) {
@@ -696,51 +782,53 @@ var assocPath = /* @__PURE__ */ _curry3(function assocPath2(path3, val, obj) {
 var nAry = /* @__PURE__ */ _curry2(function nAry2(n, fn) {
   switch (n) {
     case 0:
-      return function() {
+      return function () {
         return fn.call(this);
       };
     case 1:
-      return function(a0) {
+      return function (a0) {
         return fn.call(this, a0);
       };
     case 2:
-      return function(a0, a1) {
+      return function (a0, a1) {
         return fn.call(this, a0, a1);
       };
     case 3:
-      return function(a0, a1, a2) {
+      return function (a0, a1, a2) {
         return fn.call(this, a0, a1, a2);
       };
     case 4:
-      return function(a0, a1, a2, a3) {
+      return function (a0, a1, a2, a3) {
         return fn.call(this, a0, a1, a2, a3);
       };
     case 5:
-      return function(a0, a1, a2, a3, a4) {
+      return function (a0, a1, a2, a3, a4) {
         return fn.call(this, a0, a1, a2, a3, a4);
       };
     case 6:
-      return function(a0, a1, a2, a3, a4, a5) {
+      return function (a0, a1, a2, a3, a4, a5) {
         return fn.call(this, a0, a1, a2, a3, a4, a5);
       };
     case 7:
-      return function(a0, a1, a2, a3, a4, a5, a6) {
+      return function (a0, a1, a2, a3, a4, a5, a6) {
         return fn.call(this, a0, a1, a2, a3, a4, a5, a6);
       };
     case 8:
-      return function(a0, a1, a2, a3, a4, a5, a6, a7) {
+      return function (a0, a1, a2, a3, a4, a5, a6, a7) {
         return fn.call(this, a0, a1, a2, a3, a4, a5, a6, a7);
       };
     case 9:
-      return function(a0, a1, a2, a3, a4, a5, a6, a7, a8) {
+      return function (a0, a1, a2, a3, a4, a5, a6, a7, a8) {
         return fn.call(this, a0, a1, a2, a3, a4, a5, a6, a7, a8);
       };
     case 10:
-      return function(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {
+      return function (a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {
         return fn.call(this, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
       };
     default:
-      throw new Error("First argument to nAry must be a non-negative integer no greater than ten");
+      throw new Error(
+        "First argument to nAry must be a non-negative integer no greater than ten",
+      );
   }
 });
 var binary = /* @__PURE__ */ _curry1(function binary2(fn) {
@@ -748,21 +836,29 @@ var binary = /* @__PURE__ */ _curry1(function binary2(fn) {
 });
 function _isFunction(x) {
   var type3 = Object.prototype.toString.call(x);
-  return type3 === "[object Function]" || type3 === "[object AsyncFunction]" || type3 === "[object GeneratorFunction]" || type3 === "[object AsyncGeneratorFunction]";
+  return type3 === "[object Function]" || type3 === "[object AsyncFunction]" ||
+    type3 === "[object GeneratorFunction]" ||
+    type3 === "[object AsyncGeneratorFunction]";
 }
 var liftN = /* @__PURE__ */ _curry2(function liftN2(arity, fn) {
   var lifted = curryN(arity, fn);
-  return curryN(arity, function() {
-    return _reduce(ap, map(lifted, arguments[0]), Array.prototype.slice.call(arguments, 1));
+  return curryN(arity, function () {
+    return _reduce(
+      ap,
+      map(lifted, arguments[0]),
+      Array.prototype.slice.call(arguments, 1),
+    );
   });
 });
 var lift = /* @__PURE__ */ _curry1(function lift2(fn) {
   return liftN(fn.length, fn);
 });
 var both = /* @__PURE__ */ _curry2(function both2(f, g) {
-  return _isFunction(f) ? function _both() {
-    return f.apply(this, arguments) && g.apply(this, arguments);
-  } : lift(and)(f, g);
+  return _isFunction(f)
+    ? function _both() {
+      return f.apply(this, arguments) && g.apply(this, arguments);
+    }
+    : lift(and)(f, g);
 });
 var curry = /* @__PURE__ */ _curry1(function curry2(fn) {
   return curryN(fn.length, fn);
@@ -796,55 +892,74 @@ function _makeFlat(recursive) {
 function _forceReduced(x) {
   return {
     "@@transducer/value": x,
-    "@@transducer/reduced": true
+    "@@transducer/reduced": true,
   };
 }
-var preservingReduced = function(xf) {
+var preservingReduced = function (xf) {
   return {
     "@@transducer/init": _xfBase.init,
-    "@@transducer/result": function(result) {
+    "@@transducer/result": function (result) {
       return xf["@@transducer/result"](result);
     },
-    "@@transducer/step": function(result, input) {
+    "@@transducer/step": function (result, input) {
       var ret = xf["@@transducer/step"](result, input);
       return ret["@@transducer/reduced"] ? _forceReduced(ret) : ret;
-    }
+    },
   };
 };
 var _flatCat = function _xcat(xf) {
   var rxf = preservingReduced(xf);
   return {
     "@@transducer/init": _xfBase.init,
-    "@@transducer/result": function(result) {
+    "@@transducer/result": function (result) {
       return rxf["@@transducer/result"](result);
     },
-    "@@transducer/step": function(result, input) {
-      return !_isArrayLike(input) ? _reduce(rxf, result, [input]) : _reduce(rxf, result, input);
-    }
+    "@@transducer/step": function (result, input) {
+      return !_isArrayLike(input)
+        ? _reduce(rxf, result, [input])
+        : _reduce(rxf, result, input);
+    },
   };
 };
 var _xchain = /* @__PURE__ */ _curry2(function _xchain2(f, xf) {
   return map(f, _flatCat(xf));
 });
-var chain = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["fantasy-land/chain", "chain"], _xchain, function chain2(fn, monad) {
-  if (typeof monad === "function") {
-    return function(x) {
-      return fn(monad(x))(x);
-    };
-  }
-  return _makeFlat(false)(map(fn, monad));
-}));
+var chain = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _dispatchable(
+    ["fantasy-land/chain", "chain"],
+    _xchain,
+    function chain2(fn, monad) {
+      if (typeof monad === "function") {
+        return function (x) {
+          return fn(monad(x))(x);
+        };
+      }
+      return _makeFlat(false)(map(fn, monad));
+    },
+  ),
+);
 var clamp = /* @__PURE__ */ _curry3(function clamp2(min3, max3, value) {
   if (min3 > max3) {
-    throw new Error("min must not be greater than max in clamp(min, max, value)");
+    throw new Error(
+      "min must not be greater than max in clamp(min, max, value)",
+    );
   }
   return value < min3 ? min3 : value > max3 ? max3 : value;
 });
 function _cloneRegExp(pattern) {
-  return new RegExp(pattern.source, (pattern.global ? "g" : "") + (pattern.ignoreCase ? "i" : "") + (pattern.multiline ? "m" : "") + (pattern.sticky ? "y" : "") + (pattern.unicode ? "u" : ""));
+  return new RegExp(
+    pattern.source,
+    (pattern.global ? "g" : "") + (pattern.ignoreCase ? "i" : "") +
+      (pattern.multiline ? "m" : "") + (pattern.sticky ? "y" : "") +
+      (pattern.unicode ? "u" : ""),
+  );
 }
 var type = /* @__PURE__ */ _curry1(function type2(val) {
-  return val === null ? "Null" : val === void 0 ? "Undefined" : Object.prototype.toString.call(val).slice(8, -1);
+  return val === null
+    ? "Null"
+    : val === void 0
+    ? "Undefined"
+    : Object.prototype.toString.call(val).slice(8, -1);
 });
 function _clone(value, refFrom, refTo, deep) {
   var copy = function copy2(copiedValue) {
@@ -859,7 +974,9 @@ function _clone(value, refFrom, refTo, deep) {
     refFrom[idx + 1] = value;
     refTo[idx + 1] = copiedValue;
     for (var key in value) {
-      copiedValue[key] = deep ? _clone(value[key], refFrom, refTo, true) : value[key];
+      copiedValue[key] = deep
+        ? _clone(value[key], refFrom, refTo, true)
+        : value[key];
     }
     return copiedValue;
   };
@@ -877,10 +994,12 @@ function _clone(value, refFrom, refTo, deep) {
   }
 }
 var clone = /* @__PURE__ */ _curry1(function clone2(value) {
-  return value != null && typeof value.clone === "function" ? value.clone() : _clone(value, [], [], true);
+  return value != null && typeof value.clone === "function"
+    ? value.clone()
+    : _clone(value, [], [], true);
 });
 var comparator = /* @__PURE__ */ _curry1(function comparator2(pred) {
-  return function(a, b) {
+  return function (a, b) {
     return pred(a, b) ? -1 : pred(b, a) ? 1 : 0;
   };
 });
@@ -889,32 +1008,49 @@ var not = /* @__PURE__ */ _curry1(function not2(a) {
 });
 var complement = /* @__PURE__ */ lift(not);
 function _pipe(f, g) {
-  return function() {
+  return function () {
     return g.call(this, f.apply(this, arguments));
   };
 }
 function _checkForMethod(methodname, fn) {
-  return function() {
+  return function () {
     var length3 = arguments.length;
     if (length3 === 0) {
       return fn();
     }
     var obj = arguments[length3 - 1];
-    return _isArray(obj) || typeof obj[methodname] !== "function" ? fn.apply(this, arguments) : obj[methodname].apply(obj, Array.prototype.slice.call(arguments, 0, length3 - 1));
+    return _isArray(obj) || typeof obj[methodname] !== "function"
+      ? fn.apply(this, arguments)
+      : obj[methodname].apply(
+        obj,
+        Array.prototype.slice.call(arguments, 0, length3 - 1),
+      );
   };
 }
-var slice = /* @__PURE__ */ _curry3(/* @__PURE__ */ _checkForMethod("slice", function slice2(fromIndex, toIndex, list) {
-  return Array.prototype.slice.call(list, fromIndex, toIndex);
-}));
-var tail = /* @__PURE__ */ _curry1(/* @__PURE__ */ _checkForMethod("tail", /* @__PURE__ */ slice(1, Infinity)));
+var slice = /* @__PURE__ */ _curry3(
+  /* @__PURE__ */ _checkForMethod(
+    "slice",
+    function slice2(fromIndex, toIndex, list) {
+      return Array.prototype.slice.call(list, fromIndex, toIndex);
+    },
+  ),
+);
+var tail = /* @__PURE__ */ _curry1(
+  /* @__PURE__ */ _checkForMethod("tail", /* @__PURE__ */ slice(1, Infinity)),
+);
 function pipe() {
   if (arguments.length === 0) {
     throw new Error("pipe requires at least one argument");
   }
-  return _arity(arguments[0].length, reduce(_pipe, arguments[0], tail(arguments)));
+  return _arity(
+    arguments[0].length,
+    reduce(_pipe, arguments[0], tail(arguments)),
+  );
 }
 var reverse = /* @__PURE__ */ _curry1(function reverse2(list) {
-  return _isString(list) ? list.split("").reverse().join("") : Array.prototype.slice.call(list, 0).reverse();
+  return _isString(list)
+    ? list.split("").reverse().join("")
+    : Array.prototype.slice.call(list, 0).reverse();
 });
 function compose() {
   if (arguments.length === 0) {
@@ -931,9 +1067,9 @@ function composeK() {
   return compose(compose.apply(this, map(chain, init2)), last2);
 }
 function _pipeP(f, g) {
-  return function() {
+  return function () {
     var ctx = this;
-    return f.apply(ctx, arguments).then(function(x) {
+    return f.apply(ctx, arguments).then(function (x) {
       return g.call(ctx, x);
     });
   };
@@ -942,7 +1078,10 @@ function pipeP() {
   if (arguments.length === 0) {
     throw new Error("pipeP requires at least one argument");
   }
-  return _arity(arguments[0].length, reduce(_pipeP, arguments[0], tail(arguments)));
+  return _arity(
+    arguments[0].length,
+    reduce(_pipeP, arguments[0], tail(arguments)),
+  );
 }
 function composeP() {
   if (arguments.length === 0) {
@@ -961,10 +1100,14 @@ var pipeWith = /* @__PURE__ */ _curry2(function pipeWith2(xf, list) {
   }
   var headList = head(list);
   var tailList = tail(list);
-  return _arity(headList.length, function() {
-    return _reduce(function(result, f) {
-      return xf.call(this, f, result);
-    }, headList.apply(this, arguments), tailList);
+  return _arity(headList.length, function () {
+    return _reduce(
+      function (result, f) {
+        return xf.call(this, f, result);
+      },
+      headList.apply(this, arguments),
+      tailList,
+    );
   });
 });
 var composeWith = /* @__PURE__ */ _curry2(function composeWith2(xf, list) {
@@ -1007,9 +1150,13 @@ function _uniqContentEquals(aIterator, bIterator, stackA, stackB) {
   function eq(_a, _b) {
     return _equals(_a, _b, stackA.slice(), stackB.slice());
   }
-  return !_includesWith(function(b2, aItem) {
-    return !_includesWith(eq, aItem, b2);
-  }, b, a);
+  return !_includesWith(
+    function (b2, aItem) {
+      return !_includesWith(eq, aItem, b2);
+    },
+    b,
+    a,
+  );
 }
 function _equals(a, b, stackA, stackB) {
   if (_objectIs$1(a, b)) {
@@ -1022,17 +1169,27 @@ function _equals(a, b, stackA, stackB) {
   if (a == null || b == null) {
     return false;
   }
-  if (typeof a["fantasy-land/equals"] === "function" || typeof b["fantasy-land/equals"] === "function") {
-    return typeof a["fantasy-land/equals"] === "function" && a["fantasy-land/equals"](b) && typeof b["fantasy-land/equals"] === "function" && b["fantasy-land/equals"](a);
+  if (
+    typeof a["fantasy-land/equals"] === "function" ||
+    typeof b["fantasy-land/equals"] === "function"
+  ) {
+    return typeof a["fantasy-land/equals"] === "function" &&
+      a["fantasy-land/equals"](b) &&
+      typeof b["fantasy-land/equals"] === "function" &&
+      b["fantasy-land/equals"](a);
   }
   if (typeof a.equals === "function" || typeof b.equals === "function") {
-    return typeof a.equals === "function" && a.equals(b) && typeof b.equals === "function" && b.equals(a);
+    return typeof a.equals === "function" && a.equals(b) &&
+      typeof b.equals === "function" && b.equals(a);
   }
   switch (typeA) {
     case "Arguments":
     case "Array":
     case "Object":
-      if (typeof a.constructor === "function" && _functionName(a.constructor) === "Promise") {
+      if (
+        typeof a.constructor === "function" &&
+        _functionName(a.constructor) === "Promise"
+      ) {
         return a === b;
       }
       break;
@@ -1051,7 +1208,11 @@ function _equals(a, b, stackA, stackB) {
     case "Error":
       return a.name === b.name && a.message === b.message;
     case "RegExp":
-      if (!(a.source === b.source && a.global === b.global && a.ignoreCase === b.ignoreCase && a.multiline === b.multiline && a.sticky === b.sticky && a.unicode === b.unicode)) {
+      if (
+        !(a.source === b.source && a.global === b.global &&
+          a.ignoreCase === b.ignoreCase && a.multiline === b.multiline &&
+          a.sticky === b.sticky && a.unicode === b.unicode)
+      ) {
         return false;
       }
       break;
@@ -1068,12 +1229,22 @@ function _equals(a, b, stackA, stackB) {
       if (a.size !== b.size) {
         return false;
       }
-      return _uniqContentEquals(a.entries(), b.entries(), stackA.concat([a]), stackB.concat([b]));
+      return _uniqContentEquals(
+        a.entries(),
+        b.entries(),
+        stackA.concat([a]),
+        stackB.concat([b]),
+      );
     case "Set":
       if (a.size !== b.size) {
         return false;
       }
-      return _uniqContentEquals(a.values(), b.values(), stackA.concat([a]), stackB.concat([b]));
+      return _uniqContentEquals(
+        a.values(),
+        b.values(),
+        stackA.concat([a]),
+        stackB.concat([b]),
+      );
     case "Arguments":
     case "Array":
     case "Object":
@@ -1106,7 +1277,9 @@ function _equals(a, b, stackA, stackB) {
   idx = keysA.length - 1;
   while (idx >= 0) {
     var key = keysA[idx];
-    if (!(_has(key, b) && _equals(b[key], a[key], extendedStackA, extendedStackB))) {
+    if (
+      !(_has(key, b) && _equals(b[key], a[key], extendedStackA, extendedStackB))
+    ) {
       return false;
     }
     idx -= 1;
@@ -1165,19 +1338,30 @@ function _includes(a, list) {
   return _indexOf(list, a, 0) >= 0;
 }
 function _quote(s) {
-  var escaped = s.replace(/\\/g, "\\\\").replace(/[\b]/g, "\\b").replace(/\f/g, "\\f").replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t").replace(/\v/g, "\\v").replace(/\0/g, "\\0");
+  var escaped = s.replace(/\\/g, "\\\\").replace(/[\b]/g, "\\b").replace(
+    /\f/g,
+    "\\f",
+  ).replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t").replace(
+    /\v/g,
+    "\\v",
+  ).replace(/\0/g, "\\0");
   return '"' + escaped.replace(/"/g, '\\"') + '"';
 }
 var pad = function pad2(n) {
   return (n < 10 ? "0" : "") + n;
 };
-var _toISOString = typeof Date.prototype.toISOString === "function" ? function _toISOString2(d) {
-  return d.toISOString();
-} : function _toISOString3(d) {
-  return d.getUTCFullYear() + "-" + pad(d.getUTCMonth() + 1) + "-" + pad(d.getUTCDate()) + "T" + pad(d.getUTCHours()) + ":" + pad(d.getUTCMinutes()) + ":" + pad(d.getUTCSeconds()) + "." + (d.getUTCMilliseconds() / 1e3).toFixed(3).slice(2, 5) + "Z";
-};
+var _toISOString = typeof Date.prototype.toISOString === "function"
+  ? function _toISOString2(d) {
+    return d.toISOString();
+  }
+  : function _toISOString3(d) {
+    return d.getUTCFullYear() + "-" + pad(d.getUTCMonth() + 1) + "-" +
+      pad(d.getUTCDate()) + "T" + pad(d.getUTCHours()) + ":" +
+      pad(d.getUTCMinutes()) + ":" + pad(d.getUTCSeconds()) + "." +
+      (d.getUTCMilliseconds() / 1e3).toFixed(3).slice(2, 5) + "Z";
+  };
 function _complement(f) {
-  return function() {
+  return function () {
     return !f.apply(this, arguments);
   };
 }
@@ -1196,14 +1380,14 @@ function _filter(fn, list) {
 function _isObject(x) {
   return Object.prototype.toString.call(x) === "[object Object]";
 }
-var XFilter = /* @__PURE__ */ function() {
+var XFilter = /* @__PURE__ */ function () {
   function XFilter2(f, xf) {
     this.xf = xf;
     this.f = f;
   }
   XFilter2.prototype["@@transducer/init"] = _xfBase.init;
   XFilter2.prototype["@@transducer/result"] = _xfBase.result;
-  XFilter2.prototype["@@transducer/step"] = function(result, input) {
+  XFilter2.prototype["@@transducer/step"] = function (result, input) {
     return this.f(input) ? this.xf["@@transducer/step"](result, input) : result;
   };
   return XFilter2;
@@ -1211,14 +1395,26 @@ var XFilter = /* @__PURE__ */ function() {
 var _xfilter = /* @__PURE__ */ _curry2(function _xfilter2(f, xf) {
   return new XFilter(f, xf);
 });
-var filter = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["filter"], _xfilter, function(pred, filterable) {
-  return _isObject(filterable) ? _reduce(function(acc, key) {
-    if (pred(filterable[key])) {
-      acc[key] = filterable[key];
-    }
-    return acc;
-  }, {}, keys(filterable)) : _filter(pred, filterable);
-}));
+var filter = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _dispatchable(
+    ["filter"],
+    _xfilter,
+    function (pred, filterable) {
+      return _isObject(filterable)
+        ? _reduce(
+          function (acc, key) {
+            if (pred(filterable[key])) {
+              acc[key] = filterable[key];
+            }
+            return acc;
+          },
+          {},
+          keys(filterable),
+        )
+        : _filter(pred, filterable);
+    },
+  ),
+);
 var reject = /* @__PURE__ */ _curry2(function reject2(pred, filterable) {
   return filter(_complement(pred), filterable);
 });
@@ -1227,28 +1423,43 @@ function _toString(x, seen) {
     var xs = seen.concat([x]);
     return _includes(y, xs) ? "<Circular>" : _toString(y, xs);
   };
-  var mapPairs = function(obj, keys4) {
-    return _map(function(k) {
+  var mapPairs = function (obj, keys4) {
+    return _map(function (k) {
       return _quote(k) + ": " + recur(obj[k]);
     }, keys4.slice().sort());
   };
   switch (Object.prototype.toString.call(x)) {
     case "[object Arguments]":
-      return "(function() { return arguments; }(" + _map(recur, x).join(", ") + "))";
+      return "(function() { return arguments; }(" + _map(recur, x).join(", ") +
+        "))";
     case "[object Array]":
-      return "[" + _map(recur, x).concat(mapPairs(x, reject(function(k) {
-        return /^\d+$/.test(k);
-      }, keys(x)))).join(", ") + "]";
+      return "[" + _map(recur, x).concat(mapPairs(
+        x,
+        reject(function (k) {
+          return /^\d+$/.test(k);
+        }, keys(x)),
+      )).join(", ") + "]";
     case "[object Boolean]":
-      return typeof x === "object" ? "new Boolean(" + recur(x.valueOf()) + ")" : x.toString();
+      return typeof x === "object"
+        ? "new Boolean(" + recur(x.valueOf()) + ")"
+        : x.toString();
     case "[object Date]":
-      return "new Date(" + (isNaN(x.valueOf()) ? recur(NaN) : _quote(_toISOString(x))) + ")";
+      return "new Date(" + (isNaN(x.valueOf())
+        ? recur(NaN)
+        : _quote(_toISOString(x))) +
+        ")";
     case "[object Null]":
       return "null";
     case "[object Number]":
-      return typeof x === "object" ? "new Number(" + recur(x.valueOf()) + ")" : 1 / x === -Infinity ? "-0" : x.toString(10);
+      return typeof x === "object"
+        ? "new Number(" + recur(x.valueOf()) + ")"
+        : 1 / x === -Infinity
+        ? "-0"
+        : x.toString(10);
     case "[object String]":
-      return typeof x === "object" ? "new String(" + recur(x.valueOf()) + ")" : _quote(x);
+      return typeof x === "object"
+        ? "new String(" + recur(x.valueOf()) + ")"
+        : _quote(x);
     case "[object Undefined]":
       return "undefined";
     default:
@@ -1283,13 +1494,20 @@ var concat = /* @__PURE__ */ _curry2(function concat2(a, b) {
   if (a != null && _isFunction(a.concat)) {
     return a.concat(b);
   }
-  throw new TypeError(toString$1(a) + ' does not have a method named "concat" or "fantasy-land/concat"');
+  throw new TypeError(
+    toString$1(a) +
+      ' does not have a method named "concat" or "fantasy-land/concat"',
+  );
 });
 var cond = /* @__PURE__ */ _curry1(function cond2(pairs) {
-  var arity = reduce(max, 0, map(function(pair3) {
-    return pair3[0].length;
-  }, pairs));
-  return _arity(arity, function() {
+  var arity = reduce(
+    max,
+    0,
+    map(function (pair3) {
+      return pair3[0].length;
+    }, pairs),
+  );
+  return _arity(arity, function () {
     var idx = 0;
     while (idx < pairs.length) {
       if (pairs[idx][0].apply(this, arguments)) {
@@ -1304,11 +1522,11 @@ var constructN = /* @__PURE__ */ _curry2(function constructN2(n, Fn) {
     throw new Error("Constructor with greater than ten arguments");
   }
   if (n === 0) {
-    return function() {
+    return function () {
       return new Fn();
     };
   }
-  return curry(nAry(n, function($0, $1, $2, $3, $4, $5, $6, $7, $8, $9) {
+  return curry(nAry(n, function ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9) {
     switch (arguments.length) {
       case 1:
         return new Fn($0);
@@ -1338,15 +1556,18 @@ var construct = /* @__PURE__ */ _curry1(function construct2(Fn) {
 });
 var contains$1 = /* @__PURE__ */ _curry2(_includes);
 var converge = /* @__PURE__ */ _curry2(function converge2(after, fns) {
-  return curryN(reduce(max, 0, pluck("length", fns)), function() {
+  return curryN(reduce(max, 0, pluck("length", fns)), function () {
     var args = arguments;
     var context = this;
-    return after.apply(context, _map(function(fn) {
-      return fn.apply(context, args);
-    }, fns));
+    return after.apply(
+      context,
+      _map(function (fn) {
+        return fn.apply(context, args);
+      }, fns),
+    );
   });
 });
-var XReduceBy = /* @__PURE__ */ function() {
+var XReduceBy = /* @__PURE__ */ function () {
   function XReduceBy2(valueFn, valueAcc, keyFn, xf) {
     this.valueFn = valueFn;
     this.valueAcc = valueAcc;
@@ -1355,7 +1576,7 @@ var XReduceBy = /* @__PURE__ */ function() {
     this.inputs = {};
   }
   XReduceBy2.prototype["@@transducer/init"] = _xfBase.init;
-  XReduceBy2.prototype["@@transducer/result"] = function(result) {
+  XReduceBy2.prototype["@@transducer/result"] = function (result) {
     var key;
     for (key in this.inputs) {
       if (_has(key, this.inputs)) {
@@ -1369,7 +1590,7 @@ var XReduceBy = /* @__PURE__ */ function() {
     this.inputs = null;
     return this.xf["@@transducer/result"](result);
   };
-  XReduceBy2.prototype["@@transducer/step"] = function(result, input) {
+  XReduceBy2.prototype["@@transducer/step"] = function (result, input) {
     var key = this.keyFn(input);
     this.inputs[key] = this.inputs[key] || [key, this.valueAcc];
     this.inputs[key][1] = this.valueFn(this.inputs[key][1], input);
@@ -1377,17 +1598,36 @@ var XReduceBy = /* @__PURE__ */ function() {
   };
   return XReduceBy2;
 }();
-var _xreduceBy = /* @__PURE__ */ _curryN(4, [], function _xreduceBy2(valueFn, valueAcc, keyFn, xf) {
-  return new XReduceBy(valueFn, valueAcc, keyFn, xf);
-});
-var reduceBy = /* @__PURE__ */ _curryN(4, [], /* @__PURE__ */ _dispatchable([], _xreduceBy, function reduceBy2(valueFn, valueAcc, keyFn, list) {
-  return _reduce(function(acc, elt) {
-    var key = keyFn(elt);
-    acc[key] = valueFn(_has(key, acc) ? acc[key] : _clone(valueAcc, [], [], false), elt);
-    return acc;
-  }, {}, list);
-}));
-var countBy = /* @__PURE__ */ reduceBy(function(acc, elem) {
+var _xreduceBy = /* @__PURE__ */ _curryN(
+  4,
+  [],
+  function _xreduceBy2(valueFn, valueAcc, keyFn, xf) {
+    return new XReduceBy(valueFn, valueAcc, keyFn, xf);
+  },
+);
+var reduceBy = /* @__PURE__ */ _curryN(
+  4,
+  [],
+  /* @__PURE__ */ _dispatchable(
+    [],
+    _xreduceBy,
+    function reduceBy2(valueFn, valueAcc, keyFn, list) {
+      return _reduce(
+        function (acc, elt) {
+          var key = keyFn(elt);
+          acc[key] = valueFn(
+            _has(key, acc) ? acc[key] : _clone(valueAcc, [], [], false),
+            elt,
+          );
+          return acc;
+        },
+        {},
+        list,
+      );
+    },
+  ),
+);
+var countBy = /* @__PURE__ */ reduceBy(function (acc, elem) {
   return acc + 1;
 }, 0);
 var dec = /* @__PURE__ */ add(-1);
@@ -1399,15 +1639,15 @@ var descend = /* @__PURE__ */ _curry3(function descend2(fn, a, b) {
   var bb = fn(b);
   return aa > bb ? -1 : aa < bb ? 1 : 0;
 });
-var _Set = /* @__PURE__ */ function() {
+var _Set = /* @__PURE__ */ function () {
   function _Set2() {
     this._nativeSet = typeof Set === "function" ? new Set() : null;
     this._items = {};
   }
-  _Set2.prototype.add = function(item) {
+  _Set2.prototype.add = function (item) {
     return !hasOrAdd(item, true, this);
   };
-  _Set2.prototype.has = function(item) {
+  _Set2.prototype.has = function (item) {
     return hasOrAdd(item, false, this);
   };
   return _Set2;
@@ -1548,18 +1788,23 @@ var difference = /* @__PURE__ */ _curry2(function difference2(first, second) {
   }
   return out;
 });
-var differenceWith = /* @__PURE__ */ _curry3(function differenceWith2(pred, first, second) {
-  var out = [];
-  var idx = 0;
-  var firstLen = first.length;
-  while (idx < firstLen) {
-    if (!_includesWith(pred, first[idx], second) && !_includesWith(pred, first[idx], out)) {
-      out.push(first[idx]);
+var differenceWith = /* @__PURE__ */ _curry3(
+  function differenceWith2(pred, first, second) {
+    var out = [];
+    var idx = 0;
+    var firstLen = first.length;
+    while (idx < firstLen) {
+      if (
+        !_includesWith(pred, first[idx], second) &&
+        !_includesWith(pred, first[idx], out)
+      ) {
+        out.push(first[idx]);
+      }
+      idx += 1;
     }
-    idx += 1;
-  }
-  return out;
-});
+    return out;
+  },
+);
 var dissoc = /* @__PURE__ */ _curry2(function dissoc2(prop3, obj) {
   var result = {};
   for (var p in obj) {
@@ -1581,7 +1826,9 @@ var dissocPath = /* @__PURE__ */ _curry2(function dissocPath2(path3, obj) {
     case 0:
       return obj;
     case 1:
-      return _isInteger(path3[0]) && _isArray(obj) ? remove(path3[0], 1, obj) : dissoc(path3[0], obj);
+      return _isInteger(path3[0]) && _isArray(obj)
+        ? remove(path3[0], 1, obj)
+        : dissoc(path3[0], obj);
     default:
       var head2 = path3[0];
       var tail2 = Array.prototype.slice.call(path3, 1);
@@ -1597,14 +1844,14 @@ var dissocPath = /* @__PURE__ */ _curry2(function dissocPath2(path3, obj) {
 var divide = /* @__PURE__ */ _curry2(function divide2(a, b) {
   return a / b;
 });
-var XDrop = /* @__PURE__ */ function() {
+var XDrop = /* @__PURE__ */ function () {
   function XDrop2(n, xf) {
     this.xf = xf;
     this.n = n;
   }
   XDrop2.prototype["@@transducer/init"] = _xfBase.init;
   XDrop2.prototype["@@transducer/result"] = _xfBase.result;
-  XDrop2.prototype["@@transducer/step"] = function(result, input) {
+  XDrop2.prototype["@@transducer/step"] = function (result, input) {
     if (this.n > 0) {
       this.n -= 1;
       return result;
@@ -1616,10 +1863,12 @@ var XDrop = /* @__PURE__ */ function() {
 var _xdrop = /* @__PURE__ */ _curry2(function _xdrop2(n, xf) {
   return new XDrop(n, xf);
 });
-var drop = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["drop"], _xdrop, function drop2(n, xs) {
-  return slice(Math.max(0, n), Infinity, xs);
-}));
-var XTake = /* @__PURE__ */ function() {
+var drop = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _dispatchable(["drop"], _xdrop, function drop2(n, xs) {
+    return slice(Math.max(0, n), Infinity, xs);
+  }),
+);
+var XTake = /* @__PURE__ */ function () {
   function XTake2(n, xf) {
     this.xf = xf;
     this.n = n;
@@ -1627,9 +1876,11 @@ var XTake = /* @__PURE__ */ function() {
   }
   XTake2.prototype["@@transducer/init"] = _xfBase.init;
   XTake2.prototype["@@transducer/result"] = _xfBase.result;
-  XTake2.prototype["@@transducer/step"] = function(result, input) {
+  XTake2.prototype["@@transducer/step"] = function (result, input) {
     this.i += 1;
-    var ret = this.n === 0 ? result : this.xf["@@transducer/step"](result, input);
+    var ret = this.n === 0
+      ? result
+      : this.xf["@@transducer/step"](result, input);
     return this.n >= 0 && this.i >= this.n ? _reduced(ret) : ret;
   };
   return XTake2;
@@ -1637,13 +1888,15 @@ var XTake = /* @__PURE__ */ function() {
 var _xtake = /* @__PURE__ */ _curry2(function _xtake2(n, xf) {
   return new XTake(n, xf);
 });
-var take = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["take"], _xtake, function take2(n, xs) {
-  return slice(0, n < 0 ? Infinity : n, xs);
-}));
+var take = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _dispatchable(["take"], _xtake, function take2(n, xs) {
+    return slice(0, n < 0 ? Infinity : n, xs);
+  }),
+);
 function dropLast(n, xs) {
   return take(n < xs.length ? xs.length - n : 0, xs);
 }
-var XDropLast = /* @__PURE__ */ function() {
+var XDropLast = /* @__PURE__ */ function () {
   function XDropLast2(n, xf) {
     this.xf = xf;
     this.pos = 0;
@@ -1651,18 +1904,18 @@ var XDropLast = /* @__PURE__ */ function() {
     this.acc = new Array(n);
   }
   XDropLast2.prototype["@@transducer/init"] = _xfBase.init;
-  XDropLast2.prototype["@@transducer/result"] = function(result) {
+  XDropLast2.prototype["@@transducer/result"] = function (result) {
     this.acc = null;
     return this.xf["@@transducer/result"](result);
   };
-  XDropLast2.prototype["@@transducer/step"] = function(result, input) {
+  XDropLast2.prototype["@@transducer/step"] = function (result, input) {
     if (this.full) {
       result = this.xf["@@transducer/step"](result, this.acc[this.pos]);
     }
     this.store(input);
     return result;
   };
-  XDropLast2.prototype.store = function(input) {
+  XDropLast2.prototype.store = function (input) {
     this.acc[this.pos] = input;
     this.pos += 1;
     if (this.pos === this.acc.length) {
@@ -1675,7 +1928,9 @@ var XDropLast = /* @__PURE__ */ function() {
 var _xdropLast = /* @__PURE__ */ _curry2(function _xdropLast2(n, xf) {
   return new XDropLast(n, xf);
 });
-var dropLast$1 = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable([], _xdropLast, dropLast));
+var dropLast$1 = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _dispatchable([], _xdropLast, dropLast),
+);
 function dropLastWhile(pred, xs) {
   var idx = xs.length - 1;
   while (idx >= 0 && pred(xs[idx])) {
@@ -1683,36 +1938,42 @@ function dropLastWhile(pred, xs) {
   }
   return slice(0, idx + 1, xs);
 }
-var XDropLastWhile = /* @__PURE__ */ function() {
+var XDropLastWhile = /* @__PURE__ */ function () {
   function XDropLastWhile2(fn, xf) {
     this.f = fn;
     this.retained = [];
     this.xf = xf;
   }
   XDropLastWhile2.prototype["@@transducer/init"] = _xfBase.init;
-  XDropLastWhile2.prototype["@@transducer/result"] = function(result) {
+  XDropLastWhile2.prototype["@@transducer/result"] = function (result) {
     this.retained = null;
     return this.xf["@@transducer/result"](result);
   };
-  XDropLastWhile2.prototype["@@transducer/step"] = function(result, input) {
-    return this.f(input) ? this.retain(result, input) : this.flush(result, input);
+  XDropLastWhile2.prototype["@@transducer/step"] = function (result, input) {
+    return this.f(input)
+      ? this.retain(result, input)
+      : this.flush(result, input);
   };
-  XDropLastWhile2.prototype.flush = function(result, input) {
+  XDropLastWhile2.prototype.flush = function (result, input) {
     result = _reduce(this.xf["@@transducer/step"], result, this.retained);
     this.retained = [];
     return this.xf["@@transducer/step"](result, input);
   };
-  XDropLastWhile2.prototype.retain = function(result, input) {
+  XDropLastWhile2.prototype.retain = function (result, input) {
     this.retained.push(input);
     return result;
   };
   return XDropLastWhile2;
 }();
-var _xdropLastWhile = /* @__PURE__ */ _curry2(function _xdropLastWhile2(fn, xf) {
-  return new XDropLastWhile(fn, xf);
-});
-var dropLastWhile$1 = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable([], _xdropLastWhile, dropLastWhile));
-var XDropRepeatsWith = /* @__PURE__ */ function() {
+var _xdropLastWhile = /* @__PURE__ */ _curry2(
+  function _xdropLastWhile2(fn, xf) {
+    return new XDropLastWhile(fn, xf);
+  },
+);
+var dropLastWhile$1 = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _dispatchable([], _xdropLastWhile, dropLastWhile),
+);
+var XDropRepeatsWith = /* @__PURE__ */ function () {
   function XDropRepeatsWith2(pred, xf) {
     this.xf = xf;
     this.pred = pred;
@@ -1721,7 +1982,7 @@ var XDropRepeatsWith = /* @__PURE__ */ function() {
   }
   XDropRepeatsWith2.prototype["@@transducer/init"] = _xfBase.init;
   XDropRepeatsWith2.prototype["@@transducer/result"] = _xfBase.result;
-  XDropRepeatsWith2.prototype["@@transducer/step"] = function(result, input) {
+  XDropRepeatsWith2.prototype["@@transducer/step"] = function (result, input) {
     var sameAsLast = false;
     if (!this.seenFirstValue) {
       this.seenFirstValue = true;
@@ -1733,34 +1994,48 @@ var XDropRepeatsWith = /* @__PURE__ */ function() {
   };
   return XDropRepeatsWith2;
 }();
-var _xdropRepeatsWith = /* @__PURE__ */ _curry2(function _xdropRepeatsWith2(pred, xf) {
-  return new XDropRepeatsWith(pred, xf);
-});
+var _xdropRepeatsWith = /* @__PURE__ */ _curry2(
+  function _xdropRepeatsWith2(pred, xf) {
+    return new XDropRepeatsWith(pred, xf);
+  },
+);
 var last = /* @__PURE__ */ nth(-1);
-var dropRepeatsWith = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable([], _xdropRepeatsWith, function dropRepeatsWith2(pred, list) {
-  var result = [];
-  var idx = 1;
-  var len = list.length;
-  if (len !== 0) {
-    result[0] = list[0];
-    while (idx < len) {
-      if (!pred(last(result), list[idx])) {
-        result[result.length] = list[idx];
+var dropRepeatsWith = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _dispatchable(
+    [],
+    _xdropRepeatsWith,
+    function dropRepeatsWith2(pred, list) {
+      var result = [];
+      var idx = 1;
+      var len = list.length;
+      if (len !== 0) {
+        result[0] = list[0];
+        while (idx < len) {
+          if (!pred(last(result), list[idx])) {
+            result[result.length] = list[idx];
+          }
+          idx += 1;
+        }
       }
-      idx += 1;
-    }
-  }
-  return result;
-}));
-var dropRepeats = /* @__PURE__ */ _curry1(/* @__PURE__ */ _dispatchable([], /* @__PURE__ */ _xdropRepeatsWith(equals), /* @__PURE__ */ dropRepeatsWith(equals)));
-var XDropWhile = /* @__PURE__ */ function() {
+      return result;
+    },
+  ),
+);
+var dropRepeats = /* @__PURE__ */ _curry1(
+  /* @__PURE__ */ _dispatchable(
+    [],
+    /* @__PURE__ */ _xdropRepeatsWith(equals),
+    /* @__PURE__ */ dropRepeatsWith(equals),
+  ),
+);
+var XDropWhile = /* @__PURE__ */ function () {
   function XDropWhile2(f, xf) {
     this.xf = xf;
     this.f = f;
   }
   XDropWhile2.prototype["@@transducer/init"] = _xfBase.init;
   XDropWhile2.prototype["@@transducer/result"] = _xfBase.result;
-  XDropWhile2.prototype["@@transducer/step"] = function(result, input) {
+  XDropWhile2.prototype["@@transducer/step"] = function (result, input) {
     if (this.f) {
       if (this.f(input)) {
         return result;
@@ -1774,31 +2049,57 @@ var XDropWhile = /* @__PURE__ */ function() {
 var _xdropWhile = /* @__PURE__ */ _curry2(function _xdropWhile2(f, xf) {
   return new XDropWhile(f, xf);
 });
-var dropWhile = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["dropWhile"], _xdropWhile, function dropWhile2(pred, xs) {
-  var idx = 0;
-  var len = xs.length;
-  while (idx < len && pred(xs[idx])) {
-    idx += 1;
-  }
-  return slice(idx, Infinity, xs);
-}));
+var dropWhile = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _dispatchable(
+    ["dropWhile"],
+    _xdropWhile,
+    function dropWhile2(pred, xs) {
+      var idx = 0;
+      var len = xs.length;
+      while (idx < len && pred(xs[idx])) {
+        idx += 1;
+      }
+      return slice(idx, Infinity, xs);
+    },
+  ),
+);
 var or = /* @__PURE__ */ _curry2(function or2(a, b) {
   return a || b;
 });
 var either = /* @__PURE__ */ _curry2(function either2(f, g) {
-  return _isFunction(f) ? function _either() {
-    return f.apply(this, arguments) || g.apply(this, arguments);
-  } : lift(or)(f, g);
+  return _isFunction(f)
+    ? function _either() {
+      return f.apply(this, arguments) || g.apply(this, arguments);
+    }
+    : lift(or)(f, g);
 });
 var empty = /* @__PURE__ */ _curry1(function empty2(x) {
-  return x != null && typeof x["fantasy-land/empty"] === "function" ? x["fantasy-land/empty"]() : x != null && x.constructor != null && typeof x.constructor["fantasy-land/empty"] === "function" ? x.constructor["fantasy-land/empty"]() : x != null && typeof x.empty === "function" ? x.empty() : x != null && x.constructor != null && typeof x.constructor.empty === "function" ? x.constructor.empty() : _isArray(x) ? [] : _isString(x) ? "" : _isObject(x) ? {} : _isArguments(x) ? function() {
-    return arguments;
-  }() : void 0;
+  return x != null && typeof x["fantasy-land/empty"] === "function"
+    ? x["fantasy-land/empty"]()
+    : x != null && x.constructor != null &&
+        typeof x.constructor["fantasy-land/empty"] === "function"
+    ? x.constructor["fantasy-land/empty"]()
+    : x != null && typeof x.empty === "function"
+    ? x.empty()
+    : x != null && x.constructor != null &&
+        typeof x.constructor.empty === "function"
+    ? x.constructor.empty()
+    : _isArray(x)
+    ? []
+    : _isString(x)
+    ? ""
+    : _isObject(x)
+    ? {}
+    : _isArguments(x)
+    ? function () {
+      return arguments;
+    }()
+    : void 0;
 });
 var takeLast = /* @__PURE__ */ _curry2(function takeLast2(n, xs) {
   return drop(n >= 0 ? xs.length - n : 0, xs);
 });
-var endsWith = /* @__PURE__ */ _curry2(function(suffix, list) {
+var endsWith = /* @__PURE__ */ _curry2(function (suffix, list) {
   return equals(takeLast(suffix.length, list), suffix);
 });
 var eqBy = /* @__PURE__ */ _curry3(function eqBy2(f, x, y) {
@@ -1813,24 +2114,28 @@ var evolve = /* @__PURE__ */ _curry2(function evolve2(transformations, object) {
   for (key in object) {
     transformation = transformations[key];
     type3 = typeof transformation;
-    result[key] = type3 === "function" ? transformation(object[key]) : transformation && type3 === "object" ? evolve2(transformation, object[key]) : object[key];
+    result[key] = type3 === "function"
+      ? transformation(object[key])
+      : transformation && type3 === "object"
+      ? evolve2(transformation, object[key])
+      : object[key];
   }
   return result;
 });
-var XFind = /* @__PURE__ */ function() {
+var XFind = /* @__PURE__ */ function () {
   function XFind2(f, xf) {
     this.xf = xf;
     this.f = f;
     this.found = false;
   }
   XFind2.prototype["@@transducer/init"] = _xfBase.init;
-  XFind2.prototype["@@transducer/result"] = function(result) {
+  XFind2.prototype["@@transducer/result"] = function (result) {
     if (!this.found) {
       result = this.xf["@@transducer/step"](result, void 0);
     }
     return this.xf["@@transducer/result"](result);
   };
-  XFind2.prototype["@@transducer/step"] = function(result, input) {
+  XFind2.prototype["@@transducer/step"] = function (result, input) {
     if (this.f(input)) {
       this.found = true;
       result = _reduced(this.xf["@@transducer/step"](result, input));
@@ -1842,17 +2147,19 @@ var XFind = /* @__PURE__ */ function() {
 var _xfind = /* @__PURE__ */ _curry2(function _xfind2(f, xf) {
   return new XFind(f, xf);
 });
-var find = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["find"], _xfind, function find2(fn, list) {
-  var idx = 0;
-  var len = list.length;
-  while (idx < len) {
-    if (fn(list[idx])) {
-      return list[idx];
+var find = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _dispatchable(["find"], _xfind, function find2(fn, list) {
+    var idx = 0;
+    var len = list.length;
+    while (idx < len) {
+      if (fn(list[idx])) {
+        return list[idx];
+      }
+      idx += 1;
     }
-    idx += 1;
-  }
-}));
-var XFindIndex = /* @__PURE__ */ function() {
+  }),
+);
+var XFindIndex = /* @__PURE__ */ function () {
   function XFindIndex2(f, xf) {
     this.xf = xf;
     this.f = f;
@@ -1860,13 +2167,13 @@ var XFindIndex = /* @__PURE__ */ function() {
     this.found = false;
   }
   XFindIndex2.prototype["@@transducer/init"] = _xfBase.init;
-  XFindIndex2.prototype["@@transducer/result"] = function(result) {
+  XFindIndex2.prototype["@@transducer/result"] = function (result) {
     if (!this.found) {
       result = this.xf["@@transducer/step"](result, -1);
     }
     return this.xf["@@transducer/result"](result);
   };
-  XFindIndex2.prototype["@@transducer/step"] = function(result, input) {
+  XFindIndex2.prototype["@@transducer/step"] = function (result, input) {
     this.idx += 1;
     if (this.f(input)) {
       this.found = true;
@@ -1879,27 +2186,31 @@ var XFindIndex = /* @__PURE__ */ function() {
 var _xfindIndex = /* @__PURE__ */ _curry2(function _xfindIndex2(f, xf) {
   return new XFindIndex(f, xf);
 });
-var findIndex = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable([], _xfindIndex, function findIndex2(fn, list) {
-  var idx = 0;
-  var len = list.length;
-  while (idx < len) {
-    if (fn(list[idx])) {
-      return idx;
+var findIndex = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _dispatchable([], _xfindIndex, function findIndex2(fn, list) {
+    var idx = 0;
+    var len = list.length;
+    while (idx < len) {
+      if (fn(list[idx])) {
+        return idx;
+      }
+      idx += 1;
     }
-    idx += 1;
-  }
-  return -1;
-}));
-var XFindLast = /* @__PURE__ */ function() {
+    return -1;
+  }),
+);
+var XFindLast = /* @__PURE__ */ function () {
   function XFindLast2(f, xf) {
     this.xf = xf;
     this.f = f;
   }
   XFindLast2.prototype["@@transducer/init"] = _xfBase.init;
-  XFindLast2.prototype["@@transducer/result"] = function(result) {
-    return this.xf["@@transducer/result"](this.xf["@@transducer/step"](result, this.last));
+  XFindLast2.prototype["@@transducer/result"] = function (result) {
+    return this.xf["@@transducer/result"](
+      this.xf["@@transducer/step"](result, this.last),
+    );
   };
-  XFindLast2.prototype["@@transducer/step"] = function(result, input) {
+  XFindLast2.prototype["@@transducer/step"] = function (result, input) {
     if (this.f(input)) {
       this.last = input;
     }
@@ -1910,16 +2221,18 @@ var XFindLast = /* @__PURE__ */ function() {
 var _xfindLast = /* @__PURE__ */ _curry2(function _xfindLast2(f, xf) {
   return new XFindLast(f, xf);
 });
-var findLast = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable([], _xfindLast, function findLast2(fn, list) {
-  var idx = list.length - 1;
-  while (idx >= 0) {
-    if (fn(list[idx])) {
-      return list[idx];
+var findLast = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _dispatchable([], _xfindLast, function findLast2(fn, list) {
+    var idx = list.length - 1;
+    while (idx >= 0) {
+      if (fn(list[idx])) {
+        return list[idx];
+      }
+      idx -= 1;
     }
-    idx -= 1;
-  }
-}));
-var XFindLastIndex = /* @__PURE__ */ function() {
+  }),
+);
+var XFindLastIndex = /* @__PURE__ */ function () {
   function XFindLastIndex2(f, xf) {
     this.xf = xf;
     this.f = f;
@@ -1927,10 +2240,12 @@ var XFindLastIndex = /* @__PURE__ */ function() {
     this.lastIdx = -1;
   }
   XFindLastIndex2.prototype["@@transducer/init"] = _xfBase.init;
-  XFindLastIndex2.prototype["@@transducer/result"] = function(result) {
-    return this.xf["@@transducer/result"](this.xf["@@transducer/step"](result, this.lastIdx));
+  XFindLastIndex2.prototype["@@transducer/result"] = function (result) {
+    return this.xf["@@transducer/result"](
+      this.xf["@@transducer/step"](result, this.lastIdx),
+    );
   };
-  XFindLastIndex2.prototype["@@transducer/step"] = function(result, input) {
+  XFindLastIndex2.prototype["@@transducer/step"] = function (result, input) {
     this.idx += 1;
     if (this.f(input)) {
       this.lastIdx = this.idx;
@@ -1942,44 +2257,54 @@ var XFindLastIndex = /* @__PURE__ */ function() {
 var _xfindLastIndex = /* @__PURE__ */ _curry2(function _xfindLastIndex2(f, xf) {
   return new XFindLastIndex(f, xf);
 });
-var findLastIndex = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable([], _xfindLastIndex, function findLastIndex2(fn, list) {
-  var idx = list.length - 1;
-  while (idx >= 0) {
-    if (fn(list[idx])) {
-      return idx;
-    }
-    idx -= 1;
-  }
-  return -1;
-}));
+var findLastIndex = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _dispatchable(
+    [],
+    _xfindLastIndex,
+    function findLastIndex2(fn, list) {
+      var idx = list.length - 1;
+      while (idx >= 0) {
+        if (fn(list[idx])) {
+          return idx;
+        }
+        idx -= 1;
+      }
+      return -1;
+    },
+  ),
+);
 var flatten = /* @__PURE__ */ _curry1(/* @__PURE__ */ _makeFlat(true));
 var flip = /* @__PURE__ */ _curry1(function flip2(fn) {
-  return curryN(fn.length, function(a, b) {
+  return curryN(fn.length, function (a, b) {
     var args = Array.prototype.slice.call(arguments, 0);
     args[0] = b;
     args[1] = a;
     return fn.apply(this, args);
   });
 });
-var forEach = /* @__PURE__ */ _curry2(/* @__PURE__ */ _checkForMethod("forEach", function forEach2(fn, list) {
-  var len = list.length;
-  var idx = 0;
-  while (idx < len) {
-    fn(list[idx]);
-    idx += 1;
-  }
-  return list;
-}));
-var forEachObjIndexed = /* @__PURE__ */ _curry2(function forEachObjIndexed2(fn, obj) {
-  var keyList = keys(obj);
-  var idx = 0;
-  while (idx < keyList.length) {
-    var key = keyList[idx];
-    fn(obj[key], key, obj);
-    idx += 1;
-  }
-  return obj;
-});
+var forEach = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _checkForMethod("forEach", function forEach2(fn, list) {
+    var len = list.length;
+    var idx = 0;
+    while (idx < len) {
+      fn(list[idx]);
+      idx += 1;
+    }
+    return list;
+  }),
+);
+var forEachObjIndexed = /* @__PURE__ */ _curry2(
+  function forEachObjIndexed2(fn, obj) {
+    var keyList = keys(obj);
+    var idx = 0;
+    while (idx < keyList.length) {
+      var key = keyList[idx];
+      fn(obj[key], key, obj);
+      idx += 1;
+    }
+    return obj;
+  },
+);
 var fromPairs = /* @__PURE__ */ _curry1(function fromPairs2(pairs) {
   var result = {};
   var idx = 0;
@@ -1989,14 +2314,19 @@ var fromPairs = /* @__PURE__ */ _curry1(function fromPairs2(pairs) {
   }
   return result;
 });
-var groupBy = /* @__PURE__ */ _curry2(/* @__PURE__ */ _checkForMethod("groupBy", /* @__PURE__ */ reduceBy(function(acc, item) {
-  if (acc == null) {
-    acc = [];
-  }
-  acc.push(item);
-  return acc;
-}, null)));
-var groupWith = /* @__PURE__ */ _curry2(function(fn, list) {
+var groupBy = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _checkForMethod(
+    "groupBy",
+    /* @__PURE__ */ reduceBy(function (acc, item) {
+      if (acc == null) {
+        acc = [];
+      }
+      acc.push(item);
+      return acc;
+    }, null),
+  ),
+);
+var groupWith = /* @__PURE__ */ _curry2(function (fn, list) {
   var res = [];
   var idx = 0;
   var len = list.length;
@@ -2039,22 +2369,31 @@ var hasIn = /* @__PURE__ */ _curry2(function hasIn2(prop3, obj) {
   return prop3 in obj;
 });
 var identical = /* @__PURE__ */ _curry2(_objectIs$1);
-var ifElse = /* @__PURE__ */ _curry3(function ifElse2(condition, onTrue, onFalse) {
-  return curryN(Math.max(condition.length, onTrue.length, onFalse.length), function _ifElse() {
-    return condition.apply(this, arguments) ? onTrue.apply(this, arguments) : onFalse.apply(this, arguments);
-  });
-});
+var ifElse = /* @__PURE__ */ _curry3(
+  function ifElse2(condition, onTrue, onFalse) {
+    return curryN(
+      Math.max(condition.length, onTrue.length, onFalse.length),
+      function _ifElse() {
+        return condition.apply(this, arguments)
+          ? onTrue.apply(this, arguments)
+          : onFalse.apply(this, arguments);
+      },
+    );
+  },
+);
 var inc = /* @__PURE__ */ add(1);
 var includes = /* @__PURE__ */ _curry2(_includes);
-var indexBy = /* @__PURE__ */ reduceBy(function(acc, elem) {
+var indexBy = /* @__PURE__ */ reduceBy(function (acc, elem) {
   return elem;
 }, null);
 var indexOf = /* @__PURE__ */ _curry2(function indexOf2(target, xs) {
-  return typeof xs.indexOf === "function" && !_isArray(xs) ? xs.indexOf(target) : _indexOf(xs, target, 0);
+  return typeof xs.indexOf === "function" && !_isArray(xs)
+    ? xs.indexOf(target)
+    : _indexOf(xs, target, 0);
 });
 var init = /* @__PURE__ */ slice(0, -1);
 var innerJoin = /* @__PURE__ */ _curry3(function innerJoin2(pred, xs, ys) {
-  return _filter(function(x) {
+  return _filter(function (x) {
     return _includesWith(pred, x, ys);
   }, xs);
 });
@@ -2066,7 +2405,11 @@ var insert = /* @__PURE__ */ _curry3(function insert2(idx, elt, list) {
 });
 var insertAll = /* @__PURE__ */ _curry3(function insertAll2(idx, elts, list) {
   idx = idx < list.length && idx >= 0 ? idx : list.length;
-  return [].concat(Array.prototype.slice.call(list, 0, idx), elts, Array.prototype.slice.call(list, idx));
+  return [].concat(
+    Array.prototype.slice.call(list, 0, idx),
+    elts,
+    Array.prototype.slice.call(list, idx),
+  );
 });
 var uniqBy = /* @__PURE__ */ _curry2(function uniqBy2(fn, list) {
   var set3 = new _Set();
@@ -2084,31 +2427,38 @@ var uniqBy = /* @__PURE__ */ _curry2(function uniqBy2(fn, list) {
   return result;
 });
 var uniq = /* @__PURE__ */ uniqBy(identity);
-var intersection = /* @__PURE__ */ _curry2(function intersection2(list1, list2) {
-  var lookupList, filteredList;
-  if (list1.length > list2.length) {
-    lookupList = list1;
-    filteredList = list2;
-  } else {
-    lookupList = list2;
-    filteredList = list1;
-  }
-  return uniq(_filter(flip(_includes)(lookupList), filteredList));
-});
-var intersperse = /* @__PURE__ */ _curry2(/* @__PURE__ */ _checkForMethod("intersperse", function intersperse2(separator, list) {
-  var out = [];
-  var idx = 0;
-  var length3 = list.length;
-  while (idx < length3) {
-    if (idx === length3 - 1) {
-      out.push(list[idx]);
+var intersection = /* @__PURE__ */ _curry2(
+  function intersection2(list1, list2) {
+    var lookupList, filteredList;
+    if (list1.length > list2.length) {
+      lookupList = list1;
+      filteredList = list2;
     } else {
-      out.push(list[idx], separator);
+      lookupList = list2;
+      filteredList = list1;
     }
-    idx += 1;
-  }
-  return out;
-}));
+    return uniq(_filter(flip(_includes)(lookupList), filteredList));
+  },
+);
+var intersperse = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _checkForMethod(
+    "intersperse",
+    function intersperse2(separator, list) {
+      var out = [];
+      var idx = 0;
+      var length3 = list.length;
+      while (idx < length3) {
+        if (idx === length3 - 1) {
+          out.push(list[idx]);
+        } else {
+          out.push(list[idx], separator);
+        }
+        idx += 1;
+      }
+      return out;
+    },
+  ),
+);
 function _objectAssign(target) {
   if (target == null) {
     throw new TypeError("Cannot convert undefined or null to object");
@@ -2129,7 +2479,9 @@ function _objectAssign(target) {
   }
   return output;
 }
-var _objectAssign$1 = typeof Object.assign === "function" ? Object.assign : _objectAssign;
+var _objectAssign$1 = typeof Object.assign === "function"
+  ? Object.assign
+  : _objectAssign;
 var objOf = /* @__PURE__ */ _curry2(function objOf2(key, val) {
   var obj = {};
   obj[key] = val;
@@ -2137,25 +2489,28 @@ var objOf = /* @__PURE__ */ _curry2(function objOf2(key, val) {
 });
 var _stepCatArray = {
   "@@transducer/init": Array,
-  "@@transducer/step": function(xs, x) {
+  "@@transducer/step": function (xs, x) {
     xs.push(x);
     return xs;
   },
-  "@@transducer/result": _identity
+  "@@transducer/result": _identity,
 };
 var _stepCatString = {
   "@@transducer/init": String,
-  "@@transducer/step": function(a, b) {
+  "@@transducer/step": function (a, b) {
     return a + b;
   },
-  "@@transducer/result": _identity
+  "@@transducer/result": _identity,
 };
 var _stepCatObject = {
   "@@transducer/init": Object,
-  "@@transducer/step": function(result, input) {
-    return _objectAssign$1(result, _isArrayLike(input) ? objOf(input[0], input[1]) : input);
+  "@@transducer/step": function (result, input) {
+    return _objectAssign$1(
+      result,
+      _isArrayLike(input) ? objOf(input[0], input[1]) : input,
+    );
   },
-  "@@transducer/result": _identity
+  "@@transducer/result": _identity,
 };
 function _stepCat(obj) {
   if (_isTransformer(obj)) {
@@ -2173,7 +2528,9 @@ function _stepCat(obj) {
   throw new Error("Cannot create transformer for " + obj);
 }
 var into = /* @__PURE__ */ _curry3(function into2(acc, xf, list) {
-  return _isTransformer(acc) ? _reduce(xf(acc), acc["@@transducer/init"](), list) : _reduce(xf(_stepCat(acc)), _clone(acc, [], [], false), list);
+  return _isTransformer(acc)
+    ? _reduce(xf(acc), acc["@@transducer/init"](), list)
+    : _reduce(xf(_stepCat(acc)), _clone(acc, [], [], false), list);
 });
 var invert = /* @__PURE__ */ _curry1(function invert2(obj) {
   var props3 = keys(obj);
@@ -2202,12 +2559,17 @@ var invertObj = /* @__PURE__ */ _curry1(function invertObj2(obj) {
   return out;
 });
 var invoker = /* @__PURE__ */ _curry2(function invoker2(arity, method) {
-  return curryN(arity + 1, function() {
+  return curryN(arity + 1, function () {
     var target = arguments[arity];
     if (target != null && _isFunction(target[method])) {
-      return target[method].apply(target, Array.prototype.slice.call(arguments, 0, arity));
+      return target[method].apply(
+        target,
+        Array.prototype.slice.call(arguments, 0, arity),
+      );
     }
-    throw new TypeError(toString$1(target) + ' does not have a method named "' + method + '"');
+    throw new TypeError(
+      toString$1(target) + ' does not have a method named "' + method + '"',
+    );
   });
 });
 var is = /* @__PURE__ */ _curry2(function is2(Ctor, val) {
@@ -2218,7 +2580,7 @@ var isEmpty = /* @__PURE__ */ _curry1(function isEmpty2(x) {
 });
 var join = /* @__PURE__ */ invoker(1, "join");
 var juxt = /* @__PURE__ */ _curry1(function juxt2(fns) {
-  return converge(function() {
+  return converge(function () {
     return Array.prototype.slice.call(arguments, 0);
   }, fns);
 });
@@ -2251,9 +2613,9 @@ var length = /* @__PURE__ */ _curry1(function length2(list) {
   return list != null && _isNumber(list.length) ? list.length : NaN;
 });
 var lens = /* @__PURE__ */ _curry2(function lens2(getter, setter) {
-  return function(toFunctorFn) {
-    return function(target) {
-      return map(function(focus) {
+  return function (toFunctorFn) {
+    return function (target) {
+      return map(function (focus) {
         return setter(focus, target);
       }, toFunctorFn(getter(target)));
     };
@@ -2286,22 +2648,28 @@ var mapAccum = /* @__PURE__ */ _curry3(function mapAccum2(fn, acc, list) {
   }
   return [tuple[0], result];
 });
-var mapAccumRight = /* @__PURE__ */ _curry3(function mapAccumRight2(fn, acc, list) {
-  var idx = list.length - 1;
-  var result = [];
-  var tuple = [acc];
-  while (idx >= 0) {
-    tuple = fn(tuple[0], list[idx]);
-    result[idx] = tuple[1];
-    idx -= 1;
-  }
-  return [tuple[0], result];
-});
+var mapAccumRight = /* @__PURE__ */ _curry3(
+  function mapAccumRight2(fn, acc, list) {
+    var idx = list.length - 1;
+    var result = [];
+    var tuple = [acc];
+    while (idx >= 0) {
+      tuple = fn(tuple[0], list[idx]);
+      result[idx] = tuple[1];
+      idx -= 1;
+    }
+    return [tuple[0], result];
+  },
+);
 var mapObjIndexed = /* @__PURE__ */ _curry2(function mapObjIndexed2(fn, obj) {
-  return _reduce(function(acc, key) {
-    acc[key] = fn(obj[key], key, obj);
-    return acc;
-  }, {}, keys(obj));
+  return _reduce(
+    function (acc, key) {
+      acc[key] = fn(obj[key], key, obj);
+      return acc;
+    },
+    {},
+    keys(obj),
+  );
 });
 var match = /* @__PURE__ */ _curry2(function match2(rx, str) {
   return str.match(rx) || [];
@@ -2329,13 +2697,15 @@ var median = /* @__PURE__ */ _curry1(function median2(list) {
   }
   var width = 2 - len % 2;
   var idx = (len - width) / 2;
-  return mean(Array.prototype.slice.call(list, 0).sort(function(a, b) {
-    return a < b ? -1 : a > b ? 1 : 0;
-  }).slice(idx, idx + width));
+  return mean(
+    Array.prototype.slice.call(list, 0).sort(function (a, b) {
+      return a < b ? -1 : a > b ? 1 : 0;
+    }).slice(idx, idx + width),
+  );
 });
 var memoizeWith = /* @__PURE__ */ _curry2(function memoizeWith2(mFn, fn) {
   var cache = {};
-  return _arity(fn.length, function() {
+  return _arity(fn.length, function () {
     var key = mFn.apply(this, arguments);
     if (!_has(key, cache)) {
       cache[key] = fn.apply(this, arguments);
@@ -2364,30 +2734,54 @@ var mergeWithKey = /* @__PURE__ */ _curry3(function mergeWithKey2(fn, l, r) {
   }
   return result;
 });
-var mergeDeepWithKey = /* @__PURE__ */ _curry3(function mergeDeepWithKey2(fn, lObj, rObj) {
-  return mergeWithKey(function(k, lVal, rVal) {
-    if (_isObject(lVal) && _isObject(rVal)) {
-      return mergeDeepWithKey2(fn, lVal, rVal);
-    } else {
-      return fn(k, lVal, rVal);
-    }
-  }, lObj, rObj);
-});
-var mergeDeepLeft = /* @__PURE__ */ _curry2(function mergeDeepLeft2(lObj, rObj) {
-  return mergeDeepWithKey(function(k, lVal, rVal) {
-    return lVal;
-  }, lObj, rObj);
-});
-var mergeDeepRight = /* @__PURE__ */ _curry2(function mergeDeepRight2(lObj, rObj) {
-  return mergeDeepWithKey(function(k, lVal, rVal) {
-    return rVal;
-  }, lObj, rObj);
-});
-var mergeDeepWith = /* @__PURE__ */ _curry3(function mergeDeepWith2(fn, lObj, rObj) {
-  return mergeDeepWithKey(function(k, lVal, rVal) {
-    return fn(lVal, rVal);
-  }, lObj, rObj);
-});
+var mergeDeepWithKey = /* @__PURE__ */ _curry3(
+  function mergeDeepWithKey2(fn, lObj, rObj) {
+    return mergeWithKey(
+      function (k, lVal, rVal) {
+        if (_isObject(lVal) && _isObject(rVal)) {
+          return mergeDeepWithKey2(fn, lVal, rVal);
+        } else {
+          return fn(k, lVal, rVal);
+        }
+      },
+      lObj,
+      rObj,
+    );
+  },
+);
+var mergeDeepLeft = /* @__PURE__ */ _curry2(
+  function mergeDeepLeft2(lObj, rObj) {
+    return mergeDeepWithKey(
+      function (k, lVal, rVal) {
+        return lVal;
+      },
+      lObj,
+      rObj,
+    );
+  },
+);
+var mergeDeepRight = /* @__PURE__ */ _curry2(
+  function mergeDeepRight2(lObj, rObj) {
+    return mergeDeepWithKey(
+      function (k, lVal, rVal) {
+        return rVal;
+      },
+      lObj,
+      rObj,
+    );
+  },
+);
+var mergeDeepWith = /* @__PURE__ */ _curry3(
+  function mergeDeepWith2(fn, lObj, rObj) {
+    return mergeDeepWithKey(
+      function (k, lVal, rVal) {
+        return fn(lVal, rVal);
+      },
+      lObj,
+      rObj,
+    );
+  },
+);
 var mergeLeft = /* @__PURE__ */ _curry2(function mergeLeft2(l, r) {
   return _objectAssign$1({}, r, l);
 });
@@ -2395,9 +2789,13 @@ var mergeRight = /* @__PURE__ */ _curry2(function mergeRight2(l, r) {
   return _objectAssign$1({}, l, r);
 });
 var mergeWith = /* @__PURE__ */ _curry3(function mergeWith2(fn, l, r) {
-  return mergeWithKey(function(_, _l, _r) {
-    return fn(_l, _r);
-  }, l, r);
+  return mergeWithKey(
+    function (_, _l, _r) {
+      return fn(_l, _r);
+    },
+    l,
+    r,
+  );
 });
 var min = /* @__PURE__ */ _curry2(function min2(a, b) {
   return b < a ? b : a;
@@ -2408,13 +2806,18 @@ var minBy = /* @__PURE__ */ _curry3(function minBy2(f, a, b) {
 var modulo = /* @__PURE__ */ _curry2(function modulo2(a, b) {
   return a % b;
 });
-var move = /* @__PURE__ */ _curry3(function(from, to, list) {
+var move = /* @__PURE__ */ _curry3(function (from, to, list) {
   var length3 = list.length;
   var result = list.slice();
   var positiveFrom = from < 0 ? length3 + from : from;
   var positiveTo = to < 0 ? length3 + to : to;
   var item = result.splice(positiveFrom, 1);
-  return positiveFrom < 0 || positiveFrom >= list.length || positiveTo < 0 || positiveTo >= list.length ? list : [].concat(result.slice(0, positiveTo)).concat(item).concat(result.slice(positiveTo, list.length));
+  return positiveFrom < 0 || positiveFrom >= list.length || positiveTo < 0 ||
+      positiveTo >= list.length
+    ? list
+    : [].concat(result.slice(0, positiveTo)).concat(item).concat(
+      result.slice(positiveTo, list.length),
+    );
 });
 var multiply = /* @__PURE__ */ _curry2(function multiply2(a, b) {
   return a * b;
@@ -2427,7 +2830,7 @@ var none = /* @__PURE__ */ _curry2(function none2(fn, input) {
 });
 var nthArg = /* @__PURE__ */ _curry1(function nthArg2(n) {
   var arity = n < 0 ? 1 : n + 1;
-  return curryN(arity, function() {
+  return curryN(arity, function () {
     return nth(n, arguments);
   });
 });
@@ -2457,7 +2860,7 @@ var omit = /* @__PURE__ */ _curry2(function omit2(names, obj) {
 var once = /* @__PURE__ */ _curry1(function once2(fn) {
   var called = false;
   var result;
-  return _arity(fn.length, function() {
+  return _arity(fn.length, function () {
     if (called) {
       return result;
     }
@@ -2468,23 +2871,25 @@ var once = /* @__PURE__ */ _curry1(function once2(fn) {
 });
 function _assertPromise(name, p) {
   if (p == null || !_isFunction(p.then)) {
-    throw new TypeError("`" + name + "` expected a Promise, received " + _toString(p, []));
+    throw new TypeError(
+      "`" + name + "` expected a Promise, received " + _toString(p, []),
+    );
   }
 }
 var otherwise = /* @__PURE__ */ _curry2(function otherwise2(f, p) {
   _assertPromise("otherwise", p);
   return p.then(null, f);
 });
-var Identity = function(x) {
+var Identity = function (x) {
   return {
     value: x,
-    map: function(f) {
+    map: function (f) {
       return Identity(f(x));
-    }
+    },
   };
 };
 var over = /* @__PURE__ */ _curry3(function over2(lens3, f, x) {
-  return lens3(function(y) {
+  return lens3(function (y) {
     return Identity(f(y));
   })(x).value;
 });
@@ -2492,14 +2897,16 @@ var pair = /* @__PURE__ */ _curry2(function pair2(fst, snd) {
   return [fst, snd];
 });
 function _createPartialApplicator(concat3) {
-  return _curry2(function(fn, args) {
-    return _arity(Math.max(0, fn.length - args.length), function() {
+  return _curry2(function (fn, args) {
+    return _arity(Math.max(0, fn.length - args.length), function () {
       return fn.apply(this, concat3(args, arguments));
     });
   });
 }
 var partial = /* @__PURE__ */ _createPartialApplicator(_concat);
-var partialRight = /* @__PURE__ */ _createPartialApplicator(/* @__PURE__ */ flip(_concat));
+var partialRight = /* @__PURE__ */ _createPartialApplicator(
+  /* @__PURE__ */ flip(_concat),
+);
 var partition = /* @__PURE__ */ juxt([filter, reject]);
 var pathEq = /* @__PURE__ */ _curry3(function pathEq2(_path, val, obj) {
   return equals(path(_path, obj), val);
@@ -2507,9 +2914,11 @@ var pathEq = /* @__PURE__ */ _curry3(function pathEq2(_path, val, obj) {
 var pathOr = /* @__PURE__ */ _curry3(function pathOr2(d, p, obj) {
   return defaultTo(d, path(p, obj));
 });
-var pathSatisfies = /* @__PURE__ */ _curry3(function pathSatisfies2(pred, propPath, obj) {
-  return pred(path(propPath, obj));
-});
+var pathSatisfies = /* @__PURE__ */ _curry3(
+  function pathSatisfies2(pred, propPath, obj) {
+    return pred(path(propPath, obj));
+  },
+);
 var pick = /* @__PURE__ */ _curry2(function pick2(names, obj) {
   var result = {};
   var idx = 0;
@@ -2552,14 +2961,17 @@ var prepend = /* @__PURE__ */ _curry2(function prepend2(el, list) {
 });
 var product = /* @__PURE__ */ reduce(multiply, 1);
 var useWith = /* @__PURE__ */ _curry2(function useWith2(fn, transformers) {
-  return curryN(transformers.length, function() {
+  return curryN(transformers.length, function () {
     var args = [];
     var idx = 0;
     while (idx < transformers.length) {
       args.push(transformers[idx].call(this, arguments[idx]));
       idx += 1;
     }
-    return fn.apply(this, args.concat(Array.prototype.slice.call(arguments, transformers.length)));
+    return fn.apply(
+      this,
+      args.concat(Array.prototype.slice.call(arguments, transformers.length)),
+    );
   });
 });
 var project = /* @__PURE__ */ useWith(_map, [pickAll, identity]);
@@ -2572,11 +2984,13 @@ var propIs = /* @__PURE__ */ _curry3(function propIs2(type3, name, obj) {
 var propOr = /* @__PURE__ */ _curry3(function propOr2(val, p, obj) {
   return pathOr(val, [p], obj);
 });
-var propSatisfies = /* @__PURE__ */ _curry3(function propSatisfies2(pred, name, obj) {
-  return pred(obj[name]);
-});
+var propSatisfies = /* @__PURE__ */ _curry3(
+  function propSatisfies2(pred, name, obj) {
+    return pred(obj[name]);
+  },
+);
 var props = /* @__PURE__ */ _curry2(function props2(ps, obj) {
-  return ps.map(function(p) {
+  return ps.map(function (p) {
     return path([p], obj);
   });
 });
@@ -2600,11 +3014,19 @@ var reduceRight = /* @__PURE__ */ _curry3(function reduceRight2(fn, acc, list) {
   }
   return acc;
 });
-var reduceWhile = /* @__PURE__ */ _curryN(4, [], function _reduceWhile(pred, fn, a, list) {
-  return _reduce(function(acc, x) {
-    return pred(acc, x) ? fn(acc, x) : _reduced(acc);
-  }, a, list);
-});
+var reduceWhile = /* @__PURE__ */ _curryN(
+  4,
+  [],
+  function _reduceWhile(pred, fn, a, list) {
+    return _reduce(
+      function (acc, x) {
+        return pred(acc, x) ? fn(acc, x) : _reduced(acc);
+      },
+      a,
+      list,
+    );
+  },
+);
 var reduced = /* @__PURE__ */ _curry1(_reduced);
 var times = /* @__PURE__ */ _curry2(function times2(fn, n) {
   var len = Number(n);
@@ -2623,9 +3045,11 @@ var times = /* @__PURE__ */ _curry2(function times2(fn, n) {
 var repeat = /* @__PURE__ */ _curry2(function repeat2(value, n) {
   return times(always(value), n);
 });
-var replace = /* @__PURE__ */ _curry3(function replace2(regex, replacement, str) {
-  return str.replace(regex, replacement);
-});
+var replace = /* @__PURE__ */ _curry3(
+  function replace2(regex, replacement, str) {
+    return str.replace(regex, replacement);
+  },
+);
 var scan = /* @__PURE__ */ _curry3(function scan2(fn, acc, list) {
   var idx = 0;
   var len = list.length;
@@ -2638,9 +3062,15 @@ var scan = /* @__PURE__ */ _curry3(function scan2(fn, acc, list) {
   return result;
 });
 var sequence = /* @__PURE__ */ _curry2(function sequence2(of2, traversable) {
-  return typeof traversable.sequence === "function" ? traversable.sequence(of2) : reduceRight(function(x, acc) {
-    return ap(map(prepend, x), acc);
-  }, of2([]), traversable);
+  return typeof traversable.sequence === "function"
+    ? traversable.sequence(of2)
+    : reduceRight(
+      function (x, acc) {
+        return ap(map(prepend, x), acc);
+      },
+      of2([]),
+      traversable,
+    );
 });
 var set = /* @__PURE__ */ _curry3(function set2(lens3, v, x) {
   return over(lens3, always(v), x);
@@ -2649,14 +3079,14 @@ var sort = /* @__PURE__ */ _curry2(function sort2(comparator3, list) {
   return Array.prototype.slice.call(list, 0).sort(comparator3);
 });
 var sortBy = /* @__PURE__ */ _curry2(function sortBy2(fn, list) {
-  return Array.prototype.slice.call(list, 0).sort(function(a, b) {
+  return Array.prototype.slice.call(list, 0).sort(function (a, b) {
     var aa = fn(a);
     var bb = fn(b);
     return aa < bb ? -1 : aa > bb ? 1 : 0;
   });
 });
 var sortWith = /* @__PURE__ */ _curry2(function sortWith2(fns, list) {
-  return Array.prototype.slice.call(list, 0).sort(function(a, b) {
+  return Array.prototype.slice.call(list, 0).sort(function (a, b) {
     var result = 0;
     var i = 0;
     while (result === 0 && i < fns.length) {
@@ -2691,18 +3121,25 @@ var splitWhen = /* @__PURE__ */ _curry2(function splitWhen2(pred, list) {
   }
   return [prefix, Array.prototype.slice.call(list, idx)];
 });
-var startsWith = /* @__PURE__ */ _curry2(function(prefix, list) {
+var startsWith = /* @__PURE__ */ _curry2(function (prefix, list) {
   return equals(take(prefix.length, list), prefix);
 });
 var subtract = /* @__PURE__ */ _curry2(function subtract2(a, b) {
   return Number(a) - Number(b);
 });
-var symmetricDifference = /* @__PURE__ */ _curry2(function symmetricDifference2(list1, list2) {
-  return concat(difference(list1, list2), difference(list2, list1));
-});
-var symmetricDifferenceWith = /* @__PURE__ */ _curry3(function symmetricDifferenceWith2(pred, list1, list2) {
-  return concat(differenceWith(pred, list1, list2), differenceWith(pred, list2, list1));
-});
+var symmetricDifference = /* @__PURE__ */ _curry2(
+  function symmetricDifference2(list1, list2) {
+    return concat(difference(list1, list2), difference(list2, list1));
+  },
+);
+var symmetricDifferenceWith = /* @__PURE__ */ _curry3(
+  function symmetricDifferenceWith2(pred, list1, list2) {
+    return concat(
+      differenceWith(pred, list1, list2),
+      differenceWith(pred, list2, list1),
+    );
+  },
+);
 var takeLastWhile = /* @__PURE__ */ _curry2(function takeLastWhile2(fn, xs) {
   var idx = xs.length - 1;
   while (idx >= 0 && fn(xs[idx])) {
@@ -2710,37 +3147,45 @@ var takeLastWhile = /* @__PURE__ */ _curry2(function takeLastWhile2(fn, xs) {
   }
   return slice(idx + 1, Infinity, xs);
 });
-var XTakeWhile = /* @__PURE__ */ function() {
+var XTakeWhile = /* @__PURE__ */ function () {
   function XTakeWhile2(f, xf) {
     this.xf = xf;
     this.f = f;
   }
   XTakeWhile2.prototype["@@transducer/init"] = _xfBase.init;
   XTakeWhile2.prototype["@@transducer/result"] = _xfBase.result;
-  XTakeWhile2.prototype["@@transducer/step"] = function(result, input) {
-    return this.f(input) ? this.xf["@@transducer/step"](result, input) : _reduced(result);
+  XTakeWhile2.prototype["@@transducer/step"] = function (result, input) {
+    return this.f(input)
+      ? this.xf["@@transducer/step"](result, input)
+      : _reduced(result);
   };
   return XTakeWhile2;
 }();
 var _xtakeWhile = /* @__PURE__ */ _curry2(function _xtakeWhile2(f, xf) {
   return new XTakeWhile(f, xf);
 });
-var takeWhile = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["takeWhile"], _xtakeWhile, function takeWhile2(fn, xs) {
-  var idx = 0;
-  var len = xs.length;
-  while (idx < len && fn(xs[idx])) {
-    idx += 1;
-  }
-  return slice(0, idx, xs);
-}));
-var XTap = /* @__PURE__ */ function() {
+var takeWhile = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _dispatchable(
+    ["takeWhile"],
+    _xtakeWhile,
+    function takeWhile2(fn, xs) {
+      var idx = 0;
+      var len = xs.length;
+      while (idx < len && fn(xs[idx])) {
+        idx += 1;
+      }
+      return slice(0, idx, xs);
+    },
+  ),
+);
+var XTap = /* @__PURE__ */ function () {
   function XTap2(f, xf) {
     this.xf = xf;
     this.f = f;
   }
   XTap2.prototype["@@transducer/init"] = _xfBase.init;
   XTap2.prototype["@@transducer/result"] = _xfBase.result;
-  XTap2.prototype["@@transducer/step"] = function(result, input) {
+  XTap2.prototype["@@transducer/step"] = function (result, input) {
     this.f(input);
     return this.xf["@@transducer/step"](result, input);
   };
@@ -2749,16 +3194,21 @@ var XTap = /* @__PURE__ */ function() {
 var _xtap = /* @__PURE__ */ _curry2(function _xtap2(f, xf) {
   return new XTap(f, xf);
 });
-var tap = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable([], _xtap, function tap2(fn, x) {
-  fn(x);
-  return x;
-}));
+var tap = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _dispatchable([], _xtap, function tap2(fn, x) {
+    fn(x);
+    return x;
+  }),
+);
 function _isRegExp(x) {
   return Object.prototype.toString.call(x) === "[object RegExp]";
 }
 var test = /* @__PURE__ */ _curry2(function test2(pattern, str) {
   if (!_isRegExp(pattern)) {
-    throw new TypeError("\u2018test\u2019 requires a value of type RegExp as its first argument; received " + toString$1(pattern));
+    throw new TypeError(
+      "\u2018test\u2019 requires a value of type RegExp as its first argument; received " +
+        toString$1(pattern),
+    );
   }
   return _cloneRegExp(pattern).test(str);
 });
@@ -2784,9 +3234,12 @@ var toPairsIn = /* @__PURE__ */ _curry1(function toPairsIn2(obj) {
   return pairs;
 });
 var toUpper = /* @__PURE__ */ invoker(0, "toUpperCase");
-var transduce = /* @__PURE__ */ curryN(4, function transduce2(xf, fn, acc, list) {
-  return _reduce(xf(typeof fn === "function" ? _xwrap(fn) : fn), acc, list);
-});
+var transduce = /* @__PURE__ */ curryN(
+  4,
+  function transduce2(xf, fn, acc, list) {
+    return _reduce(xf(typeof fn === "function" ? _xwrap(fn) : fn), acc, list);
+  },
+);
 var transpose = /* @__PURE__ */ _curry1(function transpose2(outerlist) {
   var i = 0;
   var result = [];
@@ -2805,20 +3258,27 @@ var transpose = /* @__PURE__ */ _curry1(function transpose2(outerlist) {
   return result;
 });
 var traverse = /* @__PURE__ */ _curry3(function traverse2(of2, f, traversable) {
-  return typeof traversable["fantasy-land/traverse"] === "function" ? traversable["fantasy-land/traverse"](f, of2) : sequence(of2, map(f, traversable));
+  return typeof traversable["fantasy-land/traverse"] === "function"
+    ? traversable["fantasy-land/traverse"](f, of2)
+    : sequence(of2, map(f, traversable));
 });
-var ws = "	\n\v\f\r \xA0\u1680\u180E\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028\u2029\uFEFF";
+var ws =
+  "	\n\v\f\r \xA0\u1680\u180E\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028\u2029\uFEFF";
 var zeroWidth = "\u200B";
 var hasProtoTrim = typeof String.prototype.trim === "function";
-var trim = !hasProtoTrim || /* @__PURE__ */ ws.trim() || !/* @__PURE__ */ zeroWidth.trim() ? /* @__PURE__ */ _curry1(function trim2(str) {
-  var beginRx = new RegExp("^[" + ws + "][" + ws + "]*");
-  var endRx = new RegExp("[" + ws + "][" + ws + "]*$");
-  return str.replace(beginRx, "").replace(endRx, "");
-}) : /* @__PURE__ */ _curry1(function trim3(str) {
-  return str.trim();
-});
+var trim =
+  !hasProtoTrim || /* @__PURE__ */ ws.trim() ||
+    !/* @__PURE__ */ zeroWidth.trim()
+    ? /* @__PURE__ */ _curry1(function trim2(str) {
+      var beginRx = new RegExp("^[" + ws + "][" + ws + "]*");
+      var endRx = new RegExp("[" + ws + "][" + ws + "]*$");
+      return str.replace(beginRx, "").replace(endRx, "");
+    })
+    : /* @__PURE__ */ _curry1(function trim3(str) {
+      return str.trim();
+    });
 var tryCatch = /* @__PURE__ */ _curry2(function _tryCatch(tryer, catcher) {
-  return _arity(tryer.length, function() {
+  return _arity(tryer.length, function () {
     try {
       return tryer.apply(this, arguments);
     } catch (e) {
@@ -2827,7 +3287,7 @@ var tryCatch = /* @__PURE__ */ _curry2(function _tryCatch(tryer, catcher) {
   });
 });
 var unapply = /* @__PURE__ */ _curry1(function unapply2(fn) {
-  return function() {
+  return function () {
     return fn(Array.prototype.slice.call(arguments, 0));
   };
 });
@@ -2835,14 +3295,17 @@ var unary = /* @__PURE__ */ _curry1(function unary2(fn) {
   return nAry(1, fn);
 });
 var uncurryN = /* @__PURE__ */ _curry2(function uncurryN2(depth, fn) {
-  return curryN(depth, function() {
+  return curryN(depth, function () {
     var currentDepth = 1;
     var value = fn;
     var idx = 0;
     var endIdx;
     while (currentDepth <= depth && typeof value === "function") {
       endIdx = currentDepth === depth ? arguments.length : idx + value.length;
-      value = value.apply(this, Array.prototype.slice.call(arguments, idx, endIdx));
+      value = value.apply(
+        this,
+        Array.prototype.slice.call(arguments, idx, endIdx),
+      );
       currentDepth += 1;
       idx = endIdx;
     }
@@ -2873,9 +3336,11 @@ var uniqWith = /* @__PURE__ */ _curry2(function uniqWith2(pred, list) {
   }
   return result;
 });
-var unionWith = /* @__PURE__ */ _curry3(function unionWith2(pred, list1, list2) {
-  return uniqWith(pred, _concat(list1, list2));
-});
+var unionWith = /* @__PURE__ */ _curry3(
+  function unionWith2(pred, list1, list2) {
+    return uniqWith(pred, _concat(list1, list2));
+  },
+);
 var unless = /* @__PURE__ */ _curry3(function unless2(pred, whenFalseFn, x) {
   return pred(x) ? x : whenFalseFn(x);
 });
@@ -2895,12 +3360,12 @@ var valuesIn = /* @__PURE__ */ _curry1(function valuesIn2(obj) {
   }
   return vs;
 });
-var Const = function(x) {
+var Const = function (x) {
   return {
     value: x,
-    "fantasy-land/map": function() {
+    "fantasy-land/map": function () {
       return this;
-    }
+    },
   };
 };
 var view = /* @__PURE__ */ _curry2(function view2(lens3, x) {
@@ -2920,7 +3385,7 @@ var where = /* @__PURE__ */ _curry2(function where2(spec, testObj) {
 var whereEq = /* @__PURE__ */ _curry2(function whereEq2(spec, testObj) {
   return where(map(equals, spec), testObj);
 });
-var without = /* @__PURE__ */ _curry2(function(xs, list) {
+var without = /* @__PURE__ */ _curry2(function (xs, list) {
   return reject(flip(_includes)(xs), list);
 });
 var xor = /* @__PURE__ */ _curry2(function xor2(a, b) {
@@ -2980,5 +3445,263 @@ var thunkify = /* @__PURE__ */ _curry1(function thunkify2(fn) {
     };
   });
 });
-export {F, T, __, add, addIndex, adjust, all, allPass, always, and, andThen, any, anyPass, ap, aperture, append, apply, applySpec, applyTo, ascend, assoc, assocPath, binary, bind, both, call, chain, clamp, clone, comparator, complement, compose, composeK, composeP, composeWith, concat, cond, construct, constructN, contains$1 as contains, converge, countBy, curry, curryN, dec, defaultTo, descend, difference, differenceWith, dissoc, dissocPath, divide, drop, dropLast$1 as dropLast, dropLastWhile$1 as dropLastWhile, dropRepeats, dropRepeatsWith, dropWhile, either, empty, endsWith, eqBy, eqProps, equals, evolve, filter, find, findIndex, findLast, findLastIndex, flatten, flip, forEach, forEachObjIndexed, fromPairs, groupBy, groupWith, gt, gte, has, hasIn, hasPath, head, identical, identity, ifElse, inc, includes, indexBy, indexOf, init, innerJoin, insert, insertAll, intersection, intersperse, into, invert, invertObj, invoker, is, isEmpty, isNil, join, juxt, keys, keysIn, last, lastIndexOf, length, lens, lensIndex, lensPath, lensProp, lift, liftN, lt, lte, map, mapAccum, mapAccumRight, mapObjIndexed, match, mathMod, max, maxBy, mean, median, memoizeWith, merge, mergeAll, mergeDeepLeft, mergeDeepRight, mergeDeepWith, mergeDeepWithKey, mergeLeft, mergeRight, mergeWith, mergeWithKey, min, minBy, modulo, move, multiply, nAry, negate, none, not, nth, nthArg, o, objOf, of, omit, once, or, otherwise, over, pair, partial, partialRight, partition, path, pathEq, pathOr, pathSatisfies, paths, pick, pickAll, pickBy, pipe, pipeK, pipeP, pipeWith, pluck, prepend, product, project, prop, propEq, propIs, propOr, propSatisfies, props, range, reduce, reduceBy, reduceRight, reduceWhile, reduced, reject, remove, repeat, replace, reverse, scan, sequence, set, slice, sort, sortBy, sortWith, split, splitAt, splitEvery, splitWhen, startsWith, subtract, sum, symmetricDifference, symmetricDifferenceWith, tail, take, takeLast, takeLastWhile, takeWhile, tap, test, thunkify, times, toLower, toPairs, toPairsIn, toString$1 as toString, toUpper, transduce, transpose, traverse, trim, tryCatch, type, unapply, unary, uncurryN, unfold, union, unionWith, uniq, uniqBy, uniqWith, unless, unnest, until, update, useWith, values, valuesIn, view, when, where, whereEq, without, xor, xprod, zip, zipObj, zipWith};
+export {
+  __,
+  add,
+  addIndex,
+  adjust,
+  all,
+  allPass,
+  always,
+  and,
+  andThen,
+  any,
+  anyPass,
+  ap,
+  aperture,
+  append,
+  apply,
+  applySpec,
+  applyTo,
+  ascend,
+  assoc,
+  assocPath,
+  binary,
+  bind,
+  both,
+  call,
+  chain,
+  clamp,
+  clone,
+  comparator,
+  complement,
+  compose,
+  composeK,
+  composeP,
+  composeWith,
+  concat,
+  cond,
+  construct,
+  constructN,
+  contains$1 as contains,
+  converge,
+  countBy,
+  curry,
+  curryN,
+  dec,
+  defaultTo,
+  descend,
+  difference,
+  differenceWith,
+  dissoc,
+  dissocPath,
+  divide,
+  drop,
+  dropLast$1 as dropLast,
+  dropLastWhile$1 as dropLastWhile,
+  dropRepeats,
+  dropRepeatsWith,
+  dropWhile,
+  either,
+  empty,
+  endsWith,
+  eqBy,
+  eqProps,
+  equals,
+  evolve,
+  F,
+  filter,
+  find,
+  findIndex,
+  findLast,
+  findLastIndex,
+  flatten,
+  flip,
+  forEach,
+  forEachObjIndexed,
+  fromPairs,
+  groupBy,
+  groupWith,
+  gt,
+  gte,
+  has,
+  hasIn,
+  hasPath,
+  head,
+  identical,
+  identity,
+  ifElse,
+  inc,
+  includes,
+  indexBy,
+  indexOf,
+  init,
+  innerJoin,
+  insert,
+  insertAll,
+  intersection,
+  intersperse,
+  into,
+  invert,
+  invertObj,
+  invoker,
+  is,
+  isEmpty,
+  isNil,
+  join,
+  juxt,
+  keys,
+  keysIn,
+  last,
+  lastIndexOf,
+  length,
+  lens,
+  lensIndex,
+  lensPath,
+  lensProp,
+  lift,
+  liftN,
+  lt,
+  lte,
+  map,
+  mapAccum,
+  mapAccumRight,
+  mapObjIndexed,
+  match,
+  mathMod,
+  max,
+  maxBy,
+  mean,
+  median,
+  memoizeWith,
+  merge,
+  mergeAll,
+  mergeDeepLeft,
+  mergeDeepRight,
+  mergeDeepWith,
+  mergeDeepWithKey,
+  mergeLeft,
+  mergeRight,
+  mergeWith,
+  mergeWithKey,
+  min,
+  minBy,
+  modulo,
+  move,
+  multiply,
+  nAry,
+  negate,
+  none,
+  not,
+  nth,
+  nthArg,
+  o,
+  objOf,
+  of,
+  omit,
+  once,
+  or,
+  otherwise,
+  over,
+  pair,
+  partial,
+  partialRight,
+  partition,
+  path,
+  pathEq,
+  pathOr,
+  paths,
+  pathSatisfies,
+  pick,
+  pickAll,
+  pickBy,
+  pipe,
+  pipeK,
+  pipeP,
+  pipeWith,
+  pluck,
+  prepend,
+  product,
+  project,
+  prop,
+  propEq,
+  propIs,
+  propOr,
+  props,
+  propSatisfies,
+  range,
+  reduce,
+  reduceBy,
+  reduced,
+  reduceRight,
+  reduceWhile,
+  reject,
+  remove,
+  repeat,
+  replace,
+  reverse,
+  scan,
+  sequence,
+  set,
+  slice,
+  sort,
+  sortBy,
+  sortWith,
+  split,
+  splitAt,
+  splitEvery,
+  splitWhen,
+  startsWith,
+  subtract,
+  sum,
+  symmetricDifference,
+  symmetricDifferenceWith,
+  T,
+  tail,
+  take,
+  takeLast,
+  takeLastWhile,
+  takeWhile,
+  tap,
+  test,
+  thunkify,
+  times,
+  toLower,
+  toPairs,
+  toPairsIn,
+  toString$1 as toString,
+  toUpper,
+  transduce,
+  transpose,
+  traverse,
+  trim,
+  tryCatch,
+  type,
+  unapply,
+  unary,
+  uncurryN,
+  unfold,
+  union,
+  unionWith,
+  uniq,
+  uniqBy,
+  uniqWith,
+  unless,
+  unnest,
+  until,
+  update,
+  useWith,
+  values,
+  valuesIn,
+  view,
+  when,
+  where,
+  whereEq,
+  without,
+  xor,
+  xprod,
+  zip,
+  zipObj,
+  zipWith,
+};
 export default null;

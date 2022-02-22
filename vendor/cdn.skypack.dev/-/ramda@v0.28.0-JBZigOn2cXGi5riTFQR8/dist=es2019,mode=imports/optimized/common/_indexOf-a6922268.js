@@ -44,5 +44,5 @@ function _indexOf(list, a, idx) {
   }
   return -1;
 }
-export {_indexOf as _};
+export { _indexOf as _ };
 export default null;

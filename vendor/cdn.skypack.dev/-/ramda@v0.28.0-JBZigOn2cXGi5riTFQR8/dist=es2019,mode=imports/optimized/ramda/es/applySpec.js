@@ -1,5 +1,5 @@
-import {_ as _curry1} from "../../common/_curry1-a6784b40.js";
-import {_ as _isArray} from "../../common/_isArray-3f7112bf.js";
+import { _ as _curry1 } from "../../common/_curry1-a6784b40.js";
+import { _ as _isArray } from "../../common/_isArray-3f7112bf.js";
 import apply2 from "./apply.js";
 import curryN2 from "./curryN.js";
 import max2 from "./max.js";
@@ -26,20 +26,23 @@ import "../../common/_curry3-716aebc1.js";
 import "../../common/_has-ef506577.js";
 import "../../common/_isArguments-6faa657b.js";
 function mapValues(fn, obj) {
-  return _isArray(obj) ? obj.map(fn) : keys2(obj).reduce(function(acc, key) {
+  return _isArray(obj) ? obj.map(fn) : keys2(obj).reduce(function (acc, key) {
     acc[key] = fn(obj[key]);
     return acc;
   }, {});
 }
 var applySpec = /* @__PURE__ */ _curry1(function applySpec2(spec) {
-  spec = mapValues(function(v) {
+  spec = mapValues(function (v) {
     return typeof v == "function" ? v : applySpec2(v);
   }, spec);
-  return curryN2(reduce2(max2, 0, pluck2("length", values2(spec))), function() {
-    var args = arguments;
-    return mapValues(function(f) {
-      return apply2(f, args);
-    }, spec);
-  });
+  return curryN2(
+    reduce2(max2, 0, pluck2("length", values2(spec))),
+    function () {
+      var args = arguments;
+      return mapValues(function (f) {
+        return apply2(f, args);
+      }, spec);
+    },
+  );
 });
 export default applySpec;

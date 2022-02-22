@@ -1,4 +1,4 @@
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
 import equals2 from "./equals.js";
 import map2 from "./map.js";
 import where2 from "./where.js";

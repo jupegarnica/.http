@@ -1,4 +1,4 @@
-import {_ as _cloneRegExp} from "./_cloneRegExp-a38a2fe4.js";
+import { _ as _cloneRegExp } from "./_cloneRegExp-a38a2fe4.js";
 import type2 from "../ramda/es/type.js";
 function _clone(value, refFrom, refTo, deep) {
   var copy = function copy2(copiedValue) {
@@ -14,7 +14,9 @@ function _clone(value, refFrom, refTo, deep) {
     refTo[idx] = copiedValue;
     for (var key in value) {
       if (value.hasOwnProperty(key)) {
-        copiedValue[key] = deep ? _clone(value[key], refFrom, refTo, true) : value[key];
+        copiedValue[key] = deep
+          ? _clone(value[key], refFrom, refTo, true)
+          : value[key];
       }
     }
     return copiedValue;
@@ -44,5 +46,5 @@ function _clone(value, refFrom, refTo, deep) {
       return value;
   }
 }
-export {_clone as _};
+export { _clone as _ };
 export default null;

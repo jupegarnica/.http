@@ -1,6 +1,6 @@
-import {_ as _includes} from "../../common/_includes-6b736d1d.js";
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
-import {_ as _filter} from "../../common/_filter-40fab1d6.js";
+import { _ as _includes } from "../../common/_includes-6b736d1d.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
+import { _ as _filter } from "../../common/_filter-40fab1d6.js";
 import flip2 from "./flip.js";
 import uniq2 from "./uniq.js";
 import "../../common/_indexOf-a6922268.js";
@@ -23,15 +23,17 @@ import "../../common/_Set-d915dfa1.js";
 import "../../common/_xfBase-47118e3a.js";
 import "../../common/_isArray-3f7112bf.js";
 import "../../common/_isTransformer-816ffbd7.js";
-var intersection = /* @__PURE__ */ _curry2(function intersection2(list1, list2) {
-  var lookupList, filteredList;
-  if (list1.length > list2.length) {
-    lookupList = list1;
-    filteredList = list2;
-  } else {
-    lookupList = list2;
-    filteredList = list1;
-  }
-  return uniq2(_filter(flip2(_includes)(lookupList), filteredList));
-});
+var intersection = /* @__PURE__ */ _curry2(
+  function intersection2(list1, list2) {
+    var lookupList, filteredList;
+    if (list1.length > list2.length) {
+      lookupList = list1;
+      filteredList = list2;
+    } else {
+      lookupList = list2;
+      filteredList = list1;
+    }
+    return uniq2(_filter(flip2(_includes)(lookupList), filteredList));
+  },
+);
 export default intersection;

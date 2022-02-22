@@ -1,5 +1,5 @@
-import {_ as _includes} from "../../common/_includes-6b736d1d.js";
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
+import { _ as _includes } from "../../common/_includes-6b736d1d.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
 import flip2 from "./flip.js";
 import reject2 from "./reject.js";
 import "../../common/_indexOf-a6922268.js";
@@ -26,7 +26,7 @@ import "../../common/_reduce-6079ab80.js";
 import "../../common/_isArrayLike-9455bd24.js";
 import "../../common/_isString-bd8a5e0f.js";
 import "./bind.js";
-var without = /* @__PURE__ */ _curry2(function(xs, list) {
+var without = /* @__PURE__ */ _curry2(function (xs, list) {
   return reject2(flip2(_includes)(xs), list);
 });
 export default without;

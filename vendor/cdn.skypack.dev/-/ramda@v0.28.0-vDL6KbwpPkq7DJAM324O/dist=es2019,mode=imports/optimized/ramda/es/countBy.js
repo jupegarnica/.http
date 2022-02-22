@@ -16,7 +16,7 @@ import "../../common/_isString-bd8a5e0f.js";
 import "./bind.js";
 import "../../common/_curry2-21fa898b.js";
 import "../../common/_reduced-43259614.js";
-var countBy = /* @__PURE__ */ reduceBy2(function(acc, elem) {
+var countBy = /* @__PURE__ */ reduceBy2(function (acc, elem) {
   return acc + 1;
 }, 0);
 export default countBy;

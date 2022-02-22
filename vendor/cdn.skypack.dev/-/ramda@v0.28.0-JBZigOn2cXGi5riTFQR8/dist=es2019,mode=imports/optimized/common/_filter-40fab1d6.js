@@ -10,5 +10,5 @@ function _filter(fn, list) {
   }
   return result;
 }
-export {_filter as _};
+export { _filter as _ };
 export default null;

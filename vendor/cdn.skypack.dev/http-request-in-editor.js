@@ -12,5 +12,5 @@
  */
 
 // Browser-Optimized Imports (Don't directly import the URLs below in your application!)
-export * from '/-/http-request-in-editor@v0.3.0-ciMPNAJKlE6yyAT30N3U/dist=es2019,mode=imports/optimized/http-request-in-editor.js';
-export {default} from '/-/http-request-in-editor@v0.3.0-ciMPNAJKlE6yyAT30N3U/dist=es2019,mode=imports/optimized/http-request-in-editor.js';
+export * from "/-/http-request-in-editor@v0.3.0-ciMPNAJKlE6yyAT30N3U/dist=es2019,mode=imports/optimized/http-request-in-editor.js";
+export { default } from "/-/http-request-in-editor@v0.3.0-ciMPNAJKlE6yyAT30N3U/dist=es2019,mode=imports/optimized/http-request-in-editor.js";

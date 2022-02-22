@@ -1,4 +1,4 @@
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
 import ap2 from "./ap.js";
 import map2 from "./map.js";
 import prepend2 from "./prepend.js";
@@ -22,8 +22,14 @@ import "../../common/_has-ef506577.js";
 import "../../common/_isArguments-6faa657b.js";
 import "../../common/_curry3-716aebc1.js";
 var sequence = /* @__PURE__ */ _curry2(function sequence2(of, traversable) {
-  return typeof traversable.sequence === "function" ? traversable.sequence(of) : reduceRight2(function(x, acc) {
-    return ap2(map2(prepend2, x), acc);
-  }, of([]), traversable);
+  return typeof traversable.sequence === "function"
+    ? traversable.sequence(of)
+    : reduceRight2(
+      function (x, acc) {
+        return ap2(map2(prepend2, x), acc);
+      },
+      of([]),
+      traversable,
+    );
 });
 export default sequence;

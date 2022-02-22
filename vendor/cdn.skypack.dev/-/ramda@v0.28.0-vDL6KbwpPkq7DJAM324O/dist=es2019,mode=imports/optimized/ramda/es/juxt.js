@@ -1,4 +1,4 @@
-import {_ as _curry1} from "../../common/_curry1-a6784b40.js";
+import { _ as _curry1 } from "../../common/_curry1-a6784b40.js";
 import converge2 from "./converge.js";
 import "../../common/_isPlaceholder-69544913.js";
 import "../../common/_curry2-21fa898b.js";
@@ -25,7 +25,7 @@ import "./nth.js";
 import "./reduce.js";
 import "../../common/_curry3-716aebc1.js";
 var juxt = /* @__PURE__ */ _curry1(function juxt2(fns) {
-  return converge2(function() {
+  return converge2(function () {
     return Array.prototype.slice.call(arguments, 0);
   }, fns);
 });

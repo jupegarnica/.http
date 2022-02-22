@@ -17,5 +17,5 @@ function _concat(set1, set2) {
   }
   return result;
 }
-export {_concat as _};
+export { _concat as _ };
 export default null;

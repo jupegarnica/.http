@@ -1,5 +1,5 @@
-import {_ as _concat} from "../../common/_concat-9dee354c.js";
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
+import { _ as _concat } from "../../common/_concat-9dee354c.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
 import compose2 from "./compose.js";
 import uniq2 from "./uniq.js";
 import "../../common/_curry1-a6784b40.js";

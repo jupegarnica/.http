@@ -1,4 +1,4 @@
-import {_ as _has} from "./_has-ef506577.js";
+import { _ as _has } from "./_has-ef506577.js";
 function _objectAssign(target) {
   if (target == null) {
     throw new TypeError("Cannot convert undefined or null to object");
@@ -19,6 +19,8 @@ function _objectAssign(target) {
   }
   return output;
 }
-var _objectAssign$1 = typeof Object.assign === "function" ? Object.assign : _objectAssign;
-export {_objectAssign$1 as _};
+var _objectAssign$1 = typeof Object.assign === "function"
+  ? Object.assign
+  : _objectAssign;
+export { _objectAssign$1 as _ };
 export default null;

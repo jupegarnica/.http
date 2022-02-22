@@ -1,4 +1,4 @@
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
 import pipeWith2 from "./pipeWith.js";
 import reverse2 from "./reverse.js";
 import "../../common/_curry1-a6784b40.js";

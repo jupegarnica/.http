@@ -1,4 +1,4 @@
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
 import map2 from "./map.js";
 import prop2 from "./prop.js";
 import "../../common/_curry1-a6784b40.js";

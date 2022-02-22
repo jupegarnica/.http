@@ -1,7 +1,7 @@
-import {_ as _isArray} from "./_isArray-3f7112bf.js";
-import {_ as _isTransformer} from "./_isTransformer-816ffbd7.js";
+import { _ as _isArray } from "./_isArray-3f7112bf.js";
+import { _ as _isTransformer } from "./_isTransformer-816ffbd7.js";
 function _dispatchable(methodNames, transducerCreator, fn) {
-  return function() {
+  return function () {
     if (arguments.length === 0) {
       return fn();
     }
@@ -10,12 +10,18 @@ function _dispatchable(methodNames, transducerCreator, fn) {
       var idx = 0;
       while (idx < methodNames.length) {
         if (typeof obj[methodNames[idx]] === "function") {
-          return obj[methodNames[idx]].apply(obj, Array.prototype.slice.call(arguments, 0, -1));
+          return obj[methodNames[idx]].apply(
+            obj,
+            Array.prototype.slice.call(arguments, 0, -1),
+          );
         }
         idx += 1;
       }
       if (_isTransformer(obj)) {
-        var transducer = transducerCreator.apply(null, Array.prototype.slice.call(arguments, 0, -1));
+        var transducer = transducerCreator.apply(
+          null,
+          Array.prototype.slice.call(arguments, 0, -1),
+        );
         return transducer(obj);
       }
     }
@@ -23,12 +29,12 @@ function _dispatchable(methodNames, transducerCreator, fn) {
   };
 }
 var _xfBase = {
-  init: function() {
+  init: function () {
     return this.xf["@@transducer/init"]();
   },
-  result: function(result) {
+  result: function (result) {
     return this.xf["@@transducer/result"](result);
-  }
+  },
 };
-export {_xfBase as _, _dispatchable as a};
+export { _dispatchable as a, _xfBase as _ };
 export default null;

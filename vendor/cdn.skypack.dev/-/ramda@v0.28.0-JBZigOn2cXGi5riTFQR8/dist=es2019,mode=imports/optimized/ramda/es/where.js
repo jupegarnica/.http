@@ -1,5 +1,5 @@
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
-import {_ as _has} from "../../common/_has-ef506577.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
+import { _ as _has } from "../../common/_has-ef506577.js";
 import "../../common/_curry1-a6784b40.js";
 import "../../common/_isPlaceholder-69544913.js";
 var where = /* @__PURE__ */ _curry2(function where2(spec, testObj) {

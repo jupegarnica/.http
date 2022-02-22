@@ -1,4 +1,4 @@
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
 import curry2 from "./curry.js";
 import nAry2 from "./nAry.js";
 import "../../common/_curry1-a6784b40.js";
@@ -11,11 +11,11 @@ var constructN = /* @__PURE__ */ _curry2(function constructN2(n, Fn) {
     throw new Error("Constructor with greater than ten arguments");
   }
   if (n === 0) {
-    return function() {
+    return function () {
       return new Fn();
     };
   }
-  return curry2(nAry2(n, function($0, $1, $2, $3, $4, $5, $6, $7, $8, $9) {
+  return curry2(nAry2(n, function ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9) {
     switch (arguments.length) {
       case 1:
         return new Fn($0);

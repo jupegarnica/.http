@@ -1,4 +1,4 @@
-var T = function() {
+var T = function () {
   return true;
 };
 export default T;

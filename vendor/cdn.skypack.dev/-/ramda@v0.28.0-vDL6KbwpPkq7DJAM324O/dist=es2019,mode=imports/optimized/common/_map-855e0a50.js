@@ -8,5 +8,5 @@ function _map(fn, functor) {
   }
   return result;
 }
-export {_map as _};
+export { _map as _ };
 export default null;

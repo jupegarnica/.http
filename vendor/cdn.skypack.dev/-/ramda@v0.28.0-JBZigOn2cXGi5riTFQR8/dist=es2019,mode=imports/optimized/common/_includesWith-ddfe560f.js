@@ -9,5 +9,5 @@ function _includesWith(pred, x, list) {
   }
   return false;
 }
-export {_includesWith as _};
+export { _includesWith as _ };
 export default null;

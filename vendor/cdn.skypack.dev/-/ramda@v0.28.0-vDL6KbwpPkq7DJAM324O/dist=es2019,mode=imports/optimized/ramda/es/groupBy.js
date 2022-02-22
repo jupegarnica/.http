@@ -1,5 +1,5 @@
-import {_ as _checkForMethod} from "../../common/_checkForMethod-9f9acae8.js";
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
+import { _ as _checkForMethod } from "../../common/_checkForMethod-9f9acae8.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
 import reduceBy2 from "./reduceBy.js";
 import "../../common/_isArray-3f7112bf.js";
 import "../../common/_curry1-a6784b40.js";
@@ -17,8 +17,13 @@ import "../../common/_isArrayLike-9455bd24.js";
 import "../../common/_isString-bd8a5e0f.js";
 import "./bind.js";
 import "../../common/_reduced-43259614.js";
-var groupBy = /* @__PURE__ */ _curry2(/* @__PURE__ */ _checkForMethod("groupBy", /* @__PURE__ */ reduceBy2(function(acc, item) {
-  acc.push(item);
-  return acc;
-}, [])));
+var groupBy = /* @__PURE__ */ _curry2(
+  /* @__PURE__ */ _checkForMethod(
+    "groupBy",
+    /* @__PURE__ */ reduceBy2(function (acc, item) {
+      acc.push(item);
+      return acc;
+    }, []),
+  ),
+);
 export default groupBy;

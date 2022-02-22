@@ -1,7 +1,7 @@
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
-import {_ as _includesWith} from "../../common/_includesWith-ddfe560f.js";
-import {_ as _has} from "../../common/_has-ef506577.js";
-import {_ as _objectIs} from "../../common/_objectIs-99c5251f.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
+import { _ as _includesWith } from "../../common/_includesWith-ddfe560f.js";
+import { _ as _has } from "../../common/_has-ef506577.js";
+import { _ as _objectIs } from "../../common/_objectIs-99c5251f.js";
 import keys2 from "./keys.js";
 import type2 from "./type.js";
 import "../../common/_curry1-a6784b40.js";
@@ -25,9 +25,13 @@ function _uniqContentEquals(aIterator, bIterator, stackA, stackB) {
   function eq(_a, _b) {
     return _equals(_a, _b, stackA.slice(), stackB.slice());
   }
-  return !_includesWith(function(b2, aItem) {
-    return !_includesWith(eq, aItem, b2);
-  }, b, a);
+  return !_includesWith(
+    function (b2, aItem) {
+      return !_includesWith(eq, aItem, b2);
+    },
+    b,
+    a,
+  );
 }
 function _equals(a, b, stackA, stackB) {
   if (_objectIs(a, b)) {
@@ -37,17 +41,27 @@ function _equals(a, b, stackA, stackB) {
   if (typeA !== type2(b)) {
     return false;
   }
-  if (typeof a["fantasy-land/equals"] === "function" || typeof b["fantasy-land/equals"] === "function") {
-    return typeof a["fantasy-land/equals"] === "function" && a["fantasy-land/equals"](b) && typeof b["fantasy-land/equals"] === "function" && b["fantasy-land/equals"](a);
+  if (
+    typeof a["fantasy-land/equals"] === "function" ||
+    typeof b["fantasy-land/equals"] === "function"
+  ) {
+    return typeof a["fantasy-land/equals"] === "function" &&
+      a["fantasy-land/equals"](b) &&
+      typeof b["fantasy-land/equals"] === "function" &&
+      b["fantasy-land/equals"](a);
   }
   if (typeof a.equals === "function" || typeof b.equals === "function") {
-    return typeof a.equals === "function" && a.equals(b) && typeof b.equals === "function" && b.equals(a);
+    return typeof a.equals === "function" && a.equals(b) &&
+      typeof b.equals === "function" && b.equals(a);
   }
   switch (typeA) {
     case "Arguments":
     case "Array":
     case "Object":
-      if (typeof a.constructor === "function" && _functionName(a.constructor) === "Promise") {
+      if (
+        typeof a.constructor === "function" &&
+        _functionName(a.constructor) === "Promise"
+      ) {
         return a === b;
       }
       break;
@@ -66,7 +80,11 @@ function _equals(a, b, stackA, stackB) {
     case "Error":
       return a.name === b.name && a.message === b.message;
     case "RegExp":
-      if (!(a.source === b.source && a.global === b.global && a.ignoreCase === b.ignoreCase && a.multiline === b.multiline && a.sticky === b.sticky && a.unicode === b.unicode)) {
+      if (
+        !(a.source === b.source && a.global === b.global &&
+          a.ignoreCase === b.ignoreCase && a.multiline === b.multiline &&
+          a.sticky === b.sticky && a.unicode === b.unicode)
+      ) {
         return false;
       }
       break;
@@ -83,12 +101,22 @@ function _equals(a, b, stackA, stackB) {
       if (a.size !== b.size) {
         return false;
       }
-      return _uniqContentEquals(a.entries(), b.entries(), stackA.concat([a]), stackB.concat([b]));
+      return _uniqContentEquals(
+        a.entries(),
+        b.entries(),
+        stackA.concat([a]),
+        stackB.concat([b]),
+      );
     case "Set":
       if (a.size !== b.size) {
         return false;
       }
-      return _uniqContentEquals(a.values(), b.values(), stackA.concat([a]), stackB.concat([b]));
+      return _uniqContentEquals(
+        a.values(),
+        b.values(),
+        stackA.concat([a]),
+        stackB.concat([b]),
+      );
     case "Arguments":
     case "Array":
     case "Object":
@@ -121,7 +149,9 @@ function _equals(a, b, stackA, stackB) {
   idx = keysA.length - 1;
   while (idx >= 0) {
     var key = keysA[idx];
-    if (!(_has(key, b) && _equals(b[key], a[key], extendedStackA, extendedStackB))) {
+    if (
+      !(_has(key, b) && _equals(b[key], a[key], extendedStackA, extendedStackB))
+    ) {
       return false;
     }
     idx -= 1;

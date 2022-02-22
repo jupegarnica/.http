@@ -1,5 +1,5 @@
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
-import {_ as _isArray} from "../../common/_isArray-3f7112bf.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
+import { _ as _isArray } from "../../common/_isArray-3f7112bf.js";
 import equals2 from "./equals.js";
 import "../../common/_curry1-a6784b40.js";
 import "../../common/_isPlaceholder-69544913.js";

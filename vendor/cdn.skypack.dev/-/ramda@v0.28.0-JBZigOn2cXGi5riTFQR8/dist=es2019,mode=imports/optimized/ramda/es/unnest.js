@@ -1,4 +1,4 @@
-import {_ as _identity} from "../../common/_identity-7918716e.js";
+import { _ as _identity } from "../../common/_identity-7918716e.js";
 import chain2 from "./chain.js";
 import "../../common/_curry2-21fa898b.js";
 import "../../common/_curry1-a6784b40.js";

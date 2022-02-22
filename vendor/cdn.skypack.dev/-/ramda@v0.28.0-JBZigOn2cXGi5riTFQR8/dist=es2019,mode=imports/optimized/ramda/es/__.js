@@ -1,4 +1,4 @@
 var __ = {
-  "@@functional/placeholder": true
+  "@@functional/placeholder": true,
 };
 export default __;

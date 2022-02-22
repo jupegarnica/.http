@@ -1,5 +1,5 @@
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
-import {_ as _isFunction} from "../../common/_isFunction-f2ef089d.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
+import { _ as _isFunction } from "../../common/_isFunction-f2ef089d.js";
 import curryN2 from "./curryN.js";
 import toString2 from "./toString.js";
 import "../../common/_curry1-a6784b40.js";
@@ -30,12 +30,17 @@ import "../../common/_isArrayLike-9455bd24.js";
 import "../../common/_isString-bd8a5e0f.js";
 import "./bind.js";
 var invoker = /* @__PURE__ */ _curry2(function invoker2(arity, method) {
-  return curryN2(arity + 1, function() {
+  return curryN2(arity + 1, function () {
     var target = arguments[arity];
     if (target != null && _isFunction(target[method])) {
-      return target[method].apply(target, Array.prototype.slice.call(arguments, 0, arity));
+      return target[method].apply(
+        target,
+        Array.prototype.slice.call(arguments, 0, arity),
+      );
     }
-    throw new TypeError(toString2(target) + ' does not have a method named "' + method + '"');
+    throw new TypeError(
+      toString2(target) + ' does not have a method named "' + method + '"',
+    );
   });
 });
 export default invoker;

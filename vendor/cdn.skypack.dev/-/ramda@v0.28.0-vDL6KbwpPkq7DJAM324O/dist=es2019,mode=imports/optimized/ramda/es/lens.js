@@ -1,4 +1,4 @@
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
 import map2 from "./map.js";
 import "../../common/_curry1-a6784b40.js";
 import "../../common/_isPlaceholder-69544913.js";
@@ -17,9 +17,9 @@ import "./keys.js";
 import "../../common/_has-ef506577.js";
 import "../../common/_isArguments-6faa657b.js";
 var lens = /* @__PURE__ */ _curry2(function lens2(getter, setter) {
-  return function(toFunctorFn) {
-    return function(target) {
-      return map2(function(focus) {
+  return function (toFunctorFn) {
+    return function (target) {
+      return map2(function (focus) {
         return setter(focus, target);
       }, toFunctorFn(getter(target)));
     };

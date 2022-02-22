@@ -1,5 +1,5 @@
-import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
-import {_ as _map} from "../../common/_map-855e0a50.js";
+import { _ as _curry2 } from "../../common/_curry2-21fa898b.js";
+import { _ as _map } from "../../common/_map-855e0a50.js";
 import curryN2 from "./curryN.js";
 import max2 from "./max.js";
 import pluck2 from "./pluck.js";
@@ -24,12 +24,15 @@ import "../../common/_isInteger-6ed45b32.js";
 import "./nth.js";
 import "../../common/_curry3-716aebc1.js";
 var converge = /* @__PURE__ */ _curry2(function converge2(after, fns) {
-  return curryN2(reduce2(max2, 0, pluck2("length", fns)), function() {
+  return curryN2(reduce2(max2, 0, pluck2("length", fns)), function () {
     var args = arguments;
     var context = this;
-    return after.apply(context, _map(function(fn) {
-      return fn.apply(context, args);
-    }, fns));
+    return after.apply(
+      context,
+      _map(function (fn) {
+        return fn.apply(context, args);
+      }, fns),
+    );
   });
 });
 export default converge;

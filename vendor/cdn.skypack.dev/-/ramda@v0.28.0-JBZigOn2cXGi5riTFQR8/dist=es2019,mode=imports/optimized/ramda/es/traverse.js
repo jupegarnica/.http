@@ -1,4 +1,4 @@
-import {_ as _curry3} from "../../common/_curry3-716aebc1.js";
+import { _ as _curry3 } from "../../common/_curry3-716aebc1.js";
 import map2 from "./map.js";
 import sequence2 from "./sequence.js";
 import "../../common/_curry1-a6784b40.js";
@@ -23,6 +23,10 @@ import "../../common/_concat-9dee354c.js";
 import "./prepend.js";
 import "./reduceRight.js";
 var traverse = /* @__PURE__ */ _curry3(function traverse2(of, f, traversable) {
-  return typeof traversable["fantasy-land/traverse"] === "function" ? traversable["fantasy-land/traverse"](f, of) : typeof traversable.traverse === "function" ? traversable.traverse(f, of) : sequence2(of, map2(f, traversable));
+  return typeof traversable["fantasy-land/traverse"] === "function"
+    ? traversable["fantasy-land/traverse"](f, of)
+    : typeof traversable.traverse === "function"
+    ? traversable.traverse(f, of)
+    : sequence2(of, map2(f, traversable));
 });
 export default traverse;

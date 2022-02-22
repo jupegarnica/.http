@@ -1,16 +1,16 @@
-import {_ as _isArrayLike} from "./_isArrayLike-9455bd24.js";
+import { _ as _isArrayLike } from "./_isArrayLike-9455bd24.js";
 import bind2 from "../ramda/es/bind.js";
-var XWrap = /* @__PURE__ */ function() {
+var XWrap = /* @__PURE__ */ function () {
   function XWrap2(fn) {
     this.f = fn;
   }
-  XWrap2.prototype["@@transducer/init"] = function() {
+  XWrap2.prototype["@@transducer/init"] = function () {
     throw new Error("init not implemented on XWrap");
   };
-  XWrap2.prototype["@@transducer/result"] = function(acc) {
+  XWrap2.prototype["@@transducer/result"] = function (acc) {
     return acc;
   };
-  XWrap2.prototype["@@transducer/step"] = function(acc, x) {
+  XWrap2.prototype["@@transducer/step"] = function (acc, x) {
     return this.f(acc, x);
   };
   return XWrap2;
@@ -44,9 +44,13 @@ function _iterableReduce(xf, acc, iter) {
   return xf["@@transducer/result"](acc);
 }
 function _methodReduce(xf, acc, obj, methodName) {
-  return xf["@@transducer/result"](obj[methodName](bind2(xf["@@transducer/step"], xf), acc));
+  return xf["@@transducer/result"](
+    obj[methodName](bind2(xf["@@transducer/step"], xf), acc),
+  );
 }
-var symIterator = typeof Symbol !== "undefined" ? Symbol.iterator : "@@iterator";
+var symIterator = typeof Symbol !== "undefined"
+  ? Symbol.iterator
+  : "@@iterator";
 function _reduce(fn, acc, list) {
   if (typeof fn === "function") {
     fn = _xwrap(fn);
@@ -68,5 +72,5 @@ function _reduce(fn, acc, list) {
   }
   throw new TypeError("reduce: list must be array or iterable");
 }
-export {_reduce as _, _xwrap as a};
+export { _reduce as _, _xwrap as a };
 export default null;

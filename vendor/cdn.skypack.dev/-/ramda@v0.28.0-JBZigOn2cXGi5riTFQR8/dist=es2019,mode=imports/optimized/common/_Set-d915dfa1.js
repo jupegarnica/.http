@@ -1,13 +1,13 @@
-import {_ as _includes} from "./_includes-6b736d1d.js";
-var _Set = /* @__PURE__ */ function() {
+import { _ as _includes } from "./_includes-6b736d1d.js";
+var _Set = /* @__PURE__ */ function () {
   function _Set2() {
     this._nativeSet = typeof Set === "function" ? new Set() : null;
     this._items = {};
   }
-  _Set2.prototype.add = function(item) {
+  _Set2.prototype.add = function (item) {
     return !hasOrAdd(item, true, this);
   };
-  _Set2.prototype.has = function(item) {
+  _Set2.prototype.has = function (item) {
     return hasOrAdd(item, false, this);
   };
   return _Set2;
@@ -131,5 +131,5 @@ function hasOrAdd(item, shouldAdd, set) {
       return true;
   }
 }
-export {_Set as _};
+export { _Set as _ };
 export default null;

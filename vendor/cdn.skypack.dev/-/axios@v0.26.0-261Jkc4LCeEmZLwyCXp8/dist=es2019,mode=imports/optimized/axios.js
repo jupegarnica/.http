@@ -15,7 +15,10 @@ function isUndefined(val) {
   return typeof val === "undefined";
 }
 function isBuffer(val) {
-  return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor) && typeof val.constructor.isBuffer === "function" && val.constructor.isBuffer(val);
+  return val !== null && !isUndefined(val) && val.constructor !== null &&
+    !isUndefined(val.constructor) &&
+    typeof val.constructor.isBuffer === "function" &&
+    val.constructor.isBuffer(val);
 }
 function isArrayBuffer(val) {
   return toString.call(val) === "[object ArrayBuffer]";
@@ -70,7 +73,11 @@ function trim(str) {
   return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g, "");
 }
 function isStandardBrowserEnv() {
-  if (typeof navigator !== "undefined" && (navigator.product === "ReactNative" || navigator.product === "NativeScript" || navigator.product === "NS")) {
+  if (
+    typeof navigator !== "undefined" &&
+    (navigator.product === "ReactNative" ||
+      navigator.product === "NativeScript" || navigator.product === "NS")
+  ) {
     return false;
   }
   return typeof window !== "undefined" && typeof document !== "undefined";
@@ -150,10 +157,14 @@ var utils = {
   merge,
   extend,
   trim,
-  stripBOM
+  stripBOM,
 };
 function encode(val) {
-  return encodeURIComponent(val).replace(/%3A/gi, ":").replace(/%24/g, "$").replace(/%2C/gi, ",").replace(/%20/g, "+").replace(/%5B/gi, "[").replace(/%5D/gi, "]");
+  return encodeURIComponent(val).replace(/%3A/gi, ":").replace(/%24/g, "$")
+    .replace(/%2C/gi, ",").replace(/%20/g, "+").replace(/%5B/gi, "[").replace(
+      /%5D/gi,
+      "]",
+    );
 }
 var buildURL = function buildURL2(url, params, paramsSerializer) {
   if (!params) {
@@ -203,7 +214,7 @@ InterceptorManager.prototype.use = function use(fulfilled, rejected, options) {
     fulfilled,
     rejected,
     synchronous: options ? options.synchronous : false,
-    runWhen: options ? options.runWhen : null
+    runWhen: options ? options.runWhen : null,
   });
   return this.handlers.length - 1;
 };
@@ -246,7 +257,9 @@ function runTimeout(fun) {
   if (cachedSetTimeout === setTimeout) {
     return setTimeout(fun, 0);
   }
-  if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+  if (
+    (cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout
+  ) {
     cachedSetTimeout = setTimeout;
     return setTimeout(fun, 0);
   }
@@ -264,7 +277,10 @@ function runClearTimeout(marker) {
   if (cachedClearTimeout === clearTimeout) {
     return clearTimeout(marker);
   }
-  if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+  if (
+    (cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) &&
+    clearTimeout
+  ) {
     cachedClearTimeout = clearTimeout;
     return clearTimeout(marker);
   }
@@ -334,7 +350,7 @@ function Item(fun, array) {
   this.fun = fun;
   this.array = array;
 }
-Item.prototype.run = function() {
+Item.prototype.run = function () {
   this.fun.apply(null, this.array);
 };
 var title = "browser";
@@ -367,9 +383,11 @@ function umask() {
   return 0;
 }
 var performance = globalContext.performance || {};
-var performanceNow = performance.now || performance.mozNow || performance.msNow || performance.oNow || performance.webkitNow || function() {
-  return new Date().getTime();
-};
+var performanceNow = performance.now || performance.mozNow ||
+  performance.msNow || performance.oNow || performance.webkitNow ||
+  function () {
+    return new Date().getTime();
+  };
 function hrtime(previousTimestamp) {
   var clocktime = performanceNow.call(performance) * 1e-3;
   var seconds = Math.floor(clocktime);
@@ -394,7 +412,7 @@ var process = {
   nextTick,
   title,
   browser,
-  env: {NODE_ENV: "production"},
+  env: { NODE_ENV: "production" },
   argv,
   version,
   versions,
@@ -413,17 +431,29 @@ var process = {
   platform,
   release,
   config,
-  uptime
+  uptime,
 };
-var normalizeHeaderName = function normalizeHeaderName2(headers, normalizedName) {
+var normalizeHeaderName = function normalizeHeaderName2(
+  headers,
+  normalizedName,
+) {
   utils.forEach(headers, function processHeader(value, name) {
-    if (name !== normalizedName && name.toUpperCase() === normalizedName.toUpperCase()) {
+    if (
+      name !== normalizedName &&
+      name.toUpperCase() === normalizedName.toUpperCase()
+    ) {
       headers[normalizedName] = value;
       delete headers[name];
     }
   });
 };
-var enhanceError = function enhanceError2(error, config2, code, request2, response) {
+var enhanceError = function enhanceError2(
+  error,
+  config2,
+  code,
+  request2,
+  response,
+) {
   error.config = config2;
   if (code) {
     error.code = code;
@@ -443,66 +473,90 @@ var enhanceError = function enhanceError2(error, config2, code, request2, respon
       stack: this.stack,
       config: this.config,
       code: this.code,
-      status: this.response && this.response.status ? this.response.status : null
+      status: this.response && this.response.status
+        ? this.response.status
+        : null,
     };
   };
   return error;
 };
-var createError = function createError2(message, config2, code, request2, response) {
+var createError = function createError2(
+  message,
+  config2,
+  code,
+  request2,
+  response,
+) {
   var error = new Error(message);
   return enhanceError(error, config2, code, request2, response);
 };
 var settle = function settle2(resolve, reject, response) {
   var validateStatus2 = response.config.validateStatus;
-  if (!response.status || !validateStatus2 || validateStatus2(response.status)) {
+  if (
+    !response.status || !validateStatus2 || validateStatus2(response.status)
+  ) {
     resolve(response);
   } else {
-    reject(createError("Request failed with status code " + response.status, response.config, null, response.request, response));
+    reject(
+      createError(
+        "Request failed with status code " + response.status,
+        response.config,
+        null,
+        response.request,
+        response,
+      ),
+    );
   }
 };
-var cookies = utils.isStandardBrowserEnv() ? function standardBrowserEnv() {
-  return {
-    write: function write(name, value, expires, path, domain, secure) {
-      var cookie = [];
-      cookie.push(name + "=" + encodeURIComponent(value));
-      if (utils.isNumber(expires)) {
-        cookie.push("expires=" + new Date(expires).toGMTString());
-      }
-      if (utils.isString(path)) {
-        cookie.push("path=" + path);
-      }
-      if (utils.isString(domain)) {
-        cookie.push("domain=" + domain);
-      }
-      if (secure === true) {
-        cookie.push("secure");
-      }
-      document.cookie = cookie.join("; ");
-    },
-    read: function read(name) {
-      var match = document.cookie.match(new RegExp("(^|;\\s*)(" + name + ")=([^;]*)"));
-      return match ? decodeURIComponent(match[3]) : null;
-    },
-    remove: function remove(name) {
-      this.write(name, "", Date.now() - 864e5);
-    }
-  };
-}() : function nonStandardBrowserEnv() {
-  return {
-    write: function write() {
-    },
-    read: function read() {
-      return null;
-    },
-    remove: function remove() {
-    }
-  };
-}();
+var cookies = utils.isStandardBrowserEnv()
+  ? function standardBrowserEnv() {
+    return {
+      write: function write(name, value, expires, path, domain, secure) {
+        var cookie = [];
+        cookie.push(name + "=" + encodeURIComponent(value));
+        if (utils.isNumber(expires)) {
+          cookie.push("expires=" + new Date(expires).toGMTString());
+        }
+        if (utils.isString(path)) {
+          cookie.push("path=" + path);
+        }
+        if (utils.isString(domain)) {
+          cookie.push("domain=" + domain);
+        }
+        if (secure === true) {
+          cookie.push("secure");
+        }
+        document.cookie = cookie.join("; ");
+      },
+      read: function read(name) {
+        var match = document.cookie.match(
+          new RegExp("(^|;\\s*)(" + name + ")=([^;]*)"),
+        );
+        return match ? decodeURIComponent(match[3]) : null;
+      },
+      remove: function remove(name) {
+        this.write(name, "", Date.now() - 864e5);
+      },
+    };
+  }()
+  : function nonStandardBrowserEnv() {
+    return {
+      write: function write() {
+      },
+      read: function read() {
+        return null;
+      },
+      remove: function remove() {
+      },
+    };
+  }();
 var isAbsoluteURL = function isAbsoluteURL2(url) {
   return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url);
 };
 var combineURLs = function combineURLs2(baseURL, relativeURL) {
-  return relativeURL ? baseURL.replace(/\/+$/, "") + "/" + relativeURL.replace(/^\/+/, "") : baseURL;
+  return relativeURL
+    ? baseURL.replace(/\/+$/, "") + "/" + relativeURL.replace(/^\/+/, "")
+    : baseURL;
 };
 var buildFullPath = function buildFullPath2(baseURL, requestedURL) {
   if (baseURL && !isAbsoluteURL(requestedURL)) {
@@ -527,7 +581,7 @@ var ignoreDuplicateOf = [
   "proxy-authorization",
   "referer",
   "retry-after",
-  "user-agent"
+  "user-agent",
 ];
 var parseHeaders = function parseHeaders2(headers) {
   var parsed = {};
@@ -554,38 +608,49 @@ var parseHeaders = function parseHeaders2(headers) {
   });
   return parsed;
 };
-var isURLSameOrigin = utils.isStandardBrowserEnv() ? function standardBrowserEnv2() {
-  var msie = /(msie|trident)/i.test(navigator.userAgent);
-  var urlParsingNode = document.createElement("a");
-  var originURL;
-  function resolveURL(url) {
-    var href = url;
-    if (msie) {
+var isURLSameOrigin = utils.isStandardBrowserEnv()
+  ? function standardBrowserEnv2() {
+    var msie = /(msie|trident)/i.test(navigator.userAgent);
+    var urlParsingNode = document.createElement("a");
+    var originURL;
+    function resolveURL(url) {
+      var href = url;
+      if (msie) {
+        urlParsingNode.setAttribute("href", href);
+        href = urlParsingNode.href;
+      }
       urlParsingNode.setAttribute("href", href);
-      href = urlParsingNode.href;
+      return {
+        href: urlParsingNode.href,
+        protocol: urlParsingNode.protocol
+          ? urlParsingNode.protocol.replace(/:$/, "")
+          : "",
+        host: urlParsingNode.host,
+        search: urlParsingNode.search
+          ? urlParsingNode.search.replace(/^\?/, "")
+          : "",
+        hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, "") : "",
+        hostname: urlParsingNode.hostname,
+        port: urlParsingNode.port,
+        pathname: urlParsingNode.pathname.charAt(0) === "/"
+          ? urlParsingNode.pathname
+          : "/" + urlParsingNode.pathname,
+      };
     }
-    urlParsingNode.setAttribute("href", href);
-    return {
-      href: urlParsingNode.href,
-      protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, "") : "",
-      host: urlParsingNode.host,
-      search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, "") : "",
-      hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, "") : "",
-      hostname: urlParsingNode.hostname,
-      port: urlParsingNode.port,
-      pathname: urlParsingNode.pathname.charAt(0) === "/" ? urlParsingNode.pathname : "/" + urlParsingNode.pathname
+    originURL = resolveURL(window.location.href);
+    return function isURLSameOrigin2(requestURL) {
+      var parsed = utils.isString(requestURL)
+        ? resolveURL(requestURL)
+        : requestURL;
+      return parsed.protocol === originURL.protocol &&
+        parsed.host === originURL.host;
     };
-  }
-  originURL = resolveURL(window.location.href);
-  return function isURLSameOrigin2(requestURL) {
-    var parsed = utils.isString(requestURL) ? resolveURL(requestURL) : requestURL;
-    return parsed.protocol === originURL.protocol && parsed.host === originURL.host;
-  };
-}() : function nonStandardBrowserEnv2() {
-  return function isURLSameOrigin2() {
-    return true;
-  };
-}();
+  }()
+  : function nonStandardBrowserEnv2() {
+    return function isURLSameOrigin2() {
+      return true;
+    };
+  }();
 function Cancel(message) {
   this.message = message;
 }
@@ -614,25 +679,36 @@ var xhr = function xhrAdapter(config2) {
     var request2 = new XMLHttpRequest();
     if (config2.auth) {
       var username = config2.auth.username || "";
-      var password = config2.auth.password ? unescape(encodeURIComponent(config2.auth.password)) : "";
+      var password = config2.auth.password
+        ? unescape(encodeURIComponent(config2.auth.password))
+        : "";
       requestHeaders.Authorization = "Basic " + btoa(username + ":" + password);
     }
     var fullPath = buildFullPath(config2.baseURL, config2.url);
-    request2.open(config2.method.toUpperCase(), buildURL(fullPath, config2.params, config2.paramsSerializer), true);
+    request2.open(
+      config2.method.toUpperCase(),
+      buildURL(fullPath, config2.params, config2.paramsSerializer),
+      true,
+    );
     request2.timeout = config2.timeout;
     function onloadend() {
       if (!request2) {
         return;
       }
-      var responseHeaders = "getAllResponseHeaders" in request2 ? parseHeaders(request2.getAllResponseHeaders()) : null;
-      var responseData = !responseType || responseType === "text" || responseType === "json" ? request2.responseText : request2.response;
+      var responseHeaders = "getAllResponseHeaders" in request2
+        ? parseHeaders(request2.getAllResponseHeaders())
+        : null;
+      var responseData =
+        !responseType || responseType === "text" || responseType === "json"
+          ? request2.responseText
+          : request2.response;
       var response = {
         data: responseData,
         status: request2.status,
         statusText: request2.statusText,
         headers: responseHeaders,
         config: config2,
-        request: request2
+        request: request2,
       };
       settle(function _resolve(value) {
         resolve(value);
@@ -650,7 +726,10 @@ var xhr = function xhrAdapter(config2) {
         if (!request2 || request2.readyState !== 4) {
           return;
         }
-        if (request2.status === 0 && !(request2.responseURL && request2.responseURL.indexOf("file:") === 0)) {
+        if (
+          request2.status === 0 &&
+          !(request2.responseURL && request2.responseURL.indexOf("file:") === 0)
+        ) {
           return;
         }
         setTimeout(onloadend);
@@ -668,23 +747,39 @@ var xhr = function xhrAdapter(config2) {
       request2 = null;
     };
     request2.ontimeout = function handleTimeout() {
-      var timeoutErrorMessage = config2.timeout ? "timeout of " + config2.timeout + "ms exceeded" : "timeout exceeded";
+      var timeoutErrorMessage = config2.timeout
+        ? "timeout of " + config2.timeout + "ms exceeded"
+        : "timeout exceeded";
       var transitional2 = config2.transitional || defaults_1.transitional;
       if (config2.timeoutErrorMessage) {
         timeoutErrorMessage = config2.timeoutErrorMessage;
       }
-      reject(createError(timeoutErrorMessage, config2, transitional2.clarifyTimeoutError ? "ETIMEDOUT" : "ECONNABORTED", request2));
+      reject(
+        createError(
+          timeoutErrorMessage,
+          config2,
+          transitional2.clarifyTimeoutError ? "ETIMEDOUT" : "ECONNABORTED",
+          request2,
+        ),
+      );
       request2 = null;
     };
     if (utils.isStandardBrowserEnv()) {
-      var xsrfValue = (config2.withCredentials || isURLSameOrigin(fullPath)) && config2.xsrfCookieName ? cookies.read(config2.xsrfCookieName) : void 0;
+      var xsrfValue =
+        (config2.withCredentials || isURLSameOrigin(fullPath)) &&
+          config2.xsrfCookieName
+          ? cookies.read(config2.xsrfCookieName)
+          : void 0;
       if (xsrfValue) {
         requestHeaders[config2.xsrfHeaderName] = xsrfValue;
       }
     }
     if ("setRequestHeader" in request2) {
       utils.forEach(requestHeaders, function setRequestHeader(val, key) {
-        if (typeof requestData === "undefined" && key.toLowerCase() === "content-type") {
+        if (
+          typeof requestData === "undefined" &&
+          key.toLowerCase() === "content-type"
+        ) {
           delete requestHeaders[key];
         } else {
           request2.setRequestHeader(key, val);
@@ -704,17 +799,21 @@ var xhr = function xhrAdapter(config2) {
       request2.upload.addEventListener("progress", config2.onUploadProgress);
     }
     if (config2.cancelToken || config2.signal) {
-      onCanceled = function(cancel) {
+      onCanceled = function (cancel) {
         if (!request2) {
           return;
         }
-        reject(!cancel || cancel && cancel.type ? new Cancel_1("canceled") : cancel);
+        reject(
+          !cancel || cancel && cancel.type ? new Cancel_1("canceled") : cancel,
+        );
         request2.abort();
         request2 = null;
       };
       config2.cancelToken && config2.cancelToken.subscribe(onCanceled);
       if (config2.signal) {
-        config2.signal.aborted ? onCanceled() : config2.signal.addEventListener("abort", onCanceled);
+        config2.signal.aborted
+          ? onCanceled()
+          : config2.signal.addEventListener("abort", onCanceled);
       }
     }
     if (!requestData) {
@@ -724,10 +823,12 @@ var xhr = function xhrAdapter(config2) {
   });
 };
 var DEFAULT_CONTENT_TYPE = {
-  "Content-Type": "application/x-www-form-urlencoded"
+  "Content-Type": "application/x-www-form-urlencoded",
 };
 function setContentTypeIfUnset(headers, value) {
-  if (!utils.isUndefined(headers) && utils.isUndefined(headers["Content-Type"])) {
+  if (
+    !utils.isUndefined(headers) && utils.isUndefined(headers["Content-Type"])
+  ) {
     headers["Content-Type"] = value;
   }
 }
@@ -735,7 +836,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== "undefined") {
     adapter = xhr;
-  } else if (typeof process !== "undefined" && Object.prototype.toString.call(process) === "[object process]") {
+  } else if (
+    typeof process !== "undefined" &&
+    Object.prototype.toString.call(process) === "[object process]"
+  ) {
     adapter = xhr;
   }
   return adapter;
@@ -757,23 +861,33 @@ var defaults = {
   transitional: {
     silentJSONParsing: true,
     forcedJSONParsing: true,
-    clarifyTimeoutError: false
+    clarifyTimeoutError: false,
   },
   adapter: getDefaultAdapter(),
   transformRequest: [function transformRequest(data2, headers) {
     normalizeHeaderName(headers, "Accept");
     normalizeHeaderName(headers, "Content-Type");
-    if (utils.isFormData(data2) || utils.isArrayBuffer(data2) || utils.isBuffer(data2) || utils.isStream(data2) || utils.isFile(data2) || utils.isBlob(data2)) {
+    if (
+      utils.isFormData(data2) || utils.isArrayBuffer(data2) ||
+      utils.isBuffer(data2) || utils.isStream(data2) || utils.isFile(data2) ||
+      utils.isBlob(data2)
+    ) {
       return data2;
     }
     if (utils.isArrayBufferView(data2)) {
       return data2.buffer;
     }
     if (utils.isURLSearchParams(data2)) {
-      setContentTypeIfUnset(headers, "application/x-www-form-urlencoded;charset=utf-8");
+      setContentTypeIfUnset(
+        headers,
+        "application/x-www-form-urlencoded;charset=utf-8",
+      );
       return data2.toString();
     }
-    if (utils.isObject(data2) || headers && headers["Content-Type"] === "application/json") {
+    if (
+      utils.isObject(data2) ||
+      headers && headers["Content-Type"] === "application/json"
+    ) {
       setContentTypeIfUnset(headers, "application/json");
       return stringifySafely(data2);
     }
@@ -784,7 +898,10 @@ var defaults = {
     var silentJSONParsing = transitional2 && transitional2.silentJSONParsing;
     var forcedJSONParsing = transitional2 && transitional2.forcedJSONParsing;
     var strictJSONParsing = !silentJSONParsing && this.responseType === "json";
-    if (strictJSONParsing || forcedJSONParsing && utils.isString(data2) && data2.length) {
+    if (
+      strictJSONParsing ||
+      forcedJSONParsing && utils.isString(data2) && data2.length
+    ) {
       try {
         return JSON.parse(data2);
       } catch (e) {
@@ -808,9 +925,9 @@ var defaults = {
   },
   headers: {
     common: {
-      Accept: "application/json, text/plain, */*"
-    }
-  }
+      Accept: "application/json, text/plain, */*",
+    },
+  },
 };
 utils.forEach(["delete", "get", "head"], function forEachMethodNoData(method) {
   defaults.headers[method] = {};
@@ -840,21 +957,43 @@ function throwIfCancellationRequested(config2) {
 var dispatchRequest = function dispatchRequest2(config2) {
   throwIfCancellationRequested(config2);
   config2.headers = config2.headers || {};
-  config2.data = transformData.call(config2, config2.data, config2.headers, config2.transformRequest);
-  config2.headers = utils.merge(config2.headers.common || {}, config2.headers[config2.method] || {}, config2.headers);
-  utils.forEach(["delete", "get", "head", "post", "put", "patch", "common"], function cleanHeaderConfig(method) {
-    delete config2.headers[method];
-  });
+  config2.data = transformData.call(
+    config2,
+    config2.data,
+    config2.headers,
+    config2.transformRequest,
+  );
+  config2.headers = utils.merge(
+    config2.headers.common || {},
+    config2.headers[config2.method] || {},
+    config2.headers,
+  );
+  utils.forEach(
+    ["delete", "get", "head", "post", "put", "patch", "common"],
+    function cleanHeaderConfig(method) {
+      delete config2.headers[method];
+    },
+  );
   var adapter = config2.adapter || defaults_1.adapter;
   return adapter(config2).then(function onAdapterResolution(response) {
     throwIfCancellationRequested(config2);
-    response.data = transformData.call(config2, response.data, response.headers, config2.transformResponse);
+    response.data = transformData.call(
+      config2,
+      response.data,
+      response.headers,
+      config2.transformResponse,
+    );
     return response;
   }, function onAdapterRejection(reason) {
     if (!isCancel(reason)) {
       throwIfCancellationRequested(config2);
       if (reason && reason.response) {
-        reason.response.data = transformData.call(config2, reason.response.data, reason.response.headers, config2.transformResponse);
+        reason.response.data = transformData.call(
+          config2,
+          reason.response.data,
+          reason.response.headers,
+          config2.transformResponse,
+        );
       }
     }
     return Promise.reject(reason);
@@ -925,37 +1064,55 @@ var mergeConfig = function mergeConfig2(config1, config2) {
     cancelToken: defaultToConfig2,
     socketPath: defaultToConfig2,
     responseEncoding: defaultToConfig2,
-    validateStatus: mergeDirectKeys
+    validateStatus: mergeDirectKeys,
   };
-  utils.forEach(Object.keys(config1).concat(Object.keys(config2)), function computeConfigValue(prop) {
-    var merge2 = mergeMap[prop] || mergeDeepProperties;
-    var configValue = merge2(prop);
-    utils.isUndefined(configValue) && merge2 !== mergeDirectKeys || (config3[prop] = configValue);
-  });
+  utils.forEach(
+    Object.keys(config1).concat(Object.keys(config2)),
+    function computeConfigValue(prop) {
+      var merge2 = mergeMap[prop] || mergeDeepProperties;
+      var configValue = merge2(prop);
+      utils.isUndefined(configValue) && merge2 !== mergeDirectKeys ||
+        (config3[prop] = configValue);
+    },
+  );
   return config3;
 };
 var data = {
-  version: "0.26.0"
+  version: "0.26.0",
 };
 var VERSION = data.version;
 var validators = {};
-["object", "boolean", "number", "function", "string", "symbol"].forEach(function(type, i) {
-  validators[type] = function validator2(thing) {
-    return typeof thing === type || "a" + (i < 1 ? "n " : " ") + type;
-  };
-});
+["object", "boolean", "number", "function", "string", "symbol"].forEach(
+  function (type, i) {
+    validators[type] = function validator2(thing) {
+      return typeof thing === type || "a" + (i < 1 ? "n " : " ") + type;
+    };
+  },
+);
 var deprecatedWarnings = {};
 validators.transitional = function transitional(validator2, version2, message) {
   function formatMessage(opt, desc) {
-    return "[Axios v" + VERSION + "] Transitional option '" + opt + "'" + desc + (message ? ". " + message : "");
+    return "[Axios v" + VERSION + "] Transitional option '" + opt + "'" + desc +
+      (message ? ". " + message : "");
   }
-  return function(value, opt, opts) {
+  return function (value, opt, opts) {
     if (validator2 === false) {
-      throw new Error(formatMessage(opt, " has been removed" + (version2 ? " in " + version2 : "")));
+      throw new Error(
+        formatMessage(
+          opt,
+          " has been removed" + (version2 ? " in " + version2 : ""),
+        ),
+      );
     }
     if (version2 && !deprecatedWarnings[opt]) {
       deprecatedWarnings[opt] = true;
-      console.warn(formatMessage(opt, " has been deprecated since v" + version2 + " and will be removed in the near future"));
+      console.warn(
+        formatMessage(
+          opt,
+          " has been deprecated since v" + version2 +
+            " and will be removed in the near future",
+        ),
+      );
     }
     return validator2 ? validator2(value, opt, opts) : true;
   };
@@ -984,14 +1141,14 @@ function assertOptions(options, schema, allowUnknown) {
 }
 var validator = {
   assertOptions,
-  validators
+  validators,
 };
 var validators$1 = validator.validators;
 function Axios(instanceConfig) {
   this.defaults = instanceConfig;
   this.interceptors = {
     request: new InterceptorManager_1(),
-    response: new InterceptorManager_1()
+    response: new InterceptorManager_1(),
   };
 }
 Axios.prototype.request = function request(configOrUrl, config2) {
@@ -1014,22 +1171,36 @@ Axios.prototype.request = function request(configOrUrl, config2) {
     validator.assertOptions(transitional2, {
       silentJSONParsing: validators$1.transitional(validators$1.boolean),
       forcedJSONParsing: validators$1.transitional(validators$1.boolean),
-      clarifyTimeoutError: validators$1.transitional(validators$1.boolean)
+      clarifyTimeoutError: validators$1.transitional(validators$1.boolean),
     }, false);
   }
   var requestInterceptorChain = [];
   var synchronousRequestInterceptors = true;
-  this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
-    if (typeof interceptor.runWhen === "function" && interceptor.runWhen(config2) === false) {
-      return;
-    }
-    synchronousRequestInterceptors = synchronousRequestInterceptors && interceptor.synchronous;
-    requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);
-  });
+  this.interceptors.request.forEach(
+    function unshiftRequestInterceptors(interceptor) {
+      if (
+        typeof interceptor.runWhen === "function" &&
+        interceptor.runWhen(config2) === false
+      ) {
+        return;
+      }
+      synchronousRequestInterceptors = synchronousRequestInterceptors &&
+        interceptor.synchronous;
+      requestInterceptorChain.unshift(
+        interceptor.fulfilled,
+        interceptor.rejected,
+      );
+    },
+  );
   var responseInterceptorChain = [];
-  this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
-    responseInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);
-  });
+  this.interceptors.response.forEach(
+    function pushResponseInterceptors(interceptor) {
+      responseInterceptorChain.push(
+        interceptor.fulfilled,
+        interceptor.rejected,
+      );
+    },
+  );
   var promise;
   if (!synchronousRequestInterceptors) {
     var chain = [dispatchRequest, void 0];
@@ -1058,32 +1229,42 @@ Axios.prototype.request = function request(configOrUrl, config2) {
     return Promise.reject(error);
   }
   while (responseInterceptorChain.length) {
-    promise = promise.then(responseInterceptorChain.shift(), responseInterceptorChain.shift());
+    promise = promise.then(
+      responseInterceptorChain.shift(),
+      responseInterceptorChain.shift(),
+    );
   }
   return promise;
 };
 Axios.prototype.getUri = function getUri(config2) {
   config2 = mergeConfig(this.defaults, config2);
-  return buildURL(config2.url, config2.params, config2.paramsSerializer).replace(/^\?/, "");
+  return buildURL(config2.url, config2.params, config2.paramsSerializer)
+    .replace(/^\?/, "");
 };
-utils.forEach(["delete", "get", "head", "options"], function forEachMethodNoData2(method) {
-  Axios.prototype[method] = function(url, config2) {
-    return this.request(mergeConfig(config2 || {}, {
-      method,
-      url,
-      data: (config2 || {}).data
-    }));
-  };
-});
-utils.forEach(["post", "put", "patch"], function forEachMethodWithData2(method) {
-  Axios.prototype[method] = function(url, data2, config2) {
-    return this.request(mergeConfig(config2 || {}, {
-      method,
-      url,
-      data: data2
-    }));
-  };
-});
+utils.forEach(
+  ["delete", "get", "head", "options"],
+  function forEachMethodNoData2(method) {
+    Axios.prototype[method] = function (url, config2) {
+      return this.request(mergeConfig(config2 || {}, {
+        method,
+        url,
+        data: (config2 || {}).data,
+      }));
+    };
+  },
+);
+utils.forEach(
+  ["post", "put", "patch"],
+  function forEachMethodWithData2(method) {
+    Axios.prototype[method] = function (url, data2, config2) {
+      return this.request(mergeConfig(config2 || {}, {
+        method,
+        url,
+        data: data2,
+      }));
+    };
+  },
+);
 var Axios_1 = Axios;
 function CancelToken(executor) {
   if (typeof executor !== "function") {
@@ -1094,9 +1275,10 @@ function CancelToken(executor) {
     resolvePromise = resolve;
   });
   var token = this;
-  this.promise.then(function(cancel) {
-    if (!token._listeners)
+  this.promise.then(function (cancel) {
+    if (!token._listeners) {
       return;
+    }
     var i;
     var l = token._listeners.length;
     for (i = 0; i < l; i++) {
@@ -1104,9 +1286,9 @@ function CancelToken(executor) {
     }
     token._listeners = null;
   });
-  this.promise.then = function(onfulfilled) {
+  this.promise.then = function (onfulfilled) {
     var _resolve;
-    var promise = new Promise(function(resolve) {
+    var promise = new Promise(function (resolve) {
       token.subscribe(resolve);
       _resolve = resolve;
     }).then(onfulfilled);
@@ -1155,7 +1337,7 @@ CancelToken.source = function source() {
   });
   return {
     token,
-    cancel
+    cancel,
   };
 };
 var CancelToken_1 = CancelToken;
