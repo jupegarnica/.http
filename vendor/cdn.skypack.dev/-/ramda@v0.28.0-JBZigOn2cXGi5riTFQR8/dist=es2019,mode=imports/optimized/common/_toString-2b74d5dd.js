@@ -51,9 +51,8 @@ function _toString(x, seen) {
         ? "new Boolean(" + recur(x.valueOf()) + ")"
         : x.toString();
     case "[object Date]":
-      return "new Date(" + (isNaN(x.valueOf())
-        ? recur(NaN)
-        : _quote(_toISOString(x))) +
+      return "new Date(" +
+        (isNaN(x.valueOf()) ? recur(NaN) : _quote(_toISOString(x))) +
         ")";
     case "[object Null]":
       return "null";

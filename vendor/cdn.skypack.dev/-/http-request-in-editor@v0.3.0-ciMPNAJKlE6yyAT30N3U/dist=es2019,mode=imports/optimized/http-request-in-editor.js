@@ -966,9 +966,8 @@ var grammar = createCommonjsModule(function (module) {
             return parseFloat(
               (d[0] || "") + d[1].join("") + (d[2]
                 ? "." + d[2][1].join("")
-                : "") + (d[3]
-                  ? "e" + (d[3][1] || "+") + d[3][2].join("")
-                  : ""),
+                : "") +
+                (d[3] ? "e" + (d[3][1] || "+") + d[3][2].join("") : ""),
             );
           },
         },

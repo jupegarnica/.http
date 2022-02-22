@@ -119,14 +119,13 @@ var stampit_min = createCommonjsModule(function (module) {
           }
           for (r2 === f && (r2 = {}), o2 = 0; o2 < u2[S];) {
             V(n2 = u2[o2++]) &&
-              (i2 =
-                (e2 = n2.call(i2, r2, {
-                    instance: i2,
-                    stamp: t4,
-                    args: p2,
-                  })) === f
-                  ? i2
-                  : e2);
+              (i2 = (e2 = n2.call(i2, r2, {
+                  instance: i2,
+                  stamp: t4,
+                  args: p2,
+                })) === f
+                ? i2
+                : e2);
           }
           return i2;
         };
@@ -190,7 +189,8 @@ var stampit_min = createCommonjsModule(function (module) {
       K[v] = L(v, R),
       c = K[D] = R(function t2() {
         for (
-          var r2, n2, e2 = 0, o2 = [], i2 = arguments, u2 = this; e2 < i2[S];
+          var r2, n2, e2 = 0, o2 = [], i2 = arguments, u2 = this;
+          e2 < i2[S];
         ) {
           k(r2 = i2[e2++]) &&
             o2.push(

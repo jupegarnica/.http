@@ -1444,9 +1444,8 @@ function _toString(x, seen) {
         ? "new Boolean(" + recur(x.valueOf()) + ")"
         : x.toString();
     case "[object Date]":
-      return "new Date(" + (isNaN(x.valueOf())
-        ? recur(NaN)
-        : _quote(_toISOString(x))) +
+      return "new Date(" +
+        (isNaN(x.valueOf()) ? recur(NaN) : _quote(_toISOString(x))) +
         ")";
     case "[object Null]":
       return "null";
@@ -3266,17 +3265,16 @@ var ws =
   "	\n\v\f\r \xA0\u1680\u180E\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028\u2029\uFEFF";
 var zeroWidth = "\u200B";
 var hasProtoTrim = typeof String.prototype.trim === "function";
-var trim =
-  !hasProtoTrim || /* @__PURE__ */ ws.trim() ||
+var trim = !hasProtoTrim || /* @__PURE__ */ ws.trim() ||
     !/* @__PURE__ */ zeroWidth.trim()
-    ? /* @__PURE__ */ _curry1(function trim2(str) {
-      var beginRx = new RegExp("^[" + ws + "][" + ws + "]*");
-      var endRx = new RegExp("[" + ws + "][" + ws + "]*$");
-      return str.replace(beginRx, "").replace(endRx, "");
-    })
-    : /* @__PURE__ */ _curry1(function trim3(str) {
-      return str.trim();
-    });
+  ? /* @__PURE__ */ _curry1(function trim2(str) {
+    var beginRx = new RegExp("^[" + ws + "][" + ws + "]*");
+    var endRx = new RegExp("[" + ws + "][" + ws + "]*$");
+    return str.replace(beginRx, "").replace(endRx, "");
+  })
+  : /* @__PURE__ */ _curry1(function trim3(str) {
+    return str.trim();
+  });
 var tryCatch = /* @__PURE__ */ _curry2(function _tryCatch(tryer, catcher) {
   return _arity(tryer.length, function () {
     try {

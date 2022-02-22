@@ -293,7 +293,9 @@ var nearley = createCommonjsModule(function (module) {
           var state = scannable[w];
           var expect = state.rule.symbols[state.dot];
           if (
-            expect.test ? expect.test(value) : expect.type
+            expect.test
+              ? expect.test(value)
+              : expect.type
               ? expect.type === token.type
               : expect.literal === literal
           ) {

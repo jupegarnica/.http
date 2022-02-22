@@ -73,7 +73,6 @@ scripts:
   test:
     desc: Runs the tests once
     cmd: deno test -A
-    gitHook: pre-push
     importMap: vendor/import_map.json
 
 
@@ -85,6 +84,7 @@ scripts:
 
   ci:
     desc: Runs lint, check format and test
+    gitHook: pre-push
     cmd:
       - vr lint
       - vr fmt --check
@@ -94,6 +94,7 @@ scripts:
     # cmd: echo --- ${GIT_ARGS} ---
     cmd: deno run --allow-read="./.git" commitlint.ts
     gitHook: commit-msg
+
   tag:
     desc: Create tag
     cmd: |

@@ -765,11 +765,10 @@ var xhr = function xhrAdapter(config2) {
       request2 = null;
     };
     if (utils.isStandardBrowserEnv()) {
-      var xsrfValue =
-        (config2.withCredentials || isURLSameOrigin(fullPath)) &&
+      var xsrfValue = (config2.withCredentials || isURLSameOrigin(fullPath)) &&
           config2.xsrfCookieName
-          ? cookies.read(config2.xsrfCookieName)
-          : void 0;
+        ? cookies.read(config2.xsrfCookieName)
+        : void 0;
       if (xsrfValue) {
         requestHeaders[config2.xsrfHeaderName] = xsrfValue;
       }

@@ -190,7 +190,8 @@ var stampit_min = createCommonjsModule(function (module) {
       n[h] = o(h, x),
       a = n[D] = x(function r2() {
         for (
-          var t2, e2, n2 = 0, o2 = [], i = arguments, p = this; n2 < i.length;
+          var t2, e2, n2 = 0, o2 = [], i = arguments, p = this;
+          n2 < i.length;
         ) {
           N(t2 = i[n2++]) &&
             o2.push(
