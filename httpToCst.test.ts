@@ -17,7 +17,7 @@ POST https://httpbin.org/post
 Deno.test({
   name: "httpToCst",
   ignore: false,
-  only: true,
+  only: false,
   fn: () => {
     const http = `
 GET http://example.com/
