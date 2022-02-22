@@ -1,0 +1,13 @@
+import {_ as _map} from "../../common/_map-855e0a50.js";
+import identity2 from "./identity.js";
+import pickAll2 from "./pickAll.js";
+import useWith2 from "./useWith.js";
+import "../../common/_curry1-a6784b40.js";
+import "../../common/_isPlaceholder-69544913.js";
+import "../../common/_identity-7918716e.js";
+import "../../common/_curry2-21fa898b.js";
+import "./curryN.js";
+import "../../common/_arity-fefc01f2.js";
+import "../../common/_curryN-f6b52a3c.js";
+var project = /* @__PURE__ */ useWith2(_map, [pickAll2, identity2]);
+export default project;

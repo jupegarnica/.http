@@ -1,0 +1,22 @@
+import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
+import equals2 from "./equals.js";
+import takeLast2 from "./takeLast.js";
+import "../../common/_curry1-a6784b40.js";
+import "../../common/_isPlaceholder-69544913.js";
+import "../../common/_includesWith-ddfe560f.js";
+import "../../common/_has-ef506577.js";
+import "../../common/_objectIs-99c5251f.js";
+import "./keys.js";
+import "../../common/_isArguments-6faa657b.js";
+import "./type.js";
+import "./drop.js";
+import "../../common/_xfBase-47118e3a.js";
+import "../../common/_isArray-3f7112bf.js";
+import "../../common/_isTransformer-816ffbd7.js";
+import "./slice.js";
+import "../../common/_checkForMethod-9f9acae8.js";
+import "../../common/_curry3-716aebc1.js";
+var endsWith = /* @__PURE__ */ _curry2(function(suffix, list) {
+  return equals2(takeLast2(suffix.length, list), suffix);
+});
+export default endsWith;

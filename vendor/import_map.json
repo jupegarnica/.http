@@ -1,0 +1,16 @@
+{
+  "imports": {
+    "https://cdn.skypack.dev/": "./cdn.skypack.dev/",
+    "https://cdn.skypack.dev/http-request-in-editor@v0.4.0?dts": "./cdn.skypack.dev/-/http-request-in-editor@v0.4.0-Q1AgMqubMqX2WGfU9JqA/dist=es2019,mode=imports/optimized/http-request-in-editor.js"
+  },
+  "scopes": {
+    "./cdn.skypack.dev/": {
+      "/-/axios@v0.26.0-261Jkc4LCeEmZLwyCXp8/dist=es2019,mode=imports/optimized/axios.js": "./cdn.skypack.dev/-/axios@v0.26.0-261Jkc4LCeEmZLwyCXp8/dist=es2019,mode=imports/optimized/axios.js",
+      "/-/nearley@v2.20.1-A4c29ItqLXuWOAs5gtul/dist=es2019,mode=imports/optimized/nearley.js": "./cdn.skypack.dev/-/nearley@v2.20.1-A4c29ItqLXuWOAs5gtul/dist=es2019,mode=imports/optimized/nearley.js",
+      "/-/ramda-adjunct@v3.0.0-KQqwUtmF7QX8HMVNgUFS/dist=es2019,mode=imports/optimized/ramda-adjunct.js": "./cdn.skypack.dev/-/ramda-adjunct@v3.0.0-KQqwUtmF7QX8HMVNgUFS/dist=es2019,mode=imports/optimized/ramda-adjunct.js",
+      "/-/ramda@v0.28.0-JBZigOn2cXGi5riTFQR8/dist=es2019,mode=imports/optimized/ramda.js": "./cdn.skypack.dev/-/ramda@v0.28.0-JBZigOn2cXGi5riTFQR8/dist=es2019,mode=imports/optimized/ramda.js",
+      "/-/ramda@v0.28.0-vDL6KbwpPkq7DJAM324O/dist=es2019,mode=imports/optimized/ramda.js": "./cdn.skypack.dev/-/ramda@v0.28.0-vDL6KbwpPkq7DJAM324O/dist=es2019,mode=imports/optimized/ramda.js",
+      "/-/stampit@v4.3.2-kbRPxiqraWFe5r4ZPBRc/dist=es2019,mode=imports/optimized/stampit.js": "./cdn.skypack.dev/-/stampit@v4.3.2-kbRPxiqraWFe5r4ZPBRc/dist=es2019,mode=imports/optimized/stampit.js"
+    }
+  }
+}

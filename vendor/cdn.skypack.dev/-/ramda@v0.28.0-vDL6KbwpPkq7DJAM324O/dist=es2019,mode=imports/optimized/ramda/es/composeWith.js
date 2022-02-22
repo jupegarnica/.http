@@ -1,0 +1,23 @@
+import {_ as _curry2} from "../../common/_curry2-21fa898b.js";
+import pipeWith2 from "./pipeWith.js";
+import reverse2 from "./reverse.js";
+import "../../common/_curry1-a6784b40.js";
+import "../../common/_isPlaceholder-69544913.js";
+import "../../common/_arity-fefc01f2.js";
+import "./head.js";
+import "./nth.js";
+import "../../common/_isString-bd8a5e0f.js";
+import "../../common/_reduce-6079ab80.js";
+import "../../common/_isArrayLike-9455bd24.js";
+import "../../common/_isArray-3f7112bf.js";
+import "./bind.js";
+import "./tail.js";
+import "../../common/_checkForMethod-9f9acae8.js";
+import "./slice.js";
+import "../../common/_curry3-716aebc1.js";
+import "./identity.js";
+import "../../common/_identity-7918716e.js";
+var composeWith = /* @__PURE__ */ _curry2(function composeWith2(xf, list) {
+  return pipeWith2.apply(this, [xf, reverse2(list)]);
+});
+export default composeWith;

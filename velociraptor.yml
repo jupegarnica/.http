@@ -8,9 +8,11 @@
 #   - .env
 
 scripts:
+
   main:
     desc: Runs main script
-    cmd: main.ts
+    cmd: deno run --reload httpRequest.js
+    importMap: vendor/import_map.json
 
   server:
     desc: Starts deploy server
@@ -64,12 +66,16 @@ scripts:
   test-watch:
     desc: Runs and watch the tests
     cmd: deno test -A --watch --unstable
+    importMap: vendor/import_map.json
+
     # env:
     #   NO_COLOR: '1'
   test:
     desc: Runs the tests once
     cmd: deno test -A
     gitHook: pre-push
+    importMap: vendor/import_map.json
+
 
   cov:
     desc: Shows uncovered lists
